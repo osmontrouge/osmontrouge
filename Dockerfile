@@ -10,4 +10,4 @@ RUN script/update && script/generate
 
 FROM nginx:alpine
 
-COPY --from=builder /code/index.html /code/data /code/icons /usr/share/nginx/html/
+COPY --from=builder /code /usr/share/nginx/html/
