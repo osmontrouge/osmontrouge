@@ -1,0 +1,72 @@
+public_bookcase:
+  name: Boîtes à livres
+  icon: public_bookcase.svg
+  query: >-
+    [out:json][timeout:25];
+    area(3600037026)->.searchArea;
+    (
+      node["amenity"="public_bookcase"](area.searchArea);
+      way["amenity"="public_bookcase"](area.searchArea);
+      relation["amenity"="public_bookcase"](area.searchArea);
+    );
+    out body;
+    >;
+    out skel qt;
+
+marketplace:
+  name: Marchés
+  icon: marketplace.svg
+  query: >-
+    [out:json][timeout:25];
+    area(3600037026)->.searchArea;
+    (
+      node["amenity"="marketplace"](area.searchArea);
+      way["amenity"="marketplace"](area.searchArea);
+      relation["amenity"="marketplace"](area.searchArea);
+    );
+    out body;
+    >;
+    out skel qt;
+
+parks:
+  name: Parcs
+  query: >-
+    [out:json][timeout:25];
+    area(3600037026)->.searchArea;
+    (
+      node["leisure"="park"]["access"!="private"](area.searchArea);
+      way["leisure"="park"]["access"!="private"](area.searchArea);
+      relation["leisure"="park"]["access"!="private"](area.searchArea);
+    );
+    out body;
+    >;
+    out skel qt;
+
+school_primaire_public:
+  name: Écoles primaires public
+  query: >-
+    [out:json][timeout:25];
+    area(3600037026)->.searchArea;
+    (
+      node["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+      way["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+      relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+    );
+    out body;
+    >;
+    out skel qt;
+
+school_primaire_private:
+  name: Écoles primaires privées
+  query: >-
+    [out:json][timeout:25];
+    area(3600037026)->.searchArea;
+    (
+      // query part for: “amenity=school and "school:FR"=primaire and "operator:type"=private”
+      node["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+      way["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+      relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+    );
+    out body;
+    >;
+    out skel qt;

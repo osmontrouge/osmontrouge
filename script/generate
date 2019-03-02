@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const ejs          = require('ejs');
+const yaml         = require('js-yaml');
+const fs           = require('fs');
+
+const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
+
+const filters = Object.keys(data).map((id) => {
+  return {
+    id,
+    ...data[id]
+  };
+});
+
+const index = ejs.render(fs.readFileSync('template.html', 'utf-8'), { filters });
+fs.writeFileSync('index.html', index, 'utf-8');

@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+const yaml          = require('js-yaml');
+const fs            = require('fs');
+const rp            = require('request-promise');
+const osmtogeojson = require('osmtogeojson');
+
+const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
+
+Object.keys(data).map((id) => {
+  const { icon, query } = data[id];
+  const options = {
+    method: 'POST',
+    form: { data: query },
+    json: true,
+  };
+  return rp('http://overpass-api.de/api/interpreter', options)
+    .then((data) => {
+      return osmtogeojson(data);
+    })
+    .then((geojson) => {
+      geojson.features.forEach((feature) => {
+        if (icon) {
+          feature.properties.icon = icon;
+        }
+      });
+      return geojson;
+    })
+    .then((geojson) => {
+      fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
+      console.log(`${id} updated`);
+    });
+});
