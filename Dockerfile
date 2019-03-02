@@ -6,7 +6,7 @@ COPY package.json yarn.lock /code/
 RUN yarn install --pure-lockfile
 
 COPY . /code
-RUN script/generate
+RUN script/update && script/generate
 
 FROM nginx:alpine
 
