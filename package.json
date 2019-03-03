@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "parcel serve index.html",
+    "dev": "parcel serve parcel --hmr-port 1235 index.html",
     "build": "parcel build index.html"
   },
   "devDependencies": {
