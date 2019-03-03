@@ -1,6 +1,7 @@
 import 'ol/ol.css';
 import 'ol-popup/src/ol-popup.css';
 import 'normalize.css/normalize.css';
+import './index.css';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
