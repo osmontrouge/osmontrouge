@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker run --rm -ti -v $(pwd):/code -w /code node:10 script/update
+docker run --rm -ti -v $(pwd):/code -w /code -p 1234:1234 node:10 yarn run dev
