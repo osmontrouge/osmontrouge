@@ -41,7 +41,6 @@ const filters = Object.keys(data).map((id) => {
 const content = ejs.render(`
   <% filters.forEach(({ id, name }) => { %>
     <label><input type="checkbox" data-name="<%= id %>" /> <%= name %></label>
-    <br>
   <% }) %>
 `, { filters });
 document.getElementById('filters').innerHTML = content;

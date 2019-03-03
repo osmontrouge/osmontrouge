@@ -5,7 +5,7 @@ body {
   margin: 0;
 }
 h1 {
-  margin: 1rem 0;
+  margin: .5rem 0 1rem;
   font-size: 1.5rem;
 }
 #map {
@@ -14,9 +14,14 @@ h1 {
 }
 .sidebar {
   position: absolute;
-  padding: 5px;
+  padding: 10px;
   width: 250px;
   max-width: 250px;
   min-width: 250px;
   height: 100vh;
+  border-right: solid 2px #dedede;
+}
+.filters label {
+  display: block;
+  margin-bottom: .3rem;
 }
