@@ -7,6 +7,8 @@ const osmtogeojson = require('osmtogeojson');
 
 const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
 
+let rate = Promise.resolve();
+
 Object.keys(data).map((id) => {
   const { icon, query } = data[id];
   const options = {
@@ -14,7 +16,8 @@ Object.keys(data).map((id) => {
     form: { data: query },
     json: true,
   };
-  return rp('http://overpass-api.de/api/interpreter', options)
+  rate = rate
+    .then(() => rp('http://overpass-api.de/api/interpreter', options))
     .then((data) => {
       return osmtogeojson(data);
     })
