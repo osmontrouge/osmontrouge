@@ -11,6 +11,7 @@ import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { createDefaultStyle } from 'ol/style/Style';
 import { Style, Icon } from 'ol/style';
+import FullScreen from 'ol/control/FullScreen';
 import { apply } from 'ol-mapbox-style';
 import Popup from 'ol-popup';
 import data from './data.yml';
@@ -31,6 +32,8 @@ apply(map, 'https://tiles.osmontrouge.fr/styles/osm-bright/style.json');
 
 const popup = new Popup();
 map.addOverlay(popup);
+
+map.addControl(new FullScreen());
 
 const filters = Object.keys(data).map((id) => {
   return {
