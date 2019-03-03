@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>OSMontrouge</title>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css"
+          crossorigin=""/>
+    <style>
+      body { margin: 0; }
+      h1 { margin: 1rem 0; font-size: 1.5rem;  }
+      #map { height: 100vh; margin-left: 250px; }
+      .sidebar {
+        position: absolute;
+        padding: 5px;
+        width: 250px;
+        max-width: 250px;
+        min-width: 250px;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h1>OSMontrouge</h1>
+
+      <div id="filters"></div>
+    </div>
+    <div id="map"></div>
+    <script src="index.js"></script>
+  </body>
+</html>

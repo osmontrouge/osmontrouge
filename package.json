@@ -1,10 +1,19 @@
 {
+  "scripts": {
+    "dev": "parcel serve index.html",
+    "build": "parcel build index.html"
+  },
   "devDependencies": {
-    "ejs": "^2.6.1",
     "js-yaml": "^3.12.2",
     "osmtogeojson": "^3.0.0-beta.3",
+    "parcel": "^1.11.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "ol": "^5.3.1",
+    "ol-mapbox-style": "^4.0.0",
+    "ol-popup": "^4.0.0"
+  }
 }

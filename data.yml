@@ -1,6 +1,6 @@
 public_bookcase:
   name: Boîtes à livres
-  icon: public_bookcase.svg
+  icon: public_bookcase
   query: >-
     [out:json][timeout:25];
     area(3600037026)->.searchArea;
@@ -15,7 +15,7 @@ public_bookcase:
 
 marketplace:
   name: Marchés
-  icon: marketplace.svg
+  icon: marketplace
   query: >-
     [out:json][timeout:25];
     area(3600037026)->.searchArea;
