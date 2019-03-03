@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+}
+h1 {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+#map {
+  height: 100vh;
+  margin-left: 250px;
+}
+.sidebar {
+  position: absolute;
+  padding: 5px;
+  width: 250px;
+  max-width: 250px;
+  min-width: 250px;
+  height: 100vh;
+}
