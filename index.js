@@ -12,6 +12,7 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { createDefaultStyle } from 'ol/style/Style';
 import { Style, Icon } from 'ol/style';
 import FullScreen from 'ol/control/FullScreen';
+import { Control} from 'ol/control.js';
 import { apply } from 'ol-mapbox-style';
 import Popup from 'ol-popup';
 import data from './data.yml';
@@ -33,7 +34,43 @@ apply(map, 'https://tiles.osmontrouge.fr/styles/osm-bright/style.json');
 const popup = new Popup();
 map.addOverlay(popup);
 
+const Sidebar = (function (Control) {
+  function Sidebar(options = {}) {
+    const button = document.createElement('button');
+    button.innerHTML = '<';
+
+    const element = document.createElement('div');
+    element.className = 'ol-unselectable ol-control handle';
+    element.appendChild(button);
+
+    Control.call(this, {
+      element: element,
+      target: options.target
+    });
+
+    button.addEventListener('click', this.toggleSidebar.bind(this), false);
+  }
+
+  if ( Control ) Sidebar.__proto__ = Control;
+  Sidebar.prototype = Object.create(Control && Control.prototype);
+  Sidebar.prototype.constructor = Sidebar;
+
+  Sidebar.prototype.toggleSidebar = function toggleSidebar() {
+    this.target_.classList.toggle('sidebar--closed');
+    if (this.target_.classList.contains('sidebar--closed')) {
+      this.element.firstChild.innerHTML = '>';
+    } else {
+      this.element.firstChild.innerHTML = '<';
+    }
+  };
+
+  return Sidebar;
+}(Control));
+
 map.addControl(new FullScreen());
+map.addControl(new Sidebar({
+  target: document.getElementById('sidebar')
+}));
 
 const filters = Object.keys(data).map((id) => {
   return {

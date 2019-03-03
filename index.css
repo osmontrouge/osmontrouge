@@ -10,18 +10,36 @@ h1 {
 }
 #map {
   height: 100vh;
-  margin-left: 250px;
+  width: 100vw;
 }
 .sidebar {
   position: absolute;
+  z-index: 5;
+  background-color: white;
   padding: 10px;
   width: 250px;
   max-width: 250px;
   min-width: 250px;
   height: 100vh;
   border-right: solid 2px #dedede;
+  transition: transform .5s ease;
+  transform: translateX(0px);
+}
+.sidebar.sidebar--closed {
+  transform: translateX(-250px);
 }
 .filters label {
   display: block;
   margin-bottom: .3rem;
+}
+.ol-zoom {
+  top: auto;
+  left: auto;
+  bottom: 2.5em;
+  right: .5em;
+}
+.ol-control.handle {
+  transform: translateX(250px);
+  top: .5em;
+  left: .5em;
 }
