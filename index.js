@@ -1,76 +1,50 @@
-import 'ol/ol.css';
-import 'ol-popup/src/ol-popup.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import 'normalize.css/normalize.css';
 import './index.css';
 
-import Map from 'ol/Map';
-import View from 'ol/View';
-import { fromLonLat, transformExtent } from 'ol/proj';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import { createDefaultStyle } from 'ol/style/Style';
-import { Style, Icon } from 'ol/style';
-import FullScreen from 'ol/control/FullScreen';
-import { Control} from 'ol/control.js';
-import { apply } from 'ol-mapbox-style';
-import Popup from 'ol-popup';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import data from './data.yml';
 import ejs from 'ejs';
-import icons from './icons/*.svg'
 import geojsondata from './data/*.geojson'
 
-const map = new Map({
-  target: 'map',
-  view: new View({
-    center: fromLonLat([2.3160600, 48.8144000]),
-    extent: transformExtent([2.300305,48.809181,2.333694,48.822321],
-                            'EPSG:4326', 'EPSG:3857'),
-    zoom: 15
-  })
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'https://tiles.osmontrouge.fr/styles/osm-bright/style.json',
+  center: [2.3160600, 48.8144000],
+  zoom: 15,
+  maxBounds: [[2.300305, 48.809181], [2.333694, 48.822321]]
 });
-apply(map, 'https://tiles.osmontrouge.fr/styles/osm-bright/style.json');
 
-const popup = new Popup();
-map.addOverlay(popup);
+map.addControl(new mapboxgl.NavigationControl());
 
-const Sidebar = (function (Control) {
-  function Sidebar(options = {}) {
-    const button = document.createElement('button');
-    button.innerHTML = '<';
-
-    const element = document.createElement('div');
-    element.className = 'ol-unselectable ol-control handle';
-    element.appendChild(button);
-
-    Control.call(this, {
-      element: element,
-      target: options.target
-    });
-
-    button.addEventListener('click', this.toggleSidebar.bind(this), false);
+class Sidebar {
+  onAdd(map) {
+    this._map = map;
+    this._container = document.createElement('div');
+    this._container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
+    this._button = document.createElement('button');
+    this._button.innerHTML = '<';
+    this._container.appendChild(this._button);
+    this._button.addEventListener('click', this._onClick.bind(this), false);
+    return this._container;
   }
 
-  if ( Control ) Sidebar.__proto__ = Control;
-  Sidebar.prototype = Object.create(Control && Control.prototype);
-  Sidebar.prototype.constructor = Sidebar;
+  onRemove() {
+    this._container.parentNode.removeChild(this._container);
+    this._map = undefined;
+  }
 
-  Sidebar.prototype.toggleSidebar = function toggleSidebar() {
-    this.target_.classList.toggle('sidebar--closed');
-    if (this.target_.classList.contains('sidebar--closed')) {
-      this.element.firstChild.innerHTML = '>';
+  _onClick() {
+    document.body.classList.toggle('sidebar-closed');
+    if (document.body.classList.contains('sidebar-closed')) {
+      this._button.innerHTML = '>';
     } else {
-      this.element.firstChild.innerHTML = '<';
+      this._button.innerHTML = '<';
     }
-  };
+  }
+}
 
-  return Sidebar;
-}(Control));
-
-map.addControl(new FullScreen());
-map.addControl(new Sidebar({
-  target: document.getElementById('sidebar')
-}));
+map.addControl(new Sidebar(), 'top-left');
 
 const filters = Object.keys(data).map((id) => {
   return {
@@ -90,41 +64,68 @@ document.querySelectorAll('input[type=checkbox]').forEach((checkbox) => {
   const name = checkbox.dataset.name;
   checkbox.addEventListener('change', (e) => {
     if (e.target.checked) {
-      layer = new VectorLayer({
-        source: new VectorSource({
-          url: geojsondata[name],
-          format: new GeoJSON()
-        }),
-        style: (feature, resolution) => {
-          if (feature.getGeometry().getType() === 'Point' && feature.getProperties().icon) {
-            return new Style({
-              image: new Icon({
-                anchor: [0, 0],
-                src: icons[feature.getProperties().icon]
-              })
-            });
-          }
-          return createDefaultStyle(feature, resolution);
-        }
-      },);
-      map.addLayer(layer);
+      map.addSource(name, {
+        type: 'geojson',
+        data: geojsondata[name]
+      });
+      const color = (data[name].style || { color: 'blue' }).color;
+      map.addLayer({
+        id: `${name}-polygon`,
+        type: 'fill',
+        source: name,
+        paint: {
+          'fill-color': color,
+          'fill-opacity': .4
+        },
+        filter: ['==', '$type', 'Polygon']
+      });
+      map.addLayer({
+        id: `${name}-point`,
+        type: 'circle',
+        source: name,
+        paint: {
+          'circle-radius': 10,
+          'circle-color': color
+        },
+        filter: ['==', '$type', 'Point']
+      });
+      bindTooltip(`${name}-polygon`);
+      bindTooltip(`${name}-point`);
     } else {
-      map.removeLayer(layer);
+      map.removeLayer(`${name}-polygon`);
+      map.removeLayer(`${name}-point`);
+      map.removeSource(name);
+      unbindTooltip(`${name}-polygon`);
+      unbindTooltip(`${name}-point`);
     }
   });
 });
 
+const popup = new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: false
+});
 
-function displayTooltip(evt) {
-  var pixel = evt.pixel;
-  var feature = map.forEachFeatureAtPixel(pixel, (feature) => feature, { layerFilter(layer) {
-    return layer.type === 'VECTOR';
-  }});
-  if (feature && feature.getProperties().name) {
-    popup.show(evt.coordinate, feature.getProperties().name);
-  } else {
-    popup.hide();
-  }
-};
+function showTooltip(e) {
+  const name = e.features[0].properties.name;
+  if (!name) return;
+  map.getCanvas().style.cursor = 'pointer';
 
-map.on('pointermove', displayTooltip);
+  popup.setLngLat(e.lngLat)
+    .setHTML(name)
+    .addTo(map);
+}
+
+function hideTooltip() {
+  map.getCanvas().style.cursor = '';
+  popup.remove();
+}
+
+function bindTooltip(layer) {
+  map.on('mouseenter', layer, showTooltip);
+  map.on('mouseleave', layer, hideTooltip);
+}
+function unbindTooltip(layer) {
+  map.off('mouseenter', layer, showTooltip);
+  map.off('mouseleave', layer, hideTooltip);
+}

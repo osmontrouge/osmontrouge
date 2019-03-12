@@ -25,21 +25,17 @@ h1 {
   transition: transform .5s ease;
   transform: translateX(0px);
 }
-.sidebar.sidebar--closed {
+.sidebar-closed .sidebar {
   transform: translateX(-250px);
 }
 .filters label {
   display: block;
   margin-bottom: .3rem;
 }
-.ol-zoom {
-  top: auto;
-  left: auto;
-  bottom: 2.5em;
-  right: .5em;
-}
-.ol-control.handle {
+.mapboxgl-ctrl-top-left {
   transform: translateX(250px);
-  top: .5em;
-  left: .5em;
+  transition: transform .5s ease;
+}
+.sidebar-closed .mapboxgl-ctrl-top-left {
+  transform: translateX(0);
 }

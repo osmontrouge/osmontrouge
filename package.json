@@ -4,6 +4,8 @@
     "build": "parcel build index.html"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "js-yaml": "^3.12.2",
     "osmtogeojson": "^3.0.0-beta.3",
     "parcel": "^1.11.0",
@@ -12,9 +14,7 @@
   },
   "dependencies": {
     "ejs": "^2.6.1",
-    "normalize.css": "^8.0.1",
-    "ol": "^5.3.1",
-    "ol-mapbox-style": "^4.0.0",
-    "ol-popup": "^4.0.0"
+    "mapbox-gl": "^0.53.1",
+    "normalize.css": "^8.0.1"
   }
 }

@@ -30,6 +30,8 @@ marketplace:
 
 parks:
   name: Parcs
+  style:
+    color: green
   query: >-
     [out:json][timeout:25];
     area(3600037026)->.searchArea;
