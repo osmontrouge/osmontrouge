@@ -10,7 +10,7 @@ const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
 let rate = Promise.resolve();
 
 Object.keys(data).map((id) => {
-  const { icon, query } = data[id];
+  const { query } = data[id];
   const options = {
     method: 'POST',
     form: { data: query },
@@ -20,14 +20,6 @@ Object.keys(data).map((id) => {
     .then(() => rp('http://overpass-api.de/api/interpreter', options))
     .then((data) => {
       return osmtogeojson(data);
-    })
-    .then((geojson) => {
-      geojson.features.forEach((feature) => {
-        if (icon) {
-          feature.properties.icon = icon;
-        }
-      });
-      return geojson;
     })
     .then((geojson) => {
       fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
