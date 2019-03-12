@@ -9,7 +9,7 @@ import geojsondata from './data/*.geojson'
 
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'https://tiles.osmontrouge.fr/styles/osm-bright/style.json',
+  style: 'https://tiles.osmontrouge.fr/styles/liberty/style.json',
   center: [2.3160600, 48.8144000],
   zoom: 15,
   maxBounds: [[2.300305, 48.809181], [2.333694, 48.822321]]
