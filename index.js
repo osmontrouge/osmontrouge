@@ -12,7 +12,8 @@ const map = new mapboxgl.Map({
   style: 'https://tiles.osmontrouge.fr/styles/liberty/style.json',
   center: [2.3160600, 48.8144000],
   zoom: 15,
-  maxBounds: [[2.300305, 48.809181], [2.333694, 48.822321]]
+  maxBounds: [[2.300305, 48.809181], [2.333694, 48.822321]],
+  hash: true
 });
 
 map.addControl(new mapboxgl.NavigationControl());
