@@ -71,7 +71,7 @@
               >
                 <path
                   :fill="category.color"
-                  d="M24 0c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z"></path>
+                  d="M24 0c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z" />
                 <foreignObject x="9" y="3" width="30" height="30">
                   <div class="marker-icon">
                     <v-icon :color="category.color">{{ category.icon }}</v-icon>
@@ -163,19 +163,20 @@ export default {
 
     toggleMarker(idCategory, idFeature, displayed) {
       if (displayed) {
+        const category = this.taxonomy[idCategory];
+        const featureOrCategoryInfo = name => category.features[idFeature][name] || category[name];
+        const marker = {
+          id: idCategory,
+          name: category.features[idFeature].name,
+          icon: featureOrCategoryInfo('icon'),
+          color: featureOrCategoryInfo('color'),
+          markers: []
+        };
+        this.markers.push(marker)
         fetch(geojsondata[idFeature])
           .then(data => data.json())
           .then(({ features }) => {
-            const category = this.taxonomy[idCategory];
-            const featureOrCategoryInfo = name => category.features[idFeature][name] || category[name];
-
-            this.markers.push({
-              id: idCategory,
-              name: category.features[idFeature].name,
-              icon: featureOrCategoryInfo('icon'),
-              color: featureOrCategoryInfo('color'),
-              markers: features
-            });
+            marker.markers.push(...features);
           });
       } else {
         this.markers.splice(this.markers.findIndex(c => c.id === idCategory), 1);
