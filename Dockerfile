@@ -6,6 +6,7 @@ COPY package.json yarn.lock /code/
 RUN yarn install --pure-lockfile
 
 COPY . /code
+RUN yarn icons
 RUN script/update
 RUN yarn run build
 
