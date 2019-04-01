@@ -88,7 +88,7 @@
           </MglMarker>
         </template>
 
-        <MglNavigationControl />
+        <MglNavigationControl :show-compass="false" />
       </MglMap>
     </v-content>
   </v-app>
