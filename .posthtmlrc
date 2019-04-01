@@ -1,3 +1,4 @@
 {
-  "recognizeSelfClosing": true
+  "recognizeSelfClosing": true,
+  "lowerCaseTags": false
 }
