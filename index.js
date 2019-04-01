@@ -24,16 +24,27 @@ const mapMaxBounds = [[2.293611, 48.807344], [2.336998, 48.825486]];
 const mapCenter = [2.315111, 48.816614];
 const mapZoom = 15;
 const mapName = 'OSMontrouge';
+const mapStyles = [
+  {
+    title: 'Bright',
+    uri: 'https://tiles.osmontrouge.fr/styles/bright/style.json',
+  },
+  {
+    title: 'Liberty',
+    uri: 'https://tiles.osmontrouge.fr/styles/liberty/style.json',
+  }
+]
 
 new Vue({
   render: createEle => createEle(App, {
     props: {
-      taxonomy: data,
-      mapMaxBounds,
+      imageSidebar,
       mapCenter,
-      mapZoom,
+      mapMaxBounds,
       mapName,
-      imageSidebar
+      mapStyles,
+      mapZoom,
+      taxonomy: data,
     }
   }),
 }).$mount('#app');

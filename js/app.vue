@@ -46,7 +46,7 @@
         :max-bounds="map.maxBounds"
         :center.sync="map.center"
         :zoom.sync="map.zoom"
-        map-style="https://tiles.osmontrouge.fr/styles/liberty/style.json"
+        :map-style="mapStyles[0].uri"
       >
         <template
           v-for="category in markers"
@@ -87,8 +87,8 @@
             </MglPopup>
           </MglMarker>
         </template>
-
         <MglNavigationControl :show-compass="false" />
+        <style-control :styles="this.mapStyles" />
       </MglMap>
     </v-content>
   </v-app>
@@ -96,6 +96,7 @@
 
 <script>
 import { MglMap, MglMarker, MglNavigationControl, MglPopup } from 'vue-mapbox';
+import StyleControl from './style_control';
 import OsmSidebar from './sidebar';
 import geojsondata from '../data/*.geojson';
 
@@ -105,6 +106,7 @@ export default {
     MglMarker,
     MglPopup,
     MglNavigationControl,
+    StyleControl,
     OsmSidebar
   },
 
@@ -129,6 +131,10 @@ export default {
     },
     mapName: {
       type: String,
+      required: true
+    },
+    mapStyles: {
+      type: Array,
       required: true
     },
     imageSidebar: {

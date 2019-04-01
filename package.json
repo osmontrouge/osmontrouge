@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "mapbox-gl": "^0.53.1",
+    "mapbox-gl-style-switcher": "https://github.com/osmontrouge/style-switcher",
     "vue": "^2.6.9",
     "vue-mapbox": "^0.2.2",
     "vuetify": "^1.5.6"
