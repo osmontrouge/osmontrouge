@@ -3,7 +3,7 @@
 
 <script>
 import { MapboxStyleSwitcherControl } from 'mapbox-gl-style-switcher';
-import { $helpers } from 'vue-mapbox';
+import { $helpers } from 'vue-mapbox/dist/vue-mapbox.umd.js';
 
 import 'mapbox-gl-style-switcher/styles.css';
 

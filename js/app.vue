@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { MglMap, MglMarker, MglNavigationControl, MglPopup } from 'vue-mapbox';
+import { MglMap, MglMarker, MglNavigationControl, MglPopup } from 'vue-mapbox/dist/vue-mapbox.umd.js';
 import StyleControl from './style_control';
 import OsmSidebar from './sidebar';
 import geojsondata from '../data/*.geojson';
