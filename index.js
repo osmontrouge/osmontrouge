@@ -33,7 +33,12 @@ const mapStyles = [
     title: 'Liberty',
     uri: 'https://tiles.osmontrouge.fr/styles/liberty/style.json',
   }
-]
+];
+const mappillaryUsers = [
+  'e_ZBE6mFd7CYNjRSpLl-Lg', // francois2
+  'C4ENdWpJdFNf8CvnQd7NrQ', // phyks
+  'XtzGKZX2_VIJRoiJ8IWRNQ'  // overflorian
+];
 
 new Vue({
   render: createEle => createEle(App, {
@@ -44,6 +49,7 @@ new Vue({
       mapName,
       mapStyles,
       mapZoom,
+      mappillaryUsers,
       taxonomy: data,
     }
   }),

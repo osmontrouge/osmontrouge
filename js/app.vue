@@ -87,6 +87,10 @@
             </MglPopup>
           </MglMarker>
         </template>
+        <mapillary-layer
+          :pano="1"
+          :users="mappillaryUsers"
+        />
         <MglNavigationControl :show-compass="false" />
         <style-control :styles="this.mapStyles" />
       </MglMap>
@@ -98,6 +102,7 @@
 import { MglMap, MglMarker, MglNavigationControl, MglPopup } from 'vue-mapbox/dist/vue-mapbox.umd.js';
 import StyleControl from './style_control';
 import OsmSidebar from './sidebar';
+import MapillaryLayer from './mapillary_layer';
 import geojsondata from '../data/*.geojson';
 
 export default {
@@ -107,7 +112,8 @@ export default {
     MglPopup,
     MglNavigationControl,
     StyleControl,
-    OsmSidebar
+    OsmSidebar,
+    MapillaryLayer
   },
 
   props: {
@@ -140,6 +146,13 @@ export default {
     imageSidebar: {
       type: String,
       required: true
+    },
+    mappillaryUsers: {
+      type: Array,
+      required: false,
+      default() {
+        return [];
+      }
     }
   },
 
