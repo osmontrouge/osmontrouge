@@ -83,3 +83,17 @@ others:
           relation["amenity"="public_bookcase"](area.searchArea);
         );
         out center;
+
+    charging_station:
+      name: Bornes de recharges électriques
+      icon: osm-charging_station
+      color: '#0071bc'
+      query: >-
+        [out:json][timeout:25];
+        area(3600037026)->.searchArea;
+        (
+          node["amenity"="charging_station"](area.searchArea);
+          way["amenity"="charging_station"](area.searchArea);
+          relation["amenity"="charging_station"](area.searchArea);
+        );
+        out center;
