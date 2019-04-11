@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <keep-alive>
-      <router-view class="fullHeight" />
-    </keep-alive>
+    <router-view class="fullHeight" />
   </v-app>
 </template>
 

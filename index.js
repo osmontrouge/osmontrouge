@@ -21,17 +21,22 @@ Vue.use(Vuetify, {
 });
 Vue.use(VueRouter);
 
-function castParamsToFloat(keys, route) {
-  return keys.reduce((memo, key) => {
-    memo[key] = parseFloat(route.params[key]);
-    return memo;
-  }, {});
-}
-
 const routes = [
-  { name: 'index',          path: '',                  component: OsmMap },
-  { name: 'index_with_pos', path: '/@:lat,:lng,:zoom', component: OsmMap,        props(route) { return castParamsToFloat(['lat', 'lng', 'zoom'], route); } },
-  { name: '360',            path: '/360/:mKey',        component: MapillaryView, props: true }
+  {
+    name: 'index',
+    path: '/:position?',
+    component: OsmMap,
+    props: true,
+    children: [
+      {
+        name: '360',
+        path: '360/:mKey',
+        component: MapillaryView,
+        props: true
+      }
+    ]
+  },
+
 ];
 
 const router = new VueRouter({

@@ -7,7 +7,7 @@
       dark
       top
       right
-      @click="$router.push({ name: 'index' })"
+      @click="$router.push({ name: 'index', params: { position } })"
     >
       <v-icon>osm-close</v-icon>
     </v-btn>
@@ -24,6 +24,11 @@ export default {
     mKey: {
       type: String,
       required: true
+    },
+    position: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
 
@@ -40,7 +45,7 @@ export default {
     );
 
     this.viewer.on(Viewer.nodechanged, ({ key }) => {
-      this.$router.replace({ name: '360', params: { mKey: key } });
+      this.$router.replace({ name: '360', params: { mKey: key, position: this.position } });
     });
   },
 

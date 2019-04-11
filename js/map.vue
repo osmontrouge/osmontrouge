@@ -2,72 +2,75 @@
   <div
     v-resize="resize"
   >
-    <v-navigation-drawer
-      v-model="sidebar"
-      :temporary="isMobile"
-      :stateless="!isMobile"
-      :hide-overlay="!isMobile"
-      fixed
-    >
-      <osm-sidebar
-        :taxonomy="config.taxonomy"
-        :image-sidebar="config.imageSidebar"
-        :map-name="config.mapName"
-        class="sidebar"
-        @input="toggleMarker"
-      />
-    </v-navigation-drawer>
-    <v-container
-      v-show="!isMobile"
-      :class="{ 'handle--closed': !sidebar }"
-      fill-height
-      tag="a"
-      class="handle"
-      @click.prevent="sidebar = !sidebar"
-    >
-      <v-icon v-if="sidebar">{{ $vuetify.icons.prev }}</v-icon>
-      <v-icon v-else>{{ $vuetify.icons.next }}</v-icon>
-    </v-container>
-    <v-content>
-      <v-btn
-        v-show="isMobile"
+    <div>
+      <v-navigation-drawer
+        v-model="sidebar"
+        :temporary="isMobile"
+        :stateless="!isMobile"
+        :hide-overlay="!isMobile"
         fixed
-        fab
-        dark
-        top
-        left
-        color="pink"
-        @click="sidebar = !sidebar"
       >
-        <v-icon>osm-filter_list</v-icon>
-      </v-btn>
-      <MglMap
-        :max-bounds="mapMaxBounds"
-        :center.sync="mapCenter"
-        :zoom.sync="mapZoom"
-        :map-style="config.mapStyles[0].uri"
-      >
-        <template
-          v-for="category in markers"
-        >
-          <osm-marker
-            v-for="marker in category.markers"
-            :key="marker.id"
-            :marker="marker"
-            :category="category"
-          />
-        </template>
-        <mapillary-layer
-          v-if="mapillaryLayer"
-          :pano="1"
-          :users="config.mapillaryUsers"
-          @click="displayMapillaryView"
+        <osm-sidebar
+          :taxonomy="config.taxonomy"
+          :image-sidebar="config.imageSidebar"
+          :map-name="config.mapName"
+          class="sidebar"
+          @input="toggleMarker"
         />
-        <MglNavigationControl :show-compass="false" />
-        <style-control :styles="config.mapStyles" />
-        <mapillary-control v-model="mapillaryLayer" />
-      </MglMap>
-    </v-content>
+      </v-navigation-drawer>
+      <v-container
+        v-show="!isMobile"
+        :class="{ 'handle--closed': !sidebar }"
+        fill-height
+        tag="a"
+        class="handle"
+        @click.prevent="sidebar = !sidebar"
+      >
+        <v-icon v-if="sidebar">{{ $vuetify.icons.prev }}</v-icon>
+        <v-icon v-else>{{ $vuetify.icons.next }}</v-icon>
+      </v-container>
+      <v-content>
+        <v-btn
+          v-show="isMobile"
+          fixed
+          fab
+          dark
+          top
+          left
+          color="pink"
+          @click="sidebar = !sidebar"
+        >
+          <v-icon>osm-filter_list</v-icon>
+        </v-btn>
+        <MglMap
+          :max-bounds="mapMaxBounds"
+          :center.sync="mapCenter"
+          :zoom.sync="mapZoom"
+          :map-style="config.mapStyles[0].uri"
+        >
+          <template
+            v-for="category in markers"
+          >
+            <osm-marker
+              v-for="marker in category.markers"
+              :key="marker.id"
+              :marker="marker"
+              :category="category"
+            />
+          </template>
+          <mapillary-layer
+            v-if="mapillaryLayer"
+            :pano="1"
+            :users="config.mapillaryUsers"
+            @click="displayMapillaryView"
+          />
+          <MglNavigationControl :show-compass="false" />
+          <style-control :styles="config.mapStyles" />
+          <mapillary-control v-model="mapillaryLayer" />
+        </MglMap>
+      </v-content>
+    </div>
+    <router-view class="sub-view" />
   </div>
 </template>
 
@@ -78,9 +81,11 @@ import OsmSidebar from './sidebar';
 import OsmMarker from './marker';
 import MapillaryLayer from './mapillary_layer';
 import MapillaryControl from './mapillary_control';
+import MapillaryView from './mapillary_view';
 import geojsondata from '../data/*.geojson';
 import * as config from '../config';
 import { findImage } from './mapillary';
+import { encode as encodePosition, decode as decodePosition } from './position';
 
 export default {
   components: {
@@ -90,45 +95,28 @@ export default {
     OsmSidebar,
     OsmMarker,
     MapillaryLayer,
-    MapillaryControl
+    MapillaryControl,
+    MapillaryView
   },
 
   props: {
-    lat: {
-      type: Number,
+    position: {
+      type: String,
       required: false,
-      default() {
-        return config.mapCenter[1];
-      }
-    },
-    lng: {
-      type: Number,
-      required: false,
-      default() {
-        return config.mapCenter[0];
-      }
-    },
-    zoom: {
-      type: Number,
-      required: false,
-      default() {
-        return config.mapZoom;
-      }
+      default: ''
     }
   },
 
   data() {
+    const { lat, lng, zoom } = decodePosition(this.position, config);
     return {
       isMobile: false,
       sidebar: false,
       markers: [],
       mapillaryLayer: false,
       mapMaxBounds: config.mapMaxBounds,
-      mapCenter: {
-        lat: this.lat,
-        lng: this.lng
-      },
-      mapZoom: this.zoom,
+      mapCenter: { lat, lng },
+      mapZoom: zoom,
       config
     };
   },
@@ -155,11 +143,9 @@ export default {
 
     updateRoute() {
       this.$router.replace({
-        name: 'index_with_pos',
+        name: 'index',
         params: {
-          lat: this.mapCenter.lat.toFixed(6),
-          lng: this.mapCenter.lng.toFixed(6),
-          zoom: this.mapZoom.toFixed(2)
+          position: encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
         }
       });
     },
@@ -189,7 +175,7 @@ export default {
     displayMapillaryView(position) {
       findImage(position, true, config.mapillaryUsers, config.mapillaryClientId)
         .then((mKey) => {
-          this.$router.push({ name: '360', params: { mKey } });
+          this.$router.push({ name: '360', params: { mKey, position: this.position } });
         });
     }
   }
@@ -229,5 +215,14 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+.sub-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
 }
 </style>
