@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    tabindex="0"
+    @keydown.esc="close"
+  >
     <div id="mapillary" />
     <v-btn
       fixed
@@ -7,7 +10,7 @@
       dark
       top
       right
-      @click="$router.push({ name: 'index', params: { position } })"
+      @click="close"
     >
       <v-icon>osm-close</v-icon>
     </v-btn>
@@ -43,6 +46,7 @@ export default {
         }
       }
     );
+    this.$el.focus();
 
     this.viewer.on(Viewer.nodechanged, ({ key }) => {
       this.$router.replace({ name: '360', params: { mKey: key, position: this.position } });
@@ -52,6 +56,12 @@ export default {
   watch: {
     mKey(mKey) {
       this.viewer.moveToKey(mKey);
+    }
+  },
+
+  methods: {
+    close() {
+      this.$router.push({ name: 'index', params: { position: this.position } })
     }
   }
 };
