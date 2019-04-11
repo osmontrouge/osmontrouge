@@ -1,5 +1,6 @@
 node_modules/
 data/*.geojson
 dist/
+dist_test/
 .cache
 font/osm.*
