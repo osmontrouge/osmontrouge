@@ -16,33 +16,39 @@
       </v-layout>
     </v-img>
 
-    <v-list>
-
-      <v-list-group
-        v-for="(category, id) in taxonomy"
-        :key="id"
-        :prepend-icon="category.icon"
+    <v-list
+      v-for="(category, id) in taxonomy"
+      :key="id"
+    >
+      <v-subheader
+        class="small-subheader-height"
       >
-        <template v-slot:activator>
-          <v-list-tile>
-            <v-list-tile-title>{{ category.name }}</v-list-tile-title>
-          </v-list-tile>
-        </template>
+        {{ category.name }}
+      </v-subheader>
 
-        <v-list-tile
-          v-for="(feature, idFeature) in category.features"
-          :key="idFeature"
+      <v-list-tile
+        v-for="(feature, idFeature) in category.features"
+        :key="idFeature"
+        class="small-tile-height"
+      >
+        <v-list-tile-avatar
+          size="20"
+          class="no-min-width"
         >
-          <v-list-tile-content>
-            <v-list-tile-title>{{ feature.name }}</v-list-tile-title>
-          </v-list-tile-content>
+          <v-icon
+            :color="feature.color || category.color"
+            small
+          >{{ feature.icon || category.icon }}</v-icon>
+        </v-list-tile-avatar>
 
-          <v-list-tile-action>
-            <v-checkbox @change="$emit('input', id, idFeature, $event)"></v-checkbox>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list-group>
+        <v-list-tile-content class="ml-2">
+          <v-list-tile-title class="body-1">{{ feature.name }}</v-list-tile-title>
+        </v-list-tile-content>
 
+        <v-list-tile-action class="no-min-width">
+          <v-checkbox @change="$emit('input', id, idFeature, $event)"></v-checkbox>
+        </v-list-tile-action>
+      </v-list-tile>
     </v-list>
   </v-card>
 </template>
@@ -65,3 +71,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .no-min-width {
+    min-width: auto;
+  }
+  .small-subheader-height {
+    height: 30px;
+  }
+  .small-tile-height {
+    height: 40px;
+  }
+</style>

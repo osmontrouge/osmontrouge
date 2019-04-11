@@ -85,7 +85,7 @@ others:
         out center;
 
     charging_station:
-      name: Bornes de recharges électriques
+      name: Recharge de véhicule électrique
       icon: osm-charging_station
       color: '#0071bc'
       query: >-
