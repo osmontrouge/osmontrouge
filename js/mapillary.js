@@ -16,3 +16,11 @@ export function findImage(pos, pano, users, clientId) {
       }
     });
 }
+
+export function mapillaryViewerFilter(users, pano) {
+  return [
+    'all',
+    ['in', 'userKey', ...users],
+    ['==', 'pano', pano]
+  ];
+}

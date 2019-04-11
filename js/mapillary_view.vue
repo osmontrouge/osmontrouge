@@ -20,7 +20,8 @@
 <script>
 import 'mapillary-js/dist/mapillary.min.css';
 import { Viewer } from 'mapillary-js/dist/mapillary.min';
-import { mapillaryClientId } from '../config';
+import { mapillaryClientId, mapillaryUsers } from '../config';
+import { mapillaryViewerFilter } from './mapillary';
 
 export default {
   props: {
@@ -46,6 +47,7 @@ export default {
         }
       }
     );
+    this.viewer.setFilter(mapillaryViewerFilter(mapillaryUsers, true));
     this.$el.focus();
 
     this.viewer.on(Viewer.nodechanged, ({ key }) => {
