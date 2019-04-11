@@ -15,7 +15,10 @@ describe('MapillaryControl', () => {
         map: {},
         mapbox: {}
       },
-      stubs: ['v-icon']
+      stubs: {
+        'v-icon': '<div />',
+        'v-tooltip': '<div><slot name="activator" /></div>'
+      }
     });
   });
 
