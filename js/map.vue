@@ -64,10 +64,29 @@
             :users="config.mapillaryUsers"
             @click="displayMapillaryView"
           />
-          <MglNavigationControl :show-compass="false" />
-          <style-control :styles="config.mapStyles" />
-          <mapillary-control v-model="mapillaryLayer" />
+          <MglNavigationControl
+            :show-compass="false"
+            position="bottom-right"
+          />
+          <style-control
+            :styles="config.mapStyles"
+            position="bottom-right"
+          />
+          <mapillary-control
+            v-model="mapillaryLayer"
+            position="bottom-right"
+          />
         </MglMap>
+        <v-card
+          v-if="mapillaryLayer"
+          width="400"
+          height="55"
+          class="mapillary-info"
+        >
+          <v-card-text>
+            Cliquez sur les lignes verte pour voir les photos à 360°.
+          </v-card-text>
+        </v-card>
       </v-content>
     </div>
     <router-view class="sub-view" />
@@ -222,5 +241,12 @@ export default {
   z-index: 10;
   width: 100vw;
   height: 100vh;
+}
+
+.mapillary-info {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -200px;
 }
 </style>
