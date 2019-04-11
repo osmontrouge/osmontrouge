@@ -22,4 +22,10 @@ export const mapillaryUsers = [
 ];
 export const mapillaryClientId = 'ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzo0YmYyNDRkMDFkYWE3YWQ3';
 
+Object.keys(taxonomy).forEach((key) => {
+  Object.keys(taxonomy[key].features).forEach((keyFeature) => {
+    taxonomy[key].features[keyFeature].selected = false;
+  });
+});
+window.taxonomy = taxonomy;
 export { taxonomy, imageSidebar };

@@ -11,11 +11,10 @@
         fixed
       >
         <osm-sidebar
-          :taxonomy="config.taxonomy"
+          :taxonomy="taxonomy"
           :image-sidebar="config.imageSidebar"
           :map-name="config.mapName"
           class="sidebar"
-          @input="toggleMarker"
         />
       </v-navigation-drawer>
       <v-container
@@ -134,7 +133,8 @@ export default {
       mapMaxBounds: config.mapMaxBounds,
       mapCenter: { lat, lng },
       mapZoom: zoom,
-      config
+      config,
+      taxonomy: config.taxonomy
     };
   },
 
@@ -150,6 +150,13 @@ export default {
 
     mapZoom() {
       this.updateRoute();
+    },
+
+    taxonomy: {
+      deep: true,
+      handler() {
+        this.updateMarkers();
+      }
     }
   },
 
@@ -167,26 +174,38 @@ export default {
       });
     },
 
-    toggleMarker(idCategory, idFeature, displayed) {
-      if (displayed) {
-        const category = this.config.taxonomy[idCategory];
-        const featureOrCategoryInfo = name => category.features[idFeature][name] || category[name];
-        const marker = {
-          id: idCategory,
-          name: category.features[idFeature].name,
-          icon: featureOrCategoryInfo('icon'),
-          color: featureOrCategoryInfo('color'),
-          markers: []
-        };
-        this.markers.push(marker)
-        fetch(geojsondata[idFeature])
-          .then(data => data.json())
-          .then(({ features }) => {
-            marker.markers.push(...features);
-          });
-      } else {
-        this.markers.splice(this.markers.findIndex(c => c.id === idCategory), 1);
-      }
+    updateMarkers() {
+      Object.keys(this.taxonomy).forEach((idCategory) => {
+        Object.keys(this.taxonomy[idCategory].features).forEach((idFeature) => {
+          const feature = this.taxonomy[idCategory].features[idFeature];
+          const index = this.markers.findIndex(c => c.id === idFeature);
+          if (feature.selected) {
+            if (index !== -1) {
+              return;
+            }
+            const category = this.taxonomy[idCategory];
+            const featureOrCategoryInfo = name => feature[name] || category[name];
+            const marker = {
+              id: idFeature,
+              name: feature.name,
+              icon: featureOrCategoryInfo('icon'),
+              color: featureOrCategoryInfo('color'),
+              markers: []
+            };
+            this.markers.push(marker)
+            fetch(geojsondata[idFeature])
+              .then(data => data.json())
+              .then(({ features }) => {
+                marker.markers.push(...features);
+              });
+          } else {
+            if (index === -1) {
+              return;
+            }
+            this.markers.splice(index, 1);
+          }
+        });
+      });
     },
 
     displayMapillaryView(position) {
