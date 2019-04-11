@@ -3,6 +3,7 @@
     v-resize="resize"
   >
     <v-navigation-drawer
+      v-show="!mapillaryView"
       v-model="sidebar"
       :temporary="isMobile"
       :stateless="!isMobile"
@@ -18,7 +19,7 @@
       />
     </v-navigation-drawer>
     <v-container
-      v-show="!isMobile"
+      v-show="!isMobile && !mapillaryView"
       :class="{ 'handle--closed': !sidebar }"
       fill-height
       tag="a"
@@ -42,6 +43,7 @@
         <v-icon>osm-filter_list</v-icon>
       </v-btn>
       <MglMap
+        v-show="!mapillaryView"
         :hash="true"
         :max-bounds="map.maxBounds"
         :center.sync="map.center"
@@ -88,12 +90,23 @@
           </MglMarker>
         </template>
         <mapillary-layer
+          v-if="mapillaryLayer"
           :pano="1"
           :users="mappillaryUsers"
+          @click="displayMapilllaryView"
         />
         <MglNavigationControl :show-compass="false" />
         <style-control :styles="this.mapStyles" />
+        <mapillary-control v-model="mapillaryLayer" />
       </MglMap>
+      <mapillary-viewer
+        v-if="mapillaryView"
+        :pos="mapillaryPos"
+        :pano="1"
+        :users="mappillaryUsers"
+        class="mapillary-viewer"
+        @close="hideMapillaryView"
+      />
     </v-content>
   </v-app>
 </template>
@@ -103,6 +116,8 @@ import { MglMap, MglMarker, MglNavigationControl, MglPopup } from 'vue-mapbox/di
 import StyleControl from './style_control';
 import OsmSidebar from './sidebar';
 import MapillaryLayer from './mapillary_layer';
+import MapillaryControl from './mapillary_control';
+import MapillaryViewer from './mapillary_view';
 import geojsondata from '../data/*.geojson';
 
 export default {
@@ -113,7 +128,9 @@ export default {
     MglNavigationControl,
     StyleControl,
     OsmSidebar,
-    MapillaryLayer
+    MapillaryLayer,
+    MapillaryControl,
+    MapillaryViewer
   },
 
   props: {
@@ -161,6 +178,9 @@ export default {
       isMobile: false,
       sidebar: false,
       markers: [],
+      mapillaryLayer: false,
+      mapillaryView: false,
+      mapillaryPos: null,
       map: {
         maxBounds: this.mapMaxBounds,
         center: this.mapCenter,
@@ -200,6 +220,16 @@ export default {
         this.markers.splice(this.markers.findIndex(c => c.id === idCategory), 1);
       }
     },
+
+    displayMapilllaryView(position) {
+      this.mapillaryView = true;
+      this.mapillaryPos = position;
+    },
+
+    hideMapillaryView() {
+      this.mapillaryView = false;
+      this.mapillaryPos = null;
+    }
   }
 }
 </script>
@@ -227,9 +257,8 @@ html {
   transform: translateX(0);
 }
 
-#map {
+.mapillary-viewer {
   height: 100vh;
-  width: 100vw;
 }
 
 .mapboxgl-marker {

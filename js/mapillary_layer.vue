@@ -4,6 +4,9 @@
     :layer="layer"
     source-id="mapillary"
     layer-id="mapillary"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @click="onClick"
   />
 </template>
 
@@ -77,6 +80,20 @@ export default {
         return filters[0];
       }
       return [];
+    }
+  },
+
+  methods: {
+    onMouseEnter(e) {
+      e.map.getCanvas().style.cursor = 'pointer';
+    },
+
+    onMouseLeave(e) {
+      e.map.getCanvas().style.cursor = '';
+    },
+
+    onClick(e) {
+      this.$emit('click', e.mapboxEvent.lngLat);
     }
   }
 };
