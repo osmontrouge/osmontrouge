@@ -53,6 +53,6 @@ export default {
 
 <style>
   button.mapboxgl-ctrl-active {
-    background-color: rgb(53, 175, 109);
+    background-color: #b7b7b7;
   }
 </style>
