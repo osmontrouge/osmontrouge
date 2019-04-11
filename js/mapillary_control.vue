@@ -1,12 +1,20 @@
 <template>
-  <div class="mapboxgl-ctrl mapboxgl-ctrl-group">
-    <button
-      :class="{ 'mapboxgl-ctrl-active': value }"
-      @click="onClick"
-    >
-      <v-icon>osm-360</v-icon>
-    </button>
-  </div>
+  <v-tooltip left>
+    <template v-slot:activator="{ on }">
+      <div
+        v-on="on"
+        class="mapboxgl-ctrl mapboxgl-ctrl-group"
+      >
+        <button
+          :class="{ 'mapboxgl-ctrl-active': value }"
+          @click="onClick"
+        >
+          <v-icon>osm-360</v-icon>
+        </button>
+        </div>
+      </template>
+      <span>Voir les photos à 360</span>
+    </v-tooltip>
 </template>
 
 <script>
