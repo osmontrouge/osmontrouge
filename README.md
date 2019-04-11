@@ -20,6 +20,10 @@ Using docker:
 
 And visit http://localhost:1234
 
+Running tests, using [jest][]:
+
+    ./script/test
+
 ## Deploy
 
 Using docker:
@@ -39,3 +43,4 @@ GNU AGPL v3
 [overpass]: https://wiki.openstreetmap.org/wiki/Overpass_API
 [osm-liberty]: https://github.com/osmontrouge/osm-liberty
 [osm-bright-gl-style]: https://github.com/osmontrouge/osm-bright-gl-style
+[jest]: https://jestjs.io/
