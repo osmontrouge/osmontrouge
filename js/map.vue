@@ -1,0 +1,233 @@
+<template>
+  <div
+    v-resize="resize"
+  >
+    <v-navigation-drawer
+      v-model="sidebar"
+      :temporary="isMobile"
+      :stateless="!isMobile"
+      :hide-overlay="!isMobile"
+      fixed
+    >
+      <osm-sidebar
+        :taxonomy="config.taxonomy"
+        :image-sidebar="config.imageSidebar"
+        :map-name="config.mapName"
+        class="sidebar"
+        @input="toggleMarker"
+      />
+    </v-navigation-drawer>
+    <v-container
+      v-show="!isMobile"
+      :class="{ 'handle--closed': !sidebar }"
+      fill-height
+      tag="a"
+      class="handle"
+      @click.prevent="sidebar = !sidebar"
+    >
+      <v-icon v-if="sidebar">{{ $vuetify.icons.prev }}</v-icon>
+      <v-icon v-else>{{ $vuetify.icons.next }}</v-icon>
+    </v-container>
+    <v-content>
+      <v-btn
+        v-show="isMobile"
+        fixed
+        fab
+        dark
+        top
+        left
+        color="pink"
+        @click="sidebar = !sidebar"
+      >
+        <v-icon>osm-filter_list</v-icon>
+      </v-btn>
+      <MglMap
+        :max-bounds="mapMaxBounds"
+        :center.sync="mapCenter"
+        :zoom.sync="mapZoom"
+        :map-style="config.mapStyles[0].uri"
+      >
+        <template
+          v-for="category in markers"
+        >
+          <osm-marker
+            v-for="marker in category.markers"
+            :key="marker.id"
+            :marker="marker"
+            :category="category"
+          />
+        </template>
+        <mapillary-layer
+          v-if="mapillaryLayer"
+          :pano="1"
+          :users="config.mapillaryUsers"
+          @click="displayMapillaryView"
+        />
+        <MglNavigationControl :show-compass="false" />
+        <style-control :styles="config.mapStyles" />
+        <mapillary-control v-model="mapillaryLayer" />
+      </MglMap>
+    </v-content>
+  </div>
+</template>
+
+<script>
+import { MglMap, MglNavigationControl } from 'vue-mapbox/dist/vue-mapbox.umd';
+import StyleControl from './style_control';
+import OsmSidebar from './sidebar';
+import OsmMarker from './marker';
+import MapillaryLayer from './mapillary_layer';
+import MapillaryControl from './mapillary_control';
+import geojsondata from '../data/*.geojson';
+import * as config from '../config';
+import { findImage } from './mapillary';
+
+export default {
+  components: {
+    MglMap,
+    MglNavigationControl,
+    StyleControl,
+    OsmSidebar,
+    OsmMarker,
+    MapillaryLayer,
+    MapillaryControl
+  },
+
+  props: {
+    lat: {
+      type: Number,
+      required: false,
+      default() {
+        return config.mapCenter[1];
+      }
+    },
+    lng: {
+      type: Number,
+      required: false,
+      default() {
+        return config.mapCenter[0];
+      }
+    },
+    zoom: {
+      type: Number,
+      required: false,
+      default() {
+        return config.mapZoom;
+      }
+    }
+  },
+
+  data() {
+    return {
+      isMobile: false,
+      sidebar: false,
+      markers: [],
+      mapillaryLayer: false,
+      mapMaxBounds: config.mapMaxBounds,
+      mapCenter: {
+        lat: this.lat,
+        lng: this.lng
+      },
+      mapZoom: this.zoom,
+      config
+    };
+  },
+
+  mounted() {
+    this.resize();
+    this.sidebar = !this.isMobile;
+  },
+
+  watch: {
+    mapCenter() {
+      this.updateRoute();
+    },
+
+    mapZoom() {
+      this.updateRoute();
+    }
+  },
+
+  methods: {
+    resize() {
+      this.isMobile = window.innerWidth < 800;
+    },
+
+    updateRoute() {
+      this.$router.replace({
+        name: 'index_with_pos',
+        params: {
+          lat: this.mapCenter.lat.toFixed(6),
+          lng: this.mapCenter.lng.toFixed(6),
+          zoom: this.mapZoom.toFixed(2)
+        }
+      });
+    },
+
+    toggleMarker(idCategory, idFeature, displayed) {
+      if (displayed) {
+        const category = this.config.taxonomy[idCategory];
+        const featureOrCategoryInfo = name => category.features[idFeature][name] || category[name];
+        const marker = {
+          id: idCategory,
+          name: category.features[idFeature].name,
+          icon: featureOrCategoryInfo('icon'),
+          color: featureOrCategoryInfo('color'),
+          markers: []
+        };
+        this.markers.push(marker)
+        fetch(geojsondata[idFeature])
+          .then(data => data.json())
+          .then(({ features }) => {
+            marker.markers.push(...features);
+          });
+      } else {
+        this.markers.splice(this.markers.findIndex(c => c.id === idCategory), 1);
+      }
+    },
+
+    displayMapillaryView(position) {
+      findImage(position, true, config.mapillaryUsers, config.mapillaryClientId)
+        .then((mKey) => {
+          this.$router.push({ name: '360', params: { mKey } });
+        });
+    }
+  }
+}
+</script>
+
+<style>
+.sidebar {
+  height: 100vh;
+}
+
+.handle {
+  position: absolute;
+  top: 170px;
+  transform: translateX(300px);
+  padding: 24px 0 !important;
+  height: 70px;
+  width: 25px;
+  background-color: white;
+  z-index: 5;
+  box-shadow: 0 3px 1px -2px #0003,0 2px 2px 0 #00000024,0 1px 5px 0 #0000001f;
+}
+
+.handle--closed {
+  transform: translateX(0);
+}
+
+.mgl-map-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.mgl-map-wrapper .mapboxgl-map {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+</style>

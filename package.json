@@ -39,6 +39,7 @@
     "mapillary-js": "^2.17.0",
     "vue": "^2.6.9",
     "vue-mapbox": "^0.2.2",
+    "vue-router": "^3.0.3",
     "vuetify": "^1.5.6"
   }
 }

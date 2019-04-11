@@ -4,11 +4,11 @@ import './font/osm.css';
 
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import VueRouter from 'vue-router';
 
-import data from './data.yml';
 import App from './js/app.vue';
-
-import imageSidebar from './images/montrouge.png';
+import OsmMap from './js/map.vue';
+import MapillaryView from './js/mapillary_view.vue';
 
 Vue.use(Vuetify, {
   icons: {
@@ -19,38 +19,27 @@ Vue.use(Vuetify, {
     checkboxOff: 'osm-check_box_outline_blank'
   }
 });
+Vue.use(VueRouter);
 
-const mapMaxBounds = [[2.293611, 48.807344], [2.336998, 48.825486]];
-const mapCenter = [2.315111, 48.816614];
-const mapZoom = 15;
-const mapName = 'OSMontrouge';
-const mapStyles = [
-  {
-    title: 'Bright',
-    uri: 'https://tiles.osmontrouge.fr/styles/bright/style.json',
-  },
-  {
-    title: 'Liberty',
-    uri: 'https://tiles.osmontrouge.fr/styles/liberty/style.json',
-  }
+function castParamsToFloat(keys, route) {
+  return keys.reduce((memo, key) => {
+    memo[key] = parseFloat(route.params[key]);
+    return memo;
+  }, {});
+}
+
+const routes = [
+  { name: 'index',          path: '',                  component: OsmMap },
+  { name: 'index_with_pos', path: '/@:lat,:lng,:zoom', component: OsmMap,        props(route) { return castParamsToFloat(['lat', 'lng', 'zoom'], route); } },
+  { name: '360',            path: '/360/:mKey',        component: MapillaryView, props: true }
 ];
-const mappillaryUsers = [
-  'e_ZBE6mFd7CYNjRSpLl-Lg', // francois2
-  'C4ENdWpJdFNf8CvnQd7NrQ', // phyks
-  'XtzGKZX2_VIJRoiJ8IWRNQ'  // overflorian
-];
+
+const router = new VueRouter({
+  mode: 'history',
+  routes
+});
 
 new Vue({
-  render: createEle => createEle(App, {
-    props: {
-      imageSidebar,
-      mapCenter,
-      mapMaxBounds,
-      mapName,
-      mapStyles,
-      mapZoom,
-      mappillaryUsers,
-      taxonomy: data,
-    }
-  }),
+  router,
+  render: createEle => createEle(App),
 }).$mount('#app');

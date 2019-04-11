@@ -7,7 +7,7 @@
       dark
       top
       right
-      @click="$emit('close')"
+      @click="$router.push({ name: 'index' })"
     >
       <v-icon>osm-close</v-icon>
     </v-btn>
@@ -15,55 +15,39 @@
 </template>
 
 <script>
-import  "mapillary-js/dist/mapillary.min.css";
-import { Viewer } from 'mapillary-js/dist/mapillary.min.js';
+import 'mapillary-js/dist/mapillary.min.css';
+import { Viewer } from 'mapillary-js/dist/mapillary.min';
+import { mapillaryClientId } from '../config';
 
 export default {
   props: {
-    pano: {
-      type: Number,
-      required: false,
-      default: -1
-    },
-
-    users: {
-      type: Array,
-      required: false,
-      default() {
-        return [];
-      }
-    },
-
-    pos: {
-      type: Object,
+    mKey: {
+      type: String,
       required: true
     }
   },
 
   mounted() {
-    const clientId = 'ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzo0YmYyNDRkMDFkYWE3YWQ3';
-
-    const viewer = new Viewer(
+    this.viewer = new Viewer(
       'mapillary',
-      clientId,
-      null,
-    );
-    const url = new URL("https://a.mapillary.com/v3/images");
-    const params = {
-      client_id: clientId,
-      pano: this.pano === 1,
-      userkeys: this.users.join(','),
-      closeto: `${this.pos.lng},${this.pos.lat}`,
-      radius: 20
-    };
-    url.search = new URLSearchParams(params);
-    fetch(url)
-      .then(e => e.json())
-      .then((e) => {
-        if (e.features.length > 0) {
-          viewer.moveToKey(e.features[0].properties.key);
+      mapillaryClientId,
+      this.mKey,
+      {
+        component: {
+          cover: false,
         }
-      });
+      }
+    );
+
+    this.viewer.on(Viewer.nodechanged, ({ key }) => {
+      this.$router.replace({ name: '360', params: { mKey: key } });
+    });
+  },
+
+  watch: {
+    mKey(mKey) {
+      this.viewer.moveToKey(mKey);
+    }
   }
 };
 </script>
