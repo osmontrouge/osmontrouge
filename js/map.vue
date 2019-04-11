@@ -81,7 +81,6 @@ import OsmSidebar from './sidebar';
 import OsmMarker from './marker';
 import MapillaryLayer from './mapillary_layer';
 import MapillaryControl from './mapillary_control';
-import MapillaryView from './mapillary_view';
 import geojsondata from '../data/*.geojson';
 import * as config from '../config';
 import { findImage } from './mapillary';
@@ -95,8 +94,7 @@ export default {
     OsmSidebar,
     OsmMarker,
     MapillaryLayer,
-    MapillaryControl,
-    MapillaryView
+    MapillaryControl
   },
 
   props: {

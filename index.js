@@ -8,7 +8,6 @@ import VueRouter from 'vue-router';
 
 import App from './js/app.vue';
 import OsmMap from './js/map.vue';
-import MapillaryView from './js/mapillary_view.vue';
 
 Vue.use(Vuetify, {
   icons: {
@@ -31,7 +30,7 @@ const routes = [
       {
         name: '360',
         path: '360/:mKey',
-        component: MapillaryView,
+        component: () => import('./js/mapillary_view'),
         props: true
       }
     ]
