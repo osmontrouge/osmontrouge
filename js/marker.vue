@@ -1,17 +1,19 @@
 <template>
   <MglMarker
+    ref="marker"
     :coordinates="marker.geometry.coordinates"
     anchor="bottom"
   >
-    <div
-      slot="marker"
-    >
+    <div slot="marker">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="48"
         height="48"
         viewBox="0 0 48 48"
         class="marker-inside"
+        @mouseover="displayPopup"
+        @mouseout="hidePopup"
+        @click.stop
       >
         <path
           :fill="category.color"
@@ -25,11 +27,14 @@
       </svg>
     </div>
     <MglPopup
-      :offset="72"
+      :offset="75"
       :close-button="false"
       @added="(e) => e.popup.remove()"
     >
-      <div>{{ marker.properties.name || category.name }}</div>
+      <div
+        :style="{ 'background-color': category.color }"
+        class="tooltip"
+      >{{ marker.properties.name || category.name }}</div>
     </MglPopup>
   </MglMarker>
 </template>
@@ -49,6 +54,15 @@ export default {
     category: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    displayPopup() {
+      this.$refs.marker.togglePopup();
+    },
+    hidePopup() {
+      this.$refs.marker.togglePopup();
     }
   }
 }
@@ -80,5 +94,21 @@ export default {
   width: 30px;
   padding: 5px;
   font-size: 20px;
+}
+.tooltip {
+  font-weight: bold;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  margin-bottom: 5px;
+}
+.mapboxgl-popup-content {
+  padding: 0;
+  box-shadow: none;
+  background: none;
+}
+.mapboxgl-popup-tip {
+  border: 0;
 }
 </style>
