@@ -68,7 +68,7 @@ nature:
 
 others:
   name: Divers
-  color: purple
+  color: '#7e007e'
 
   features:
     public_bookcase:
