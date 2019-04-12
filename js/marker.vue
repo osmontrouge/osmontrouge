@@ -58,6 +58,9 @@ export default {
 .mapboxgl-marker {
   transition: none;
 }
+.mapboxgl-marker:hover {
+  z-index: 5;
+}
 .marker-inside {
   transition: transform .1s ease;
   transform-origin: bottom center;
