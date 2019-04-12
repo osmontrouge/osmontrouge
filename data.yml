@@ -97,3 +97,16 @@ others:
           relation["amenity"="charging_station"](area.searchArea);
         );
         out center;
+
+    recycling_clothes:
+      name: Recyclage de vêtements
+      icon: osm-recycling
+      query: >-
+        [out:json][timeout:25];
+        area(3600037026)->.searchArea;
+        (
+          node["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+          way["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+          relation["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+        );
+        out center;
