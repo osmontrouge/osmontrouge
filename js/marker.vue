@@ -11,8 +11,8 @@
         height="48"
         viewBox="0 0 48 48"
         class="marker-inside"
-        @mouseover="displayPopup"
-        @mouseout="hidePopup"
+        @mouseover="togglePopup"
+        @mouseout="togglePopup"
         @click.stop
       >
         <path
@@ -58,12 +58,9 @@ export default {
   },
 
   methods: {
-    displayPopup() {
+    togglePopup() {
       this.$refs.marker.togglePopup();
     },
-    hidePopup() {
-      this.$refs.marker.togglePopup();
-    }
   }
 }
 </script>
