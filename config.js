@@ -27,5 +27,5 @@ Object.keys(taxonomy).forEach((key) => {
     taxonomy[key].features[keyFeature].selected = false;
   });
 });
-window.taxonomy = taxonomy;
+
 export { taxonomy, imageSidebar };
