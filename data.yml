@@ -1,3 +1,8 @@
+config:
+  query_search: >-
+    [out:json][timeout:25];
+    area(3600037026)->.searchArea;
+
 taxonomy:
   schools:
     name: Écoles
@@ -8,8 +13,6 @@ taxonomy:
       school_primaire_public:
         name: Écoles primaires publiques
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             node["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
             way["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
@@ -20,8 +23,6 @@ taxonomy:
       school_primaire_private:
         name: Écoles primaires privées
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             // query part for: “amenity=school and "school:FR"=primaire and "operator:type"=private”
             node["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
@@ -29,7 +30,6 @@ taxonomy:
             relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
           );
           out center;
-
 
   food:
     name: Alimentation
@@ -40,8 +40,6 @@ taxonomy:
       marketplace:
         name: Marchés
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             node["amenity"="marketplace"](area.searchArea);
             way["amenity"="marketplace"](area.searchArea);
@@ -58,8 +56,6 @@ taxonomy:
       parks:
         name: Parcs
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             node["leisure"="park"]["access"!="private"](area.searchArea);
             way["leisure"="park"]["access"!="private"](area.searchArea);
@@ -76,8 +72,6 @@ taxonomy:
         name: Boîtes à livres
         icon: osm-public_bookcase
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             node["amenity"="public_bookcase"](area.searchArea);
             way["amenity"="public_bookcase"](area.searchArea);
@@ -90,8 +84,6 @@ taxonomy:
         icon: osm-charging_station
         color: '#0071bc'
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             node["amenity"="charging_station"](area.searchArea);
             way["amenity"="charging_station"](area.searchArea);
@@ -103,8 +95,6 @@ taxonomy:
         name: Recyclage de vêtements
         icon: osm-recycling
         query: >-
-          [out:json][timeout:25];
-          area(3600037026)->.searchArea;
           (
             node["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
             way["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);

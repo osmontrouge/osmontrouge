@@ -5,16 +5,17 @@ const fs           = require('fs');
 const rp           = require('request-promise');
 const osmtogeojson = require('osmtogeojson');
 
-const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8')).taxonomy;
+const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
 
 let rate = Promise.resolve();
 
-Object.keys(data).forEach((idCat) => {
-  Object.keys(data[idCat].features).forEach((id) => {
-    const { query } = data[idCat].features[id];
+const taxonomy = data.taxonomy;
+Object.keys(taxonomy).forEach((idCat) => {
+  Object.keys(taxonomy[idCat].features).forEach((id) => {
+    const { query } = taxonomy[idCat].features[id];
     const options = {
       method: 'POST',
-      form: { data: query },
+      form: { data: `${data.config.query_search}${query}` },
       json: true,
     };
     rate = rate
