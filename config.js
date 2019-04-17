@@ -1,4 +1,4 @@
-import taxonomy from './data.yml';
+import { taxonomy } from './data.yml';
 import imageSidebar from './images/montrouge.png';
 
 export const mapMaxBounds = [[2.293611, 48.807344], [2.336998, 48.825486]];

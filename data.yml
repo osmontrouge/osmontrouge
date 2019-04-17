@@ -1,112 +1,113 @@
-schools:
-  name: Écoles
-  icon: osm-school
-  color: '#725a50'
-  features:
+taxonomy:
+  schools:
+    name: Écoles
+    icon: osm-school
+    color: '#725a50'
+    features:
 
-    school_primaire_public:
-      name: Écoles primaires publiques
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          node["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
-          way["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
-          relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
-        );
-        out center;
+      school_primaire_public:
+        name: Écoles primaires publiques
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            node["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+            way["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+            relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+          );
+          out center;
 
-    school_primaire_private:
-      name: Écoles primaires privées
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          // query part for: “amenity=school and "school:FR"=primaire and "operator:type"=private”
-          node["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
-          way["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
-          relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
-        );
-        out center;
+      school_primaire_private:
+        name: Écoles primaires privées
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            // query part for: “amenity=school and "school:FR"=primaire and "operator:type"=private”
+            node["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+            way["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+            relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+          );
+          out center;
 
 
-food:
-  name: Alimentation
-  icon: osm-marketplace
-  color: '#5d60be'
+  food:
+    name: Alimentation
+    icon: osm-marketplace
+    color: '#5d60be'
 
-  features:
-    marketplace:
-      name: Marchés
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          node["amenity"="marketplace"](area.searchArea);
-          way["amenity"="marketplace"](area.searchArea);
-          relation["amenity"="marketplace"](area.searchArea);
-        );
-        out center;
+    features:
+      marketplace:
+        name: Marchés
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            node["amenity"="marketplace"](area.searchArea);
+            way["amenity"="marketplace"](area.searchArea);
+            relation["amenity"="marketplace"](area.searchArea);
+          );
+          out center;
 
-nature:
-  name: Espaces verts
-  icon: osm-park
-  color: '#a2c36b'
+  nature:
+    name: Espaces verts
+    icon: osm-park
+    color: '#a2c36b'
 
-  features:
-    parks:
-      name: Parcs
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          node["leisure"="park"]["access"!="private"](area.searchArea);
-          way["leisure"="park"]["access"!="private"](area.searchArea);
-          relation["leisure"="park"]["access"!="private"](area.searchArea);
-        );
-        out center;
+    features:
+      parks:
+        name: Parcs
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            node["leisure"="park"]["access"!="private"](area.searchArea);
+            way["leisure"="park"]["access"!="private"](area.searchArea);
+            relation["leisure"="park"]["access"!="private"](area.searchArea);
+          );
+          out center;
 
-others:
-  name: Divers
-  color: '#7e007e'
+  others:
+    name: Divers
+    color: '#7e007e'
 
-  features:
-    public_bookcase:
-      name: Boîtes à livres
-      icon: osm-public_bookcase
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          node["amenity"="public_bookcase"](area.searchArea);
-          way["amenity"="public_bookcase"](area.searchArea);
-          relation["amenity"="public_bookcase"](area.searchArea);
-        );
-        out center;
+    features:
+      public_bookcase:
+        name: Boîtes à livres
+        icon: osm-public_bookcase
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            node["amenity"="public_bookcase"](area.searchArea);
+            way["amenity"="public_bookcase"](area.searchArea);
+            relation["amenity"="public_bookcase"](area.searchArea);
+          );
+          out center;
 
-    charging_station:
-      name: Recharge de véhicule électrique
-      icon: osm-charging_station
-      color: '#0071bc'
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          node["amenity"="charging_station"](area.searchArea);
-          way["amenity"="charging_station"](area.searchArea);
-          relation["amenity"="charging_station"](area.searchArea);
-        );
-        out center;
+      charging_station:
+        name: Recharge de véhicule électrique
+        icon: osm-charging_station
+        color: '#0071bc'
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            node["amenity"="charging_station"](area.searchArea);
+            way["amenity"="charging_station"](area.searchArea);
+            relation["amenity"="charging_station"](area.searchArea);
+          );
+          out center;
 
-    recycling_clothes:
-      name: Recyclage de vêtements
-      icon: osm-recycling
-      query: >-
-        [out:json][timeout:25];
-        area(3600037026)->.searchArea;
-        (
-          node["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
-          way["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
-          relation["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
-        );
-        out center;
+      recycling_clothes:
+        name: Recyclage de vêtements
+        icon: osm-recycling
+        query: >-
+          [out:json][timeout:25];
+          area(3600037026)->.searchArea;
+          (
+            node["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+            way["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+            relation["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+          );
+          out center;
