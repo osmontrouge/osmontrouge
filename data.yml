@@ -1,5 +1,6 @@
 config:
   name: OSMontrouge
+
   map:
     zoom: 15
     center: [2.315111, 48.816614]
@@ -9,6 +10,13 @@ config:
         uri: https://tiles.osmontrouge.fr/styles/bright/style.json
       - title: Liberty
         uri: https://tiles.osmontrouge.fr/styles/liberty/style.json
+
+  mapillary:
+    users:
+      - e_ZBE6mFd7CYNjRSpLl-Lg # francois2
+      - C4ENdWpJdFNf8CvnQd7NrQ # phyks
+      - XtzGKZX2_VIJRoiJ8IWRNQ # overflorian
+    clientId: ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzo0YmYyNDRkMDFkYWE3YWQ3
 
   query_search: >-
     [out:json][timeout:25];

@@ -7,12 +7,8 @@ export const mapZoom = config.map.zoom;
 export const mapName = config.name;
 export const mapStyles = config.map.styles;
 
-export const mapillaryUsers = [
-  'e_ZBE6mFd7CYNjRSpLl-Lg', // francois2
-  'C4ENdWpJdFNf8CvnQd7NrQ', // phyks
-  'XtzGKZX2_VIJRoiJ8IWRNQ'  // overflorian
-];
-export const mapillaryClientId = 'ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzo0YmYyNDRkMDFkYWE3YWQ3';
+export const mapillaryUsers = config.mapillary.users;
+export const mapillaryClientId = config.mapillary.clientId;
 
 Object.keys(taxonomy).forEach((key) => {
   Object.keys(taxonomy[key].features).forEach((keyFeature) => {
