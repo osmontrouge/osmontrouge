@@ -16,7 +16,7 @@ config:
       - e_ZBE6mFd7CYNjRSpLl-Lg # francois2
       - C4ENdWpJdFNf8CvnQd7NrQ # phyks
       - XtzGKZX2_VIJRoiJ8IWRNQ # overflorian
-    clientId: ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzo0YmYyNDRkMDFkYWE3YWQ3
+    clientId: ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzowMzY1ODgyOWM4NDVmMzQ0
 
   query_search: >-
     [out:json][timeout:25];
