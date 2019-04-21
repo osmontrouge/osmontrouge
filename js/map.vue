@@ -83,7 +83,7 @@
           class="mapillary-info"
         >
           <v-card-text>
-            Cliquez sur les lignes verte pour voir les photos à 360°.
+            Cliquez sur les lignes vertes pour voir les photos à 360°.
           </v-card-text>
         </v-card>
       </v-content>
