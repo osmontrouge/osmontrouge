@@ -97,11 +97,11 @@ import { MglMap, MglNavigationControl } from 'vue-mapbox/dist/vue-mapbox.umd';
 import StyleControl from './style_control';
 import OsmSidebar from './sidebar';
 import OsmMarker from './marker';
-import MapillaryLayer from './mapillary_layer';
-import MapillaryControl from './mapillary_control';
+import MapillaryLayer from './mapillary/mapillary_layer';
+import MapillaryControl from './mapillary/mapillary_control';
 import geojsondata from '../data/*.geojson';
 import * as config from '../config';
-import { findImage } from './mapillary';
+import { findImage } from './mapillary/mapillary';
 import { encode as encodePosition, decode as decodePosition } from './position';
 
 export default {

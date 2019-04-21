@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 
-import MapillaryLayer from '../js/mapillary_layer';
+import MapillaryLayer from '../../js/mapillary/mapillary_layer';
 
 jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
   Map: () => ({})

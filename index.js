@@ -30,7 +30,7 @@ const routes = [
       {
         name: '360',
         path: '360/:mKey',
-        component: () => import('./js/mapillary_view'),
+        component: () => import('./js/mapillary/mapillary_view'),
         props: true
       }
     ]

@@ -20,7 +20,7 @@
 <script>
 import 'mapillary-js/dist/mapillary.min.css';
 import { Viewer } from 'mapillary-js/dist/mapillary.min';
-import { mapillaryClientId, mapillaryUsers } from '../config';
+import { mapillaryClientId, mapillaryUsers } from '../../config';
 import { mapillaryViewerFilter } from './mapillary';
 
 export default {

@@ -1,4 +1,4 @@
-import { mapillaryViewerFilter } from '../js/mapillary';
+import { mapillaryViewerFilter } from '../../js/mapillary/mapillary';
 
 describe('mapillaryViewerFilter', () => {
   it('create the filter', () => {
