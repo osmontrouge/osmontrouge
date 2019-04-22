@@ -106,13 +106,13 @@ import { encode, decode, encodePosition, decodePosition, encodeFeatures, decodeF
 
 export default {
   components: {
+    MapillaryControl,
+    MapillaryLayer,
     MglMap,
     MglNavigationControl,
-    StyleControl,
-    OsmSidebar,
     OsmMarker,
-    MapillaryLayer,
-    MapillaryControl
+    OsmSidebar,
+    StyleControl
   },
 
   props: {
