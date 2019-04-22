@@ -13,7 +13,7 @@
         class="marker-inside"
         @mouseover="togglePopup"
         @mouseout="togglePopup"
-        @click.stop
+        @click.stop="$emit('open', feature.id)"
       >
         <path
           :fill="category.color"

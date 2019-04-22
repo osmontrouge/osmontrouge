@@ -25,13 +25,37 @@ const routes = [
     name: 'index',
     path: '/:featuresAndLocation?',
     component: OsmMap,
-    props: true,
+    props: (route) => {
+      return {
+        featuresAndLocation: route.params.featuresAndLocation
+      };
+    },
     children: [
+      {
+        name: 'place',
+        path: 'place/:idCategory/:idFeature/:id',
+        component: () => import('./js/detail'),
+        props: (route) => {
+          return {
+            featuresAndLocation: route.params.featuresAndLocation,
+            idCategory: route.params.idCategory,
+            idFeature: route.params.idFeature,
+            id: route.params.id,
+            class: 'right-sidebar'
+          };
+        }
+      },
       {
         name: '360',
         path: '360/:mKey',
         component: () => import('./js/mapillary/mapillary_view'),
-        props: true
+        props: (route) => {
+          return {
+            featuresAndLocation: route.params.featuresAndLocation,
+            mKey: route.params.mKey,
+            class: 'fullscreen'
+          };
+        }
       }
     ]
   },

@@ -1,6 +1,7 @@
 <template>
   <div
     v-resize="resize"
+    :class="{ 'place-opened': $route.name === 'place' }"
   >
     <div>
       <v-navigation-drawer
@@ -55,6 +56,7 @@
               :key="marker.id"
               :feature="marker"
               :category="category"
+              @open="openDetail(category, $event)"
             />
           </template>
           <mapillary-layer
@@ -79,7 +81,7 @@
         </v-card>
       </v-content>
     </div>
-    <router-view class="sub-view" />
+    <router-view />
   </div>
 </template>
 
@@ -162,8 +164,9 @@ export default {
 
     updateRoute() {
       this.$router.replace({
-        name: 'index',
+        name: this.$route.name,
         params: {
+          ...this.$route.params,
           featuresAndLocation: encode(
             encodeFeatures(this.taxonomy),
             encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
@@ -213,6 +216,18 @@ export default {
         .then((mKey) => {
           this.$router.push({ name: '360', params: { mKey, featuresAndLocation: this.featuresAndLocation } });
         });
+    },
+
+    openDetail(category, id) {
+      this.$router.push({
+        name: 'place',
+        params: {
+          idCategory: category.category,
+          idFeature: category.feature,
+          id: id,
+          featuresAndLocation: this.featuresAndLocation
+        }
+      });
     }
   }
 }
@@ -253,7 +268,7 @@ export default {
   width: 100%;
 }
 
-.sub-view {
+.fullscreen {
   position: fixed;
   top: 0;
   left: 0;
@@ -262,10 +277,23 @@ export default {
   height: 100vh;
 }
 
+.right-sidebar {
+  width: 400px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
 .mapillary-info {
   position: fixed;
   bottom: 10px;
   left: 50%;
   margin-left: -200px;
+}
+
+.place-opened  .mapboxgl-ctrl-bottom-right, .place-opened .mapboxgl-ctrl-top-right {
+  transform: translateX(-400px);
 }
 </style>
