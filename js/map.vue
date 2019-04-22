@@ -219,7 +219,7 @@ export default {
     displayMapillaryView(position) {
       findImage(position, true, config.mapillaryUsers, config.mapillaryClientId)
         .then((mKey) => {
-          this.$router.push({ name: '360', params: { mKey, position: this.position } });
+          this.$router.push({ name: '360', params: { mKey, featuresAndLocation: this.featuresAndLocation } });
         });
     }
   }

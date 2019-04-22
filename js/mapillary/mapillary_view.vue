@@ -29,7 +29,7 @@ export default {
       type: String,
       required: true
     },
-    position: {
+    featuresAndLocation: {
       type: String,
       required: false,
       default: ''
@@ -51,7 +51,7 @@ export default {
     this.$el.focus();
 
     this.viewer.on(Viewer.nodechanged, ({ key }) => {
-      this.$router.replace({ name: '360', params: { mKey: key, position: this.position } });
+      this.$router.replace({ name: '360', params: { mKey: key, featuresAndLocation: this.featuresAndLocation } });
     });
   },
 
@@ -63,7 +63,7 @@ export default {
 
   methods: {
     close() {
-      this.$router.push({ name: 'index', params: { position: this.position } })
+      this.$router.push({ name: 'index', params: { featuresAndLocation: this.featuresAndLocation } })
     }
   }
 };
