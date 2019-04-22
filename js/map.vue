@@ -53,7 +53,7 @@
             <osm-marker
               v-for="marker in category.markers"
               :key="marker.id"
-              :marker="marker"
+              :feature="marker"
               :category="category"
             />
           </template>
@@ -193,7 +193,8 @@ export default {
             const category = this.taxonomy[idCategory];
             const featureOrCategoryInfo = name => feature[name] || category[name];
             const marker = {
-              id: idFeature,
+              category: idCategory,
+              feature: idFeature,
               name: feature.name,
               icon: featureOrCategoryInfo('icon'),
               color: featureOrCategoryInfo('color'),

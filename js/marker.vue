@@ -1,7 +1,7 @@
 <template>
   <MglMarker
     ref="marker"
-    :coordinates="marker.geometry.coordinates"
+    :coordinates="feature.geometry.coordinates"
     anchor="bottom"
   >
     <div slot="marker">
@@ -34,7 +34,7 @@
       <div
         :style="{ 'background-color': category.color }"
         class="tooltip"
-      >{{ marker.properties.name || category.name }}</div>
+      >{{ feature.properties.name || category.name }}</div>
     </MglPopup>
   </MglMarker>
 </template>
@@ -46,7 +46,7 @@ export default {
   components: { MglMarker, MglPopup },
 
   props: {
-    marker: {
+    feature: {
       type: Object,
       required: true
     },
