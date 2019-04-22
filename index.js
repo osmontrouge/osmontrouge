@@ -23,7 +23,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     name: 'index',
-    path: '/:position?',
+    path: '/:featuresAndLocation?',
     component: OsmMap,
     props: true,
     children: [

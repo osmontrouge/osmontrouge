@@ -102,7 +102,7 @@ import MapillaryControl from './mapillary/mapillary_control';
 import geojsondata from '../data/*.geojson';
 import * as config from '../config';
 import { findImage } from './mapillary/mapillary';
-import { encode as encodePosition, decode as decodePosition } from './position';
+import { encode, decode, encodePosition, decodePosition, encodeFeatures, decodeFeatures } from './url';
 
 export default {
   components: {
@@ -116,7 +116,7 @@ export default {
   },
 
   props: {
-    position: {
+    featuresAndLocation: {
       type: String,
       required: false,
       default: ''
@@ -124,7 +124,9 @@ export default {
   },
 
   data() {
-    const { lat, lng, zoom } = decodePosition(this.position, config);
+    const { features, location } = decode(this.featuresAndLocation);
+    const { lat, lng, zoom } = decodePosition(location, config);
+    decodeFeatures(features, config.taxonomy)
     return {
       isMobile: false,
       sidebar: false,
@@ -141,6 +143,7 @@ export default {
   mounted() {
     this.resize();
     this.sidebar = !this.isMobile;
+    this.updateMarkers();
   },
 
   watch: {
@@ -156,6 +159,7 @@ export default {
       deep: true,
       handler() {
         this.updateMarkers();
+        this.updateRoute();
       }
     }
   },
@@ -169,7 +173,10 @@ export default {
       this.$router.replace({
         name: 'index',
         params: {
-          position: encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
+          featuresAndLocation: encode(
+            encodeFeatures(this.taxonomy),
+            encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
+          )
         }
       });
     },
