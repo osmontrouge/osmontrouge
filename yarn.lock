@@ -5070,9 +5070,9 @@ mapbox-gl@^0.53.1:
     vt-pbf "^3.1.1"
 
 mapillary-js@^2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/mapillary-js/-/mapillary-js-2.17.0.tgz#042eb0a80478ba7a69622e9285d25db2c518c950"
-  integrity sha512-pcKrzSIUkQlWKtRQvSJRTdukd86EwYeZ2SLOxX638QCsNrREZEdmDAc76NnwGOOUslbUga1yiUEHWkzVVI98FQ==
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/mapillary-js/-/mapillary-js-2.18.0.tgz#b30eb577b8a6bc263009e83967c2b5b12990a6c2"
+  integrity sha512-5cjC6heQ2M5T402VaaQnAGlD9oEYBfSPNRuHf0VZ+yun7hFRoccal4qX9xkyAr9EI3jWTrJaZdtlS0zvx5L6AA==
   dependencies:
     earcut "^2.1.3"
     falcor "^0.1.17"
