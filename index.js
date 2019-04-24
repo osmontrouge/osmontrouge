@@ -40,8 +40,7 @@ const routes = [
             featuresAndLocation: route.params.featuresAndLocation,
             idCategory: route.params.idCategory,
             idFeature: route.params.idFeature,
-            id: route.params.id,
-            class: 'right-sidebar'
+            id: route.params.id
           };
         }
       },

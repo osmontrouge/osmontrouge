@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    v-resize="resize"
+    :class="{ 'bottom-dialog': isMobile, 'right-sidebar': !isMobile }"
+  >
     <v-slide-x-reverse-transition>
       <v-card
         v-if="point"
@@ -75,11 +78,13 @@ export default {
   },
 
   mounted() {
+    this.resize();
     this.updatePoint();
   },
 
   data() {
     return {
+      isMobile: true,
       color: null,
       icon: null,
       feature: null,
@@ -95,6 +100,10 @@ export default {
   },
 
   methods: {
+    resize() {
+      this.isMobile = window.innerWidth < 800;
+    },
+
     updatePoint() {
       const category = taxonomy[this.idCategory];
       const feature = category.features[this.idFeature];
@@ -116,3 +125,22 @@ export default {
   }
 }
 </script>
+
+<style>
+.right-sidebar {
+  width: 400px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.bottom-dialog {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+</style>

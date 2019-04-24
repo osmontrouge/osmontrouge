@@ -1,7 +1,7 @@
 <template>
   <div
     v-resize="resize"
-    :class="{ 'place-opened': $route.name === 'place' }"
+    :class="{ 'place-opened': $route.name === 'place' && !isMobile }"
   >
     <div>
       <v-navigation-drawer
@@ -275,15 +275,6 @@ export default {
   z-index: 10;
   width: 100vw;
   height: 100vh;
-}
-
-.right-sidebar {
-  width: 400px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 10;
 }
 
 .mapillary-info {
