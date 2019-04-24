@@ -63,18 +63,9 @@
             :users="config.mapillaryUsers"
             @click="displayMapillaryView"
           />
-          <MglNavigationControl
-            :show-compass="false"
-            position="bottom-right"
-          />
-          <style-control
-            :styles="config.mapStyles"
-            position="bottom-right"
-          />
-          <mapillary-control
-            v-model="mapillaryLayer"
-            position="bottom-right"
-          />
+          <MglNavigationControl :show-compass="false" />
+          <style-control :styles="config.mapStyles" />
+          <mapillary-control v-model="mapillaryLayer" />
         </MglMap>
         <v-card
           v-if="mapillaryLayer"
