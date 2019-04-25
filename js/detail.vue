@@ -29,23 +29,39 @@
         </v-toolbar>
 
         <v-list>
-          <v-list-tile v-if="point.properties.opening_hours">
-            <v-list-tile-action>
-              Ouvert
-            </v-list-tile-action>
+          <detail-tag
+            v-if="point.properties['operator:type']"
+            :value="point.properties['operator:type']"
+            name="Type de l'opérateur :"
+          />
+          <detail-tag
+            v-if="point.properties['school:FR']"
+            :value="point.properties['school:FR']"
+            name="Type de l'école :"
+          />
+          <detail-tag
+            v-if="point.properties.opening_hours"
+            :value="point.properties.opening_hours"
+            name="Horaires d'ouverture"
+          />
+          <detail-tag
+            v-if="point.properties.operator"
+            :value="point.properties.operator"
+            name="Opéré par"
+          />
+
+          <v-list-tile v-if="point.properties.website">
             <v-list-tile-content>
-              <v-list-tile-title>{{ point.properties.opening_hours }}</v-list-tile-title>
+              <v-list-tile-title>
+                <a
+                  :href="point.properties.website"
+                >
+                  {{ point.properties.website }}
+                </a>
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile v-if="point.properties.operator">
-            <v-list-tile-action>
-              Opéré par
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ point.properties.operator }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
         </v-list>
       </v-card>
     </v-slide-x-reverse-transition>
@@ -55,8 +71,11 @@
 <script>
 import { taxonomy } from '../config';
 import geojsondata from '../data/*.geojson';
+import DetailTag from './detail_tag';
 
 export default {
+  components: { DetailTag },
+
   props: {
     idCategory: {
       type: String,
