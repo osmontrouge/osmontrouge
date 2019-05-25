@@ -29,24 +29,23 @@ taxonomy:
     color: '#725a50'
     features:
 
-      school_primaire_public:
-        name: Écoles primaires publiques
+      school_elementaire:
+        name: Écoles élémentaires
         query: >-
           (
-            node["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
-            way["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
-            relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="public"](area.searchArea);
+            node["amenity"="school"]["school:FR"~"primaire|maternelle"](area.searchArea);
+            way["amenity"="school"]["school:FR"~"primaire|maternelle"](area.searchArea);
+            relation["amenity"="school"]["school:FR"~"primaire|maternelle"](area.searchArea);
           );
           out center;
 
-      school_primaire_private:
-        name: Écoles primaires privées
+      school_college:
+        name: Collèges
         query: >-
           (
-            // query part for: “amenity=school and "school:FR"=primaire and "operator:type"=private”
-            node["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
-            way["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
-            relation["amenity"="school"]["school:FR"="primaire"]["operator:type"="private"](area.searchArea);
+            node["amenity"="school"]["school:FR"="collège"](area.searchArea);
+            way["amenity"="school"]["school:FR"="collège"](area.searchArea);
+            relation["amenity"="school"]["school:FR"="collège"](area.searchArea);
           );
           out center;
 
