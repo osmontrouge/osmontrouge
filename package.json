@@ -40,11 +40,11 @@
     "vue-template-compiler": "^2.6.9"
   },
   "dependencies": {
-    "mapbox-gl": "^0.53.1",
+    "mapbox-gl": "^1.0.0",
     "mapbox-gl-style-switcher": "https://github.com/osmontrouge/style-switcher",
     "mapillary-js": "^2.17.0",
     "vue": "^2.6.9",
-    "vue-mapbox": "^0.2.2",
+    "vue-mapbox": "^0.4.0",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.6"
   }
