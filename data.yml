@@ -33,9 +33,9 @@ taxonomy:
         name: Écoles élémentaires
         query: >-
           (
-            node["amenity"="school"]["school:FR"~"primaire|maternelle"](area.searchArea);
-            way["amenity"="school"]["school:FR"~"primaire|maternelle"](area.searchArea);
-            relation["amenity"="school"]["school:FR"~"primaire|maternelle"](area.searchArea);
+            node["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
+            way["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
+            relation["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
           );
           out center;
 
