@@ -15,6 +15,7 @@
           :taxonomy="taxonomy"
           :image-sidebar="config.imageSidebar"
           :map-name="config.mapName"
+          :map-footer="config.mapFooter"
           class="sidebar"
         />
       </v-navigation-drawer>

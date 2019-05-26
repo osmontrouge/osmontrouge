@@ -56,6 +56,14 @@
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
+
+    <v-card
+      class="ma-1 mt-3"
+      color="#bddcf4"
+    >
+      <v-card-text v-html="mapFooter" />
+    </v-card>
+
   </v-card>
 </template>
 
@@ -70,9 +78,13 @@ export default {
       type: String,
       required: true
     },
-    imageSidebar: {
+    mapFooter: {
       type: String,
       required: true
+    },
+    imageSidebar: {
+      type: String,
+      required: false
     }
   }
 }

@@ -1,5 +1,8 @@
 config:
   name: OSMontrouge
+  footer: >-
+    <p>La carte et les données viennent d'<a href="https://www.openstreetmap.org/">OpenStreetMap</a>.</p>
+    <p><a href="https://wiki.openstreetmap.org/wiki/Montrouge">Suivez l'avancement de la cartographie sur Montrouge</a>.</p>
 
   map:
     zoom: 15
