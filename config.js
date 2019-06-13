@@ -1,5 +1,5 @@
 import { config, taxonomy } from './data.yml';
-import imageSidebar from './images/montrouge.png';
+import imageSidebar from './images/montrouge.jpg';
 
 export const mapMaxBounds = config.map.maxBounds;
 export const mapCenter = config.map.center;

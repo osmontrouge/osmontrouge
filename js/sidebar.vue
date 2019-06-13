@@ -10,8 +10,8 @@
       >
         <v-spacer></v-spacer>
 
-        <v-card-title class="white--text pl-1 pt-5">
-          <div class="display-1 pt-5">{{ mapName }}</div>
+        <v-card-title class="pl-1 pt-5">
+          <div class="display-1 px-1">{{ mapName }}</div>
         </v-card-title>
       </v-layout>
     </v-img>
@@ -99,5 +99,8 @@ export default {
   }
   .small-tile-height {
     height: 40px;
+  }
+  .display-1 {
+    background-color: #ffffffa6;
   }
 </style>
