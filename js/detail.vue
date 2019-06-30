@@ -14,11 +14,9 @@
           dark
         >
           <v-icon>{{ icon }}</v-icon>
-          <v-card-title
-            class="headline lighten-2"
-          >
-            {{ point.properties.name || feature.name }}
-          </v-card-title>
+          <v-toolbar-title
+            :title="title"
+            >{{ title }}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn
             icon
@@ -109,6 +107,12 @@ export default {
       feature: null,
       point: null
     };
+  },
+
+  computed: {
+    title() {
+      return this.point.properties.name || this.feature.name;
+    }
   },
 
   watch: {
