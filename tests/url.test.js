@@ -94,6 +94,32 @@ describe('URL Params', () => {
       };
       expect(encodeFeatures(taxonomy)).toEqual('test=testA&test=testB&test2=testA');
     });
+
+    it('encode the features and mapillary', () => {
+      const taxonomy = {
+        test: {
+          features: {
+            testA: {
+              selected: true
+            }
+          }
+        },
+      };
+      expect(encodeFeatures(taxonomy, { mapillary: true })).toEqual('test=testA&mapillary=');
+    });
+
+    it("dont encore mapillary when it's false", () => {
+      const taxonomy = {
+        test: {
+          features: {
+            testA: {
+              selected: true
+            }
+          }
+        },
+      };
+      expect(encodeFeatures(taxonomy, { mapillary: false })).toEqual('test=testA');
+    });
   });
 
   describe('decodeFeatures', () => {
@@ -112,7 +138,7 @@ describe('URL Params', () => {
     });
 
     it('apply selected feature', () => {
-       const taxonomy = {
+      const taxonomy = {
         test: {
           features: {
             testA: {

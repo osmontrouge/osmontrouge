@@ -28,7 +28,7 @@ export function encodePosition(lat, lng, zoom) {
   return `@${position.join(',')}`;
 }
 
-export function encodeFeatures(taxonomy) {
+export function encodeFeatures(taxonomy, additionalParams = {}) {
   const params = new URLSearchParams();
   Object.keys(taxonomy).forEach((idCategory) => {
     Object.keys(taxonomy[idCategory].features).forEach((idFeature) => {
@@ -37,6 +37,11 @@ export function encodeFeatures(taxonomy) {
         params.append(idCategory, idFeature);
       }
     });
+  });
+  Object.keys(additionalParams).forEach((param) => {
+    if (additionalParams[param]) {
+      params.append(param, '');
+    }
   });
   return params.toString();
 }

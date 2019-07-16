@@ -120,12 +120,13 @@ export default {
   data() {
     const { features, location } = decode(this.featuresAndLocation);
     const { lat, lng, zoom } = decodePosition(location, config);
-    decodeFeatures(features, config.taxonomy)
+    const params = new URLSearchParams(features);
+    decodeFeatures(features, config.taxonomy);
     return {
       isMobile: false,
       sidebar: false,
       markers: [],
-      mapillaryLayer: false,
+      mapillaryLayer: params.has('mapillary'),
       mapMaxBounds: config.mapMaxBounds,
       mapCenter: { lat, lng },
       mapZoom: zoom,
@@ -149,6 +150,10 @@ export default {
       this.updateRoute();
     },
 
+    mapillaryLayer() {
+      this.updateRoute();
+    },
+
     taxonomy: {
       deep: true,
       handler() {
@@ -169,7 +174,7 @@ export default {
         params: {
           ...this.$route.params,
           featuresAndLocation: encode(
-            encodeFeatures(this.taxonomy),
+            encodeFeatures(this.taxonomy, { mapillary: this.mapillaryLayer }),
             encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
           )
         }
