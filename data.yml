@@ -32,6 +32,16 @@ taxonomy:
     color: '#725a50'
     features:
 
+      school_creche:
+        name: Crèches
+        query: >-
+          (
+            node["amenity"="childcare"](area.searchArea);
+            way["amenity"="childcare"](area.searchArea);
+            relation["amenity"="childcare"](area.searchArea);
+          );
+          out center;
+
       school_elementaire:
         name: Écoles élémentaires
         query: >-
