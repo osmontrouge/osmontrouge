@@ -142,3 +142,14 @@ taxonomy:
             relation["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
           );
           out center;
+
+      excrement_bags:
+        name: Sacs à déjections canine
+        icon: osm-excrement_bags
+        query: >-
+          (
+            node["vending"="excrement_bags"](area.searchArea);
+            way["vending"="excrement_bags"](area.searchArea);
+            relation["vending"="excrement_bags"](area.searchArea);
+          );
+          out center;
