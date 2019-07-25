@@ -52,6 +52,16 @@ taxonomy:
           );
           out center;
 
+      school_lycee:
+        name: Lycées
+        query: >-
+          (
+            node["amenity"="school"]["school:FR"="lycée"](area.searchArea);
+            way["amenity"="school"]["school:FR"="lycée"](area.searchArea);
+            relation["amenity"="school"]["school:FR"="lycée"](area.searchArea);
+          );
+          out center;
+
   food:
     name: Alimentation
     icon: osm-marketplace
