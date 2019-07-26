@@ -104,6 +104,38 @@ taxonomy:
           );
           out center;
 
+  stationnement:
+    name: Stationnement
+
+    features:
+      parkings:
+        name: Parkings souterrain
+        icon: osm-parking_entrance
+        color: '#f2bb14'
+        query: >-
+          (
+            node["operator"="Autocité"](area.searchArea);
+            way["operator"="Autocité"](area.searchArea);
+            relation["operator"="Autocité"](area.searchArea);
+          );
+          out center;
+
+
+      twowheel_parking:
+        name: Stationnements 2 roues
+        icon: osm-motorcycle_parking
+        color: '#f2bb14'
+        query: >-
+          (
+            node[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            node[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            way[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            way[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            relation[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            relation[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+          );
+          out center;
+
   others:
     name: Divers
     color: '#7e007e'
