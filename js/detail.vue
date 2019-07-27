@@ -43,6 +43,11 @@
             name="Horaires d'ouverture"
           />
           <detail-tag
+            v-if="point.properties.collection_times"
+            :value="point.properties.collection_times"
+            name="Horaires de levée"
+          />
+          <detail-tag
             v-if="point.properties.operator"
             :value="point.properties.operator"
             name="Opéré par"
