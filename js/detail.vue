@@ -28,42 +28,45 @@
 
         <v-list>
           <detail-tag
-            v-if="point.properties['operator:type']"
+            :value="point.properties.phone"
+            name="Téléphone :"
+          />
+          <detail-tag
             :value="point.properties['operator:type']"
             name="Type de l'opérateur :"
           />
           <detail-tag
-            v-if="point.properties['school:FR']"
             :value="point.properties['school:FR']"
             name="Type de l'école :"
           />
           <detail-tag
-            v-if="point.properties.opening_hours"
             :value="point.properties.opening_hours"
             name="Horaires d'ouverture"
           />
           <detail-tag
-            v-if="point.properties.collection_times"
             :value="point.properties.collection_times"
             name="Horaires de levée"
           />
           <detail-tag
-            v-if="point.properties.operator"
+            :value="point.properties.capacity"
+            name="Nombre de places :"
+          />
+          <detail-tag
             :value="point.properties.operator"
             name="Opéré par"
           />
 
-          <v-list-tile v-if="point.properties.website">
-            <v-list-tile-content>
-              <v-list-tile-title>
-                <a
-                  :href="point.properties.website"
-                >
-                  {{ point.properties.website }}
-                </a>
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <detail-entry v-if="point.properties.dog === 'no'">
+            Interdit aux chiens
+          </detail-entry>
+
+          <detail-entry v-if="point.properties.website">
+            <a
+              :href="point.properties.website"
+            >
+              {{ point.properties.website }}
+            </a>
+          </detail-entry>
 
         </v-list>
       </v-card>
@@ -75,9 +78,10 @@
 import { taxonomy } from '../config';
 import geojsondata from '../data/*.geojson';
 import DetailTag from './detail_tag';
+import DetailEntry from './detail_entry';
 
 export default {
-  components: { DetailTag },
+  components: { DetailEntry, DetailTag },
 
   props: {
     idCategory: {

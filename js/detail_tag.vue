@@ -1,14 +1,18 @@
 <template>
-  <v-list-tile>
-    <v-list-tile-action class="mr-1">{{ name }}</v-list-tile-action>
-    <v-list-tile-content>
-      <v-list-tile-title>{{ value }}</v-list-tile-title>
-    </v-list-tile-content>
-  </v-list-tile>
+  <detail-entry
+    v-if="value"
+    :name="name"
+  >
+    {{ value }}
+  </detail-entry>
 </template>
 
 <script>
+import DetailEntry from './detail_entry';
+
 export default {
+  components: { DetailEntry },
+
   props: {
     name: {
       type: String,
@@ -16,7 +20,7 @@ export default {
     },
     value: {
       type: String,
-      required: true
+      default: undefined
     }
   }
 }
