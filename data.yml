@@ -72,19 +72,46 @@ taxonomy:
           );
           out center;
 
-  food:
-    name: Alimentation
-    icon: osm-marketplace
-    color: '#5d60be'
+  public_services:
+    name: Services publiques
+    color: '#48719D'
 
     features:
-      marketplace:
-        name: Marchés
+      townhall:
+        name: Mairie
+        icon: osm-town_hall
         query: >-
           (
-            node["amenity"="marketplace"](area.searchArea);
-            way["amenity"="marketplace"](area.searchArea);
-            relation["amenity"="marketplace"](area.searchArea);
+            nwr["amenity"="townhall"](area.searchArea);
+          );
+          out center;
+
+      police:
+        name: Police
+        icon: osm-police
+        query: >-
+          (
+            nwr["amenity"="police"](area.searchArea);
+          );
+          out center;
+
+      post_office:
+        name: Bureaux de postes
+        icon: osm-post_office
+        color: '#ffcc2e'
+        query: >-
+          (
+            nwr["amenity"="post_office"](area.searchArea);
+          );
+          out center;
+
+      post_box:
+        name: Boites aux lettres
+        icon: osm-post_box
+        color: '#ffcc2e'
+        query: >-
+          (
+            nwr["amenity"="post_box"](area.searchArea);
           );
           out center;
 
@@ -141,6 +168,19 @@ taxonomy:
     color: '#7e007e'
 
     features:
+
+      marketplace:
+        name: Marchés
+        icon: osm-marketplace
+        color: '#5d60be'
+        query: >-
+          (
+            node["amenity"="marketplace"](area.searchArea);
+            way["amenity"="marketplace"](area.searchArea);
+            relation["amenity"="marketplace"](area.searchArea);
+          );
+          out center;
+
       public_bookcase:
         name: Boîtes à livres
         icon: osm-public_bookcase
