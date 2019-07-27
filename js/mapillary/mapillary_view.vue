@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import MapillaryViewer from './mapillary_viewer';
-
 export default {
-  components: { MapillaryViewer },
+  components: {
+    MapillaryViewer: () => import('./mapillary_viewer')
+  },
 
   props: {
     mKey: {
