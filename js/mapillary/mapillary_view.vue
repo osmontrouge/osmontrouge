@@ -3,7 +3,10 @@
     tabindex="0"
     @keydown.esc="close"
   >
-    <div id="mapillary" />
+    <mapillary-viewer
+      :m-key="mKey"
+      @keychange="updateRoute"
+    />
     <v-btn
       fixed
       icon
@@ -18,12 +21,11 @@
 </template>
 
 <script>
-import 'mapillary-js/dist/mapillary.min.css';
-import { Viewer } from 'mapillary-js/dist/mapillary.min';
-import { mapillaryClientId, mapillaryUsers } from '../../config';
-import { mapillaryViewerFilter } from './mapillary';
+import MapillaryViewer from './mapillary_viewer';
 
 export default {
+  components: { MapillaryViewer },
+
   props: {
     mKey: {
       type: String,
@@ -37,31 +39,14 @@ export default {
   },
 
   mounted() {
-    this.viewer = new Viewer(
-      'mapillary',
-      mapillaryClientId,
-      this.mKey,
-      {
-        component: {
-          cover: false,
-        }
-      }
-    );
-    this.viewer.setFilter(mapillaryViewerFilter(mapillaryUsers, true));
     this.$el.focus();
-
-    this.viewer.on(Viewer.nodechanged, ({ key }) => {
-      this.$router.replace({ name: '360', params: { mKey: key, featuresAndLocation: this.featuresAndLocation } });
-    });
-  },
-
-  watch: {
-    mKey(mKey) {
-      this.viewer.moveToKey(mKey);
-    }
   },
 
   methods: {
+    updateRoute(key) {
+      this.$router.replace({ name: '360', params: { mKey: key, featuresAndLocation: this.featuresAndLocation } });
+    },
+
     close() {
       this.$router.push({ name: 'index', params: { featuresAndLocation: this.featuresAndLocation } })
     }

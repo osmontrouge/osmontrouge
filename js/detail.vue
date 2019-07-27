@@ -26,6 +26,13 @@
           </v-btn>
         </v-toolbar>
 
+        <mapillary-viewer
+          v-if="point.properties.mapillary"
+          :m-key="point.properties.mapillary"
+          :cover="true"
+          class="card-mapillary"
+        />
+
         <v-list>
           <detail-tag
             :value="point.properties.phone"
@@ -81,7 +88,11 @@ import DetailTag from './detail_tag';
 import DetailEntry from './detail_entry';
 
 export default {
-  components: { DetailEntry, DetailTag },
+  components: {
+    DetailEntry,
+    DetailTag,
+    MapillaryViewer: () => import('./mapillary/mapillary_viewer')
+  },
 
   props: {
     idCategory: {
@@ -158,7 +169,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .right-sidebar {
   width: 400px;
   height: 100vh;
@@ -174,5 +185,8 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 10;
+}
+.card-mapillary {
+  height: 400px;
 }
 </style>
