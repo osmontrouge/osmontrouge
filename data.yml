@@ -36,9 +36,7 @@ taxonomy:
         name: Crèches
         query: >-
           (
-            node["amenity"="childcare"](area.searchArea);
-            way["amenity"="childcare"](area.searchArea);
-            relation["amenity"="childcare"](area.searchArea);
+            nwr["amenity"="childcare"](area.searchArea);
           );
           out center;
 
@@ -46,9 +44,7 @@ taxonomy:
         name: Écoles élémentaires
         query: >-
           (
-            node["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
-            way["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
-            relation["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
+            nwr["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
           );
           out center;
 
@@ -56,9 +52,7 @@ taxonomy:
         name: Collèges
         query: >-
           (
-            node["amenity"="school"]["school:FR"="collège"](area.searchArea);
-            way["amenity"="school"]["school:FR"="collège"](area.searchArea);
-            relation["amenity"="school"]["school:FR"="collège"](area.searchArea);
+            nwr["amenity"="school"]["school:FR"="collège"](area.searchArea);
           );
           out center;
 
@@ -66,9 +60,7 @@ taxonomy:
         name: Lycées
         query: >-
           (
-            node["amenity"="school"]["school:FR"="lycée"](area.searchArea);
-            way["amenity"="school"]["school:FR"="lycée"](area.searchArea);
-            relation["amenity"="school"]["school:FR"="lycée"](area.searchArea);
+            nwr["amenity"="school"]["school:FR"="lycée"](area.searchArea);
           );
           out center;
 
@@ -126,9 +118,7 @@ taxonomy:
         name: Parcs
         query: >-
           (
-            node["leisure"="park"]["access"!="private"](area.searchArea);
-            way["leisure"="park"]["access"!="private"](area.searchArea);
-            relation["leisure"="park"]["access"!="private"](area.searchArea);
+            nwr["leisure"="park"]["access"!="private"](area.searchArea);
           );
           out center;
 
@@ -142,12 +132,9 @@ taxonomy:
         color: '#f2bb14'
         query: >-
           (
-            node["operator"="Autocité"](area.searchArea);
-            way["operator"="Autocité"](area.searchArea);
-            relation["operator"="Autocité"](area.searchArea);
+            nwr["operator"="Autocité"](area.searchArea);
           );
           out center;
-
 
       twowheel_parking:
         name: Stationnements 2 roues
@@ -155,12 +142,8 @@ taxonomy:
         color: '#f2bb14'
         query: >-
           (
-            node[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
-            node[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
-            way[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
-            way[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
-            relation[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
-            relation[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            nwr[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            nwr[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
           );
           out center;
 
@@ -176,9 +159,7 @@ taxonomy:
         color: '#5d60be'
         query: >-
           (
-            node["amenity"="marketplace"](area.searchArea);
-            way["amenity"="marketplace"](area.searchArea);
-            relation["amenity"="marketplace"](area.searchArea);
+            nwr["amenity"="marketplace"](area.searchArea);
           );
           out center;
 
@@ -187,9 +168,7 @@ taxonomy:
         icon: osm-public_bookcase
         query: >-
           (
-            node["amenity"="public_bookcase"](area.searchArea);
-            way["amenity"="public_bookcase"](area.searchArea);
-            relation["amenity"="public_bookcase"](area.searchArea);
+            nwr["amenity"="public_bookcase"](area.searchArea);
           );
           out center;
 
@@ -199,9 +178,7 @@ taxonomy:
         color: '#0071bc'
         query: >-
           (
-            node["amenity"="charging_station"](area.searchArea);
-            way["amenity"="charging_station"](area.searchArea);
-            relation["amenity"="charging_station"](area.searchArea);
+            nwr["amenity"="charging_station"](area.searchArea);
           );
           out center;
 
@@ -210,9 +187,7 @@ taxonomy:
         icon: osm-recycling
         query: >-
           (
-            node["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
-            way["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
-            relation["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+            nwr["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
           );
           out center;
 
@@ -221,8 +196,6 @@ taxonomy:
         icon: osm-excrement_bags
         query: >-
           (
-            node["vending"="excrement_bags"](area.searchArea);
-            way["vending"="excrement_bags"](area.searchArea);
-            relation["vending"="excrement_bags"](area.searchArea);
+            nwr["vending"="excrement_bags"](area.searchArea);
           );
           out center;
