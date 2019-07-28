@@ -36,7 +36,7 @@ taxonomy:
         name: Crèches
         query: >-
           (
-            nwr["amenity"="childcare"](area.searchArea);
+            nwr["amenity"="kindergarten"]["kindergarten:FR"](area.searchArea);
           );
           out center;
 
