@@ -77,7 +77,7 @@
           class="mapillary-info"
         >
           <v-card-text>
-            Cliquez sur les lignes vertes pour voir les photos à 360°.
+            {{ $t("mapillary.info") }}
           </v-card-text>
         </v-card>
       </v-content>

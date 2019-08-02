@@ -21,7 +21,7 @@
           <v-btn
             icon
             dark
-             @click="close">
+            @click="close">
             <v-icon>osm-close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -68,7 +68,7 @@
           />
 
           <detail-entry v-if="point.properties.dog === 'no'">
-            Interdit aux chiens
+            {{ $t('details.dog_no') }}
           </detail-entry>
 
           <detail-entry v-if="point.properties.website">

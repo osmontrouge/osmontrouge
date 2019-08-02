@@ -13,7 +13,7 @@
         </button>
         </div>
       </template>
-      <span>Voir les photos à 360</span>
+      <span>{{ $t('mapillary.control') }}</span>
     </v-tooltip>
 </template>
 

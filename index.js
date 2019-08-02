@@ -5,9 +5,12 @@ import './font/osm.css';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import VueI18n from 'vue-i18n';
 
 import App from './js/app.vue';
 import OsmMap from './js/map.vue';
+
+import messages from './locales.json';
 
 Vue.use(Vuetify, {
   icons: {
@@ -19,6 +22,12 @@ Vue.use(Vuetify, {
   }
 });
 Vue.use(VueRouter);
+Vue.use(VueI18n);
+
+const i18n = new VueI18n({
+  locale: 'fr',
+  messages,
+});
 
 const routes = [
   {
@@ -68,5 +77,6 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  i18n,
   render: createEle => createEle(App),
 }).$mount('#app');
