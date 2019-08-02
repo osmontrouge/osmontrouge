@@ -12,7 +12,7 @@ config:
       - title: Normal
         uri: https://tiles.osmontrouge.fr/styles/bright/style.json
       - title: 3D
-        uri: https://tiles.osmontrouge.fr/styles/liberty/style.json
+        uri: https://tiles.osmontrouge.fr/styles/bright/style3d.json
 
   mapillary:
     users:
