@@ -199,3 +199,13 @@ taxonomy:
             nwr["vending"="excrement_bags"](area.searchArea);
           );
           out center;
+
+      velib:
+        name: Stations Vélib
+        icon: osm-velib
+        color: '#733e7fff'
+        query: >-
+          (
+            nwr["amenity"="bicycle_rental"]["operator"="Smovengo"](area.searchArea);
+          );
+          out center;
