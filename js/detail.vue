@@ -43,6 +43,10 @@
             name="Type de l'opérateur :"
           />
           <detail-tag
+            :value="point.properties['kindergarten:FR']"
+            name="Type de crèche :"
+          />
+          <detail-tag
             :value="point.properties['school:FR']"
             name="Type de l'école :"
           />
