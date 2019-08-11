@@ -132,7 +132,7 @@ export default {
       mapZoom: zoom,
       config,
       taxonomy: config.taxonomy,
-      style3D: false
+      style3D: params.has('3d')
     };
   },
 
@@ -162,6 +162,10 @@ export default {
       this.updateRoute();
     },
 
+    style3D() {
+      this.updateRoute();
+    },
+
     taxonomy: {
       deep: true,
       handler() {
@@ -182,7 +186,7 @@ export default {
         params: {
           ...this.$route.params,
           featuresAndLocation: encode(
-            encodeFeatures(this.taxonomy, { mapillary: this.mapillaryLayer }),
+            encodeFeatures(this.taxonomy, { mapillary: this.mapillaryLayer, '3d': this.style3D }),
             encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
           )
         }
