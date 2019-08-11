@@ -7,7 +7,7 @@ RUN yarn install --pure-lockfile
 
 COPY . /code
 RUN yarn icons
-RUN script/update
+RUN yarn run download-data
 RUN yarn run build
 
 FROM nginx:alpine
