@@ -9,7 +9,6 @@
           :class="{ 'mapboxgl-ctrl-active': value }"
           @click="onClick"
         >
-          <v-icon>osm-360</v-icon>
         </button>
         </div>
       </template>
@@ -51,8 +50,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   button.mapboxgl-ctrl-active {
     background-color: #b7b7b7;
+  }
+  button {
+    background-image: url(../../images/360.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80%;
   }
 </style>
