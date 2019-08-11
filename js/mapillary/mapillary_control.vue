@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
   button.mapboxgl-ctrl-active {
-    background-color: #b7b7b7;
+    background-color: rgb(53, 175, 109);
   }
   button {
     background-image: url(../../images/360.svg);
