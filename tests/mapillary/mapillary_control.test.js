@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import MapillaryControl from '../../js/mapillary/mapillary_control';
 
 jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
@@ -7,9 +7,11 @@ jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
 
 describe('MapillaryControl', () => {
   let control;
-
   beforeEach(() => {
+    let localVue = createLocalVue();
+    localVue.prototype.$t = () => {};
     control = shallowMount(MapillaryControl, {
+      localVue,
       provide: {
         actions: {},
         map: {},
