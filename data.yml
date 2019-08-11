@@ -9,10 +9,8 @@ config:
     center: [2.315111, 48.816614]
     maxBounds: [[2.293611, 48.807344], [2.336998, 48.825486]]
     styles:
-      - title: Normal
-        uri: https://tiles.osmontrouge.fr/styles/bright/style.json
-      - title: 3D
-        uri: https://tiles.osmontrouge.fr/styles/bright-3d/style.json
+      normal: https://tiles.osmontrouge.fr/styles/bright/style.json
+      3d: https://tiles.osmontrouge.fr/styles/bright-3d/style.json
 
   mapillary:
     users:

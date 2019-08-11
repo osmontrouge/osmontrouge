@@ -47,7 +47,7 @@
           :max-bounds="mapMaxBounds"
           :center.sync="mapCenter"
           :zoom.sync="mapZoom"
-          :map-style="config.mapStyles[0].uri"
+          :map-style="mapStyle"
         >
           <template
             v-for="category in markers"
@@ -67,7 +67,7 @@
             @click="displayMapillaryView"
           />
           <MglNavigationControl :show-compass="false" />
-          <style-control :styles="config.mapStyles" />
+          <view-control v-model="style3D" />
           <mapillary-control v-model="mapillaryLayer" />
         </MglMap>
         <v-card
@@ -88,7 +88,7 @@
 
 <script>
 import { MglMap, MglNavigationControl } from 'vue-mapbox/dist/vue-mapbox.umd';
-import StyleControl from './style_control';
+import ViewControl from './3d_control';
 import OsmSidebar from './sidebar';
 import OsmMarker from './marker';
 import MapillaryLayer from './mapillary/mapillary_layer';
@@ -106,7 +106,7 @@ export default {
     MglNavigationControl,
     OsmMarker,
     OsmSidebar,
-    StyleControl
+    ViewControl
   },
 
   props: {
@@ -131,7 +131,8 @@ export default {
       mapCenter: { lat, lng },
       mapZoom: zoom,
       config,
-      taxonomy: config.taxonomy
+      taxonomy: config.taxonomy,
+      style3D: false
     };
   },
 
@@ -139,6 +140,13 @@ export default {
     this.resize();
     this.sidebar = !this.isMobile;
     this.updateMarkers();
+  },
+
+  computed: {
+    mapStyle() {
+      if (this.style3D) return this.config.mapStyles['3d'];
+      return this.config.mapStyles.normal;
+    }
   },
 
   watch: {
