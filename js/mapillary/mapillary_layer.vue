@@ -46,9 +46,7 @@ export default {
 
     layer() {
       const layer = {
-        id: 'mapillary',
         type: 'line',
-        source: 'mapillary',
         'source-layer': 'mapillary-sequences',
         layout: {
           'line-cap': 'round',
