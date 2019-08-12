@@ -8,7 +8,6 @@
     </button>
   </div>
 </template>
-</template>
 
 <script>
 import { $helpers } from 'vue-mapbox/dist/vue-mapbox.umd.js';
