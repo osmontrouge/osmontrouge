@@ -145,6 +145,32 @@ taxonomy:
           );
           out center;
 
+  zero_waste:
+    name: Zéro déchets
+    icon: osm-recycling
+
+    features:
+
+      bulk_purchase:
+        name: Vente en vrac
+        color: '#00aa03'
+
+        query: >-
+          (
+            nwr["bulk_purchase"](area.searchArea);
+          );
+          out center;
+
+      zero_waste:
+        name: Accepte les contenants
+        color: '#366837'
+
+        query: >-
+          (
+            nwr["zero_waste"](area.searchArea);
+          );
+          out center;
+
   others:
     name: Divers
     color: '#7e007e'
