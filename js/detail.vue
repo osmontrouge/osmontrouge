@@ -27,8 +27,8 @@
         </v-toolbar>
 
         <mapillary-viewer
-          v-if="point.properties.mapillary"
-          :m-key="point.properties.mapillary"
+          v-if="mapillaryImage"
+          :m-key="mapillaryImage"
           :cover="true"
           class="card-mapillary"
         />
@@ -86,7 +86,8 @@
 </template>
 
 <script>
-import { taxonomy } from '../config';
+import { findImage } from './mapillary/mapillary';
+import * as config from '../config';
 import geojsondata from '../data/*.geojson';
 import DetailTag from './detail_tag';
 import DetailEntry from './detail_entry';
@@ -129,7 +130,8 @@ export default {
       color: null,
       icon: null,
       feature: null,
-      point: null
+      point: null,
+      mapillaryImage: null
     };
   },
 
@@ -152,7 +154,7 @@ export default {
     },
 
     updatePoint() {
-      const category = taxonomy[this.idCategory];
+      const category = config.taxonomy[this.idCategory];
       const feature = category.features[this.idFeature];
 
       this.color = feature.color || category.color;
@@ -163,6 +165,21 @@ export default {
         .then(data => data.json())
         .then(({ features }) => {
           this.point = features.find(f => f.id === this.id);
+          this.mapillaryImage = this.point.properties.mapillary;
+          if (!this.mapillaryImage) {
+            this.fetchMapillaryImage();
+          }
+        });
+    },
+
+    fetchMapillaryImage() {
+      const coordinates = {
+        lng: this.point.geometry.coordinates[0],
+        lat: this.point.geometry.coordinates[1]
+      };
+      findImage(coordinates, true, config.mapillaryUsers, config.mapillaryClientId)
+        .then((mKey) => {
+          this.mapillaryImage = mKey;
         });
     },
 

@@ -1,10 +1,10 @@
-export function findImage(pos, pano, users, clientId) {
+export function findImage({ lng, lat }, pano, users, clientId) {
   const url = new URL("https://a.mapillary.com/v3/images");
   const params = {
     client_id: clientId,
     pano,
     userkeys: users.join(','),
-    closeto: [pos.lng, pos.lat].join(','),
+    closeto: [lng, lat].join(','),
     radius: 20
   };
   url.search = new URLSearchParams(params);
