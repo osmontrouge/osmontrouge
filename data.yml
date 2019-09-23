@@ -161,13 +161,13 @@ taxonomy:
           );
           out center;
 
-      zero_waste:
+      reusable_packaging:
         name: Accepte les contenants
         color: '#366837'
 
         query: >-
           (
-            nwr["zero_waste"](area.searchArea);
+            nwr["reusable_packaging:accept"]["reusable_packaging:accept"!="no"](area.searchArea);
           );
           out center;
 
