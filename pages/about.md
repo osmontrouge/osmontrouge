@@ -1,7 +1,5 @@
 # OSMontrouge est la carte interactive de la ville de Montrouge la plus détaillée et la plus exhaustive qui soit.
 
-[Suivez nous sur twitter @osmontrouge](https://twitter.com/osmontrouge)
-
 ## OpenStreetMap
 
 [OpenStreetMap](https://www.openstreetmap.org/) est « le Wikipédia de la cartographie », une communauté mondiale coordonnée, auto-organisée, créant des données librement exploitables. OpenStreetMap est aujourd’hui considérée comme la base de données cartographique ouverte la plus exhaustive au Monde.
@@ -27,7 +25,7 @@ Nous nous efforçons de décrire de manière précise la manière de cartographi
 ## Rencontres locales
 
 À Montrouge, depuis 2018 les contributeurs locaux se réunissent autour d'une bière tous les mois pour planifier et coordonner leurs actions.
-[Retrouvez tous nos événements](https://wiki.openstreetmap.org/wiki/Montrouge#Rencontres_locales)
+[Retrouvez tous nos événements.](https://wiki.openstreetmap.org/wiki/Montrouge#Rencontres_locales)
 
 Vous voulez participer à détailler la carte ? Venez nous rencontrer ! Débutants ou passionnés, nous serons heureux de vous soutenir.
 
@@ -39,7 +37,7 @@ Dès que l'un d'entre nous découvre un nouvel endroit à cartographier, il en f
 ## Les données et le code informatique sont libres !
 
 Les données OpenStreetMap sont disponibles en open data, librement utilisables sous les conditions de la licence OdbL.
-[En savoir plus sur la licence OdbL](https://www.openstreetmap.org/copyright)
+[En savoir plus sur la licence OdbL.](https://www.openstreetmap.org/copyright)
 
 Les logiciels utilisés sur ce site sont tous des Logiciels Libres.
-[Voir le code source des logiciels](https://github.com/osmontrouge/)
+[Voir le code source des logiciels.](https://github.com/osmontrouge/)
