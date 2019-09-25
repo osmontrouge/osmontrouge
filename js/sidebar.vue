@@ -27,23 +27,39 @@
           <v-list-tile-title class="body-1">{{ $t('about') }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-divider></v-divider>
+      <v-list-tile
+        :href="`https://twitter.com/${social.twitter}`"
+        target="_blank">
+        <v-list-tile-avatar
+          class="no-min-width"
+          size="20">
+          <v-icon small>osm-twitter</v-icon>
+        </v-list-tile-avatar>
+        <v-list-tile-content class="ml-2">
+          <v-list-tile-title class="body-1">Twitter</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </div>
 </template>
 
 <script>
-import { mapName, imageSidebar }  from '../config';
+import { mapName, imageSidebar, social }  from '../config';
 
 export default {
   data () {
     return {
-      mapName, imageSidebar
+      mapName, imageSidebar, social
     };
   }
 }
 </script>
 
 <style scoped>
+  .no-min-width {
+    min-width: auto;
+  }
   .display-1 {
     background-color: #ffffffa6;
   }

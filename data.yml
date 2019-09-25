@@ -1,6 +1,9 @@
 config:
   name: OSMontrouge
 
+  social:
+    twitter: osmontrouge
+
   map:
     zoom: 15
     center: [2.315111, 48.816614]

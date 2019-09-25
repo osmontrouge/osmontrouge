@@ -6,6 +6,7 @@ export const mapCenter = config.map.center;
 export const mapZoom = config.map.zoom;
 export const mapName = config.name;
 export const mapStyles = config.map.styles;
+export const social = config.social;
 
 export const mapillaryUsers = config.mapillary.users;
 export const mapillaryClientId = config.mapillary.clientId;
