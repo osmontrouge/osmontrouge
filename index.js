@@ -30,6 +30,11 @@ const i18n = new VueI18n({
 });
 
 const routes = [
+   {
+    name: 'about',
+    path: '/about',
+    component: () => import('./js/about'),
+   },
   {
     name: 'index',
     path: '/:featuresAndLocation?',
@@ -66,8 +71,7 @@ const routes = [
         }
       }
     ]
-  },
-
+  }
 ];
 
 const router = new VueRouter({
