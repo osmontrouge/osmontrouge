@@ -1,105 +1,49 @@
 <template>
-  <v-card>
-    <v-img
-      :src="imageSidebar"
-      height="200px"
-    >
-      <v-layout
-        column
-        fill-height
+  <div>
+    <v-card>
+      <v-img
+        :src="imageSidebar"
+        height="200px"
       >
-        <v-spacer></v-spacer>
-
-        <v-card-title class="pl-1 pt-5">
-          <div class="display-1 px-1">{{ mapName }}</div>
-        </v-card-title>
-      </v-layout>
-    </v-img>
-
-    <v-list
-      v-for="(category, id) in taxonomy"
-      :key="id"
-      class="pt-1"
-      subheader
-    >
-      <v-subheader
-        class="small-subheader-height"
-      >
-        {{ category.name }}
-      </v-subheader>
-
-      <v-list-tile
-        v-for="(feature, idFeature) in category.features"
-        :key="idFeature"
-        class="small-tile-height"
-        @click=""
-      >
-        <v-list-tile-avatar
-          size="20"
-          class="no-min-width"
+        <v-layout
+          column
+          fill-height
         >
-          <v-icon
-            :color="feature.selected ? (feature.color || category.color) : null"
-            small
-          >{{ feature.icon || category.icon }}</v-icon>
-        </v-list-tile-avatar>
-
-        <v-list-tile-content
-          class="ml-2"
-          @click="feature.selected = !feature.selected"
-        >
-          <v-list-tile-title class="body-1">{{ feature.name }}</v-list-tile-title>
-        </v-list-tile-content>
-
-        <v-list-tile-action class="no-min-width">
-          <v-checkbox v-model="feature.selected"></v-checkbox>
-        </v-list-tile-action>
-      </v-list-tile>
-    </v-list>
-
-    <v-card
-      class="ma-1 mt-3"
-      color="#bddcf4"
-    >
-      <v-card-text v-html="mapFooter" />
+          <v-spacer></v-spacer>
+  
+          <v-card-title class="pl-1 pt-5">
+            <div class="display-1 px-1">{{ mapName }}</div>
+          </v-card-title>
+        </v-layout>
+      </v-img>
     </v-card>
 
-  </v-card>
+    <slot />
+    <v-list>
+      <slot name="list-top"></slot>
+      <v-divider></v-divider>
+      <v-list-tile :to="{ name: 'about' }">
+        <v-list-tile-content class="ml-2">
+          <v-list-tile-title class="body-1">{{ $t('about') }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
+  </div>
 </template>
 
 <script>
+import { mapName, imageSidebar }  from '../config';
+
 export default {
-  props: {
-    taxonomy: {
-      type: Object,
-      required: true
-    },
-    mapName: {
-      type: String,
-      required: true
-    },
-    mapFooter: {
-      type: String,
-      required: true
-    },
-    imageSidebar: {
-      type: String,
-      required: false
-    }
+  data () {
+    return {
+      mapName, imageSidebar
+    };
   }
 }
 </script>
 
 <style scoped>
-  .no-min-width {
-    min-width: auto;
-  }
-  .small-subheader-height {
-    height: 35px;
-  }
-  .small-tile-height {
-    height: 40px;
-  }
   .display-1 {
     background-color: #ffffffa6;
   }

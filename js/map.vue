@@ -11,13 +11,9 @@
         :hide-overlay="!isMobile"
         fixed
       >
-        <osm-sidebar
-          :taxonomy="taxonomy"
-          :image-sidebar="config.imageSidebar"
-          :map-name="config.mapName"
-          :map-footer="config.mapFooter"
-          class="sidebar"
-        />
+        <osm-sidebar>
+          <osm-filter-features :taxonomy="taxonomy" />
+        </osm-sidebar>
       </v-navigation-drawer>
       <v-container
         v-show="!isMobile"
@@ -90,6 +86,7 @@
 import { MglMap, MglNavigationControl } from 'vue-mapbox/dist/vue-mapbox.umd';
 import ViewControl from './3d_control';
 import OsmSidebar from './sidebar';
+import OsmFilterFeatures from './filter_features';
 import OsmMarker from './marker';
 import MapillaryLayer from './mapillary/mapillary_layer';
 import MapillaryControl from './mapillary/mapillary_control';
@@ -104,6 +101,7 @@ export default {
     MapillaryLayer,
     MglMap,
     MglNavigationControl,
+    OsmFilterFeatures,
     OsmMarker,
     OsmSidebar,
     ViewControl
@@ -252,10 +250,6 @@ export default {
 </script>
 
 <style>
-.sidebar {
-  height: 100vh;
-}
-
 .handle {
   position: absolute;
   top: 170px;
