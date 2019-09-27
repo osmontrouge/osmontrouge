@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div :class="{ withSidebar: sidebar }">
     <v-navigation-drawer
+      v-model="sidebar"
       absolute
     >
       <osm-sidebar>
@@ -13,7 +14,21 @@
         </template>
       </osm-sidebar>
     </v-navigation-drawer>
-    <div class="ma-3 page" v-html="about">
+    <v-content>
+      <v-btn
+        v-show="!sidebar"
+        fixed
+        fab
+        dark
+        top
+        left
+        color="pink"
+        @click="sidebar = !sidebar"
+      >
+        <v-icon>osm-filter_list</v-icon>
+      </v-btn>
+      <div class="ma-3 page" v-html="about">
+    </v-content>
   </div>
 </template>
 
@@ -26,6 +41,7 @@ export default {
 
   data() {
     return {
+      sidebar: null,
       about
     };
   }
@@ -33,7 +49,7 @@ export default {
 </script>
 
 <style>
-.page {
+.withSidebar .page {
   margin-left: 320px !important;
 }
 .page h1, .page h2, .page h3, .page ul {
