@@ -1,6 +1,6 @@
 <template>
   <div
-    v-resize="resize"
+    v-resize="computeIsMobile"
     :class="{ 'place-opened': $route.name === 'place' && !isMobile }"
   >
     <div>
@@ -135,7 +135,7 @@ export default {
   },
 
   mounted() {
-    this.resize();
+    this.computeIsMobile();
     this.sidebar = !this.isMobile;
     this.updateMarkers();
   },
@@ -174,7 +174,7 @@ export default {
   },
 
   methods: {
-    resize() {
+    computeIsMobile() {
       this.isMobile = window.innerWidth < 800;
     },
 

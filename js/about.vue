@@ -1,8 +1,14 @@
 <template>
-  <div :class="{ withSidebar: sidebar }">
+  <div
+    v-resize="computeIsMobile"
+   :class="{ withSidebar: sidebar && !isMobile }">
     <v-navigation-drawer
       v-model="sidebar"
-      absolute
+      :temporary="isMobile"
+      :stateless="!isMobile"
+      :hide-overlay="!isMobile"
+      :absolute="!isMobile"
+      :fixed="isMobile"
     >
       <osm-sidebar>
         <template v-slot:list-top>
@@ -41,9 +47,21 @@ export default {
 
   data() {
     return {
-      sidebar: null,
+      sidebar: false,
+      isMobile: false,
       about
     };
+  },
+
+  mounted() {
+    this.computeIsMobile();
+    this.sidebar = !this.isMobile;
+  },
+
+  methods: {
+    computeIsMobile() {
+      this.isMobile = window.innerWidth < 800;
+    },
   }
 };
 </script>
