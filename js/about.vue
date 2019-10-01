@@ -9,14 +9,17 @@
       :hide-overlay="!isMobile"
       :absolute="!isMobile"
       :fixed="isMobile"
+      width="300"
     >
       <osm-sidebar>
         <template v-slot:list-top>
-          <v-list-tile :to="{ name: 'index' }">
-            <v-list-tile-content class="ml-2">
-              <v-list-tile-title class="body-1">{{ $t('map') }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-item
+            :exact="true"
+            :to="{ name: 'index' }">
+            <v-list-item-content class="ml-2">
+              <v-list-item-title class="body-1">{{ $t('map') }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </template>
       </osm-sidebar>
     </v-navigation-drawer>

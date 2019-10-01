@@ -22,24 +22,22 @@
     <v-list>
       <slot name="list-top"></slot>
       <v-divider></v-divider>
-      <v-list-tile :to="{ name: 'about' }">
-        <v-list-tile-content class="ml-2">
-          <v-list-tile-title class="body-1">{{ $t('about') }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <v-list-item :to="{ name: 'about' }">
+        <v-list-item-content class="ml-2">
+          <v-list-item-title class="body-1">{{ $t('about') }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
       <v-divider></v-divider>
-      <v-list-tile
+      <v-list-item
         :href="`https://twitter.com/${social.twitter}`"
         target="_blank">
-        <v-list-tile-avatar
-          class="no-min-width"
-          size="20">
+        <v-list-item-icon class="mr-0">
           <v-icon small>osm-twitter</v-icon>
-        </v-list-tile-avatar>
-        <v-list-tile-content class="ml-2">
-          <v-list-tile-title class="body-1">Twitter</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-icon>
+        <v-list-item-content class="ml-2">
+          <v-list-item-title class="body-1">Twitter</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </div>
 </template>

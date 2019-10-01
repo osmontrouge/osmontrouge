@@ -11,34 +11,30 @@
       >
         {{ category.name }}
       </v-subheader>
-
-      <v-list-tile
+      <v-list-item
         v-for="(feature, idFeature) in category.features"
         :key="idFeature"
-        class="small-tile-height"
+        class="small-item-height"
         @click=""
       >
-        <v-list-tile-avatar
-          size="20"
-          class="no-min-width"
-        >
+        <v-list-item-icon class="mr-0 my-3">
           <v-icon
             :color="feature.selected ? (feature.color || category.color) : null"
             small
           >{{ feature.icon || category.icon }}</v-icon>
-        </v-list-tile-avatar>
+        </v-list-item-icon>
 
-        <v-list-tile-content
-          class="ml-2"
+        <v-list-item-content
+          class="ml-2 py-1"
           @click="feature.selected = !feature.selected"
         >
-          <v-list-tile-title class="body-1">{{ feature.name }}</v-list-tile-title>
-        </v-list-tile-content>
+          <v-list-item-title>{{ feature.name }}</v-list-item-title>
+        </v-list-item-content>
 
-        <v-list-tile-action class="no-min-width">
-          <v-checkbox v-model="feature.selected"></v-checkbox>
-        </v-list-tile-action>
-      </v-list-tile>
+        <v-list-item-action class="ma-0">
+          <v-checkbox v-model="feature.selected" dense></v-checkbox>
+        </v-list-item-action>
+      </v-list-item>
     </v-list>
   </div>
 </template>
@@ -55,13 +51,11 @@ export default {
 </script>
 
 <style scoped>
-  .no-min-width {
-    min-width: auto;
-  }
   .small-subheader-height {
     height: 35px;
   }
-  .small-tile-height {
+  .small-item-height {
     height: 40px;
+    min-height: 35px;
   }
 </style>
