@@ -18,6 +18,10 @@ Une dizaine d'autres contributeurs interviennent également régulièrement.
 
 ## Libre à vous de réutiliser les données !
 
+Toutes les données sont téléchargeables depuis OpenStreetMap directement. Pour faciliter leur utilisation, nous avons également mis en place une plateforme OpenData dédiée. Merci [Opendatasoft](https://www.opendatasoft.com/).
+
+[Consulter et télécharger les jeux de données](https://data.osmontrouge.fr/)
+
 Nous nous efforçons de décrire de manière précise la manière de cartographier toutes les données que nous créons dans OpenStreetMap à Montrouge.
 
 [Notre méthodologie et la structure des données sont publiques.](https://wiki.openstreetmap.org/wiki/Montrouge)
