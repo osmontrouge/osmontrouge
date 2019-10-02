@@ -10,12 +10,12 @@
       >
         <v-toolbar
           :color="color"
-          card
           dark
         >
           <v-icon>{{ icon }}</v-icon>
           <v-toolbar-title
             :title="title"
+            class="ml-3"
             >{{ title }}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn

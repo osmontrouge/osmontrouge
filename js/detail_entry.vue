@@ -1,15 +1,15 @@
 <template>
-  <v-list-tile>
-    <v-list-tile-action
+  <v-list-item>
+    <v-list-item-action
       v-if="name"
       class="mr-1"
-    >{{ name }}</v-list-tile-action>
-    <v-list-tile-content>
-      <v-list-tile-title>
+    >{{ name }}</v-list-item-action>
+    <v-list-item-content>
+      <v-list-item-title>
         <slot />
-      </v-list-tile-title>
-    </v-list-tile-content>
-  </v-list-tile>
+      </v-list-item-title>
+    </v-list-item-content>
+  </v-list-item>
 </template>
 
 <script>

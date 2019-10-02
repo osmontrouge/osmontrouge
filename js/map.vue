@@ -9,6 +9,7 @@
         :temporary="isMobile"
         :stateless="!isMobile"
         :hide-overlay="!isMobile"
+        width="300"
         fixed
       >
         <osm-sidebar>
@@ -23,8 +24,14 @@
         class="handle"
         @click.prevent="sidebar = !sidebar"
       >
-        <v-icon v-if="sidebar">{{ $vuetify.icons.prev }}</v-icon>
-        <v-icon v-else>{{ $vuetify.icons.next }}</v-icon>
+        <v-icon
+          v-if="sidebar"
+          v-text="'$vuetify.icons.prev'"
+        ></v-icon>
+        <v-icon
+          v-else
+          v-text="'$vuetify.icons.next'"
+        ></v-icon>
       </v-container>
       <v-content>
         <v-btn

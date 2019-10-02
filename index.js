@@ -1,9 +1,37 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
-import 'vuetify/dist/vuetify.min.css';
 import './font/osm.css';
 
 import Vue from 'vue';
-import Vuetify from 'vuetify';
+import Vuetify, {
+  VBtn,
+  VCard,
+  VCardText,
+  VCardTitle,
+  VCheckbox,
+  VContainer,
+  VContent,
+  VDivider,
+  VIcon,
+  VImg,
+  VLayout,
+  VList,
+  VListItem,
+  VListItemAction,
+  VListItemAvatar,
+  VListItemContent,
+  VListItemGroup,
+  VListItemIcon,
+  VListItemTitle,
+  VNavigationDrawer,
+  VSlideXReverseTransition,
+  VSpacer,
+  VSubheader,
+  VToolbar,
+  VToolbarTitle,
+  VTooltip,
+  VApp,
+} from 'vuetify/lib';
+import { Resize } from 'vuetify/lib/directives'
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
 
@@ -13,16 +41,53 @@ import OsmMap from './js/map.vue';
 import messages from './locales.json';
 
 Vue.use(Vuetify, {
-  icons: {
-    prev: 'osm-chevron_left',
-    next: 'osm-chevron_right',
-    expand: 'osm-arrow_down',
-    checkboxOn: 'osm-check_box',
-    checkboxOff: 'osm-check_box_outline_blank'
+  components: {
+    VApp,
+    VBtn,
+    VCard,
+    VCardText,
+    VCardTitle,
+    VCheckbox,
+    VContainer,
+    VContent,
+    VDivider,
+    VIcon,
+    VImg,
+    VLayout,
+    VList,
+    VListItem,
+    VListItemAction,
+    VListItemAvatar,
+    VListItemContent,
+    VListItemGroup,
+    VListItemIcon,
+    VListItemTitle,
+    VNavigationDrawer,
+    VSlideXReverseTransition,
+    VSpacer,
+    VSubheader,
+    VToolbar,
+    VToolbarTitle,
+    VTooltip,
+  },
+  directives: {
+    Resize
   }
 });
 Vue.use(VueRouter);
 Vue.use(VueI18n);
+
+const vuetify = new Vuetify({
+  icons: {
+    values: {
+      prev: 'osm-chevron_left',
+      next: 'osm-chevron_right',
+      expand: 'osm-arrow_down',
+      checkboxOn: 'osm-check_box',
+      checkboxOff: 'osm-check_box_outline_blank'
+    }
+  }
+});
 
 const i18n = new VueI18n({
   locale: 'fr',
@@ -82,5 +147,6 @@ const router = new VueRouter({
 new Vue({
   router,
   i18n,
+  vuetify,
   render: createEle => createEle(App),
 }).$mount('#app');
