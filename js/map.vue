@@ -8,7 +8,7 @@
         v-model="sidebar"
         :temporary="isMobile"
         :stateless="!isMobile"
-        :hide-overlay="!isMobile"
+        :hide-overlay="!isMobile || !sidebar"
         width="300"
         fixed
       >

@@ -6,7 +6,7 @@
       v-model="sidebar"
       :temporary="isMobile"
       :stateless="!isMobile"
-      :hide-overlay="!isMobile"
+      :hide-overlay="!isMobile || !sidebar"
       :absolute="!isMobile"
       :fixed="isMobile"
       width="300"
