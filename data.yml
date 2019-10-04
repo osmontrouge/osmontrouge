@@ -24,12 +24,11 @@ config:
     area(3600037026)->.searchArea;
 
 taxonomy:
-  schools:
-    name: Écoles
-    icon: osm-school
+  child_care:
+    name: Crèches
+    icon: osm-child_care
     color: '#725a50'
     features:
-
       school_creche:
         name: Crèches
         query: >-
@@ -38,6 +37,11 @@ taxonomy:
           );
           out center;
 
+  schools:
+    name: Écoles
+    icon: osm-school
+    color: '#725a50'
+    features:
       school_elementaire:
         name: Écoles élémentaires
         query: >-

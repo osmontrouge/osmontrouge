@@ -8,6 +8,8 @@
       "dog_no": "Interdit aux chiens"
     },
     "about": "A propos",
-    "map": "Carte"
+    "edit": "Éditer cette carte",
+    "map": "Carte",
+    "reuse": "Réutilisateurs"
   }
 }

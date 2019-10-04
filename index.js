@@ -100,6 +100,11 @@ const routes = [
     path: '/about',
     component: () => import('./js/about'),
    },
+   {
+    name: 'reuses',
+    path: '/reuses',
+    component: () => import('./js/reuses'),
+   },
   {
     name: 'index',
     path: '/:featuresAndLocation?',
@@ -136,7 +141,7 @@ const routes = [
         }
       }
     ]
-  }
+  },
 ];
 
 const router = new VueRouter({

@@ -39,14 +39,14 @@
       >
         <v-icon>osm-filter_list</v-icon>
       </v-btn>
-      <div class="ma-3 page" v-html="about">
+      <div class="ma-3 page" v-html="reuses">
     </v-content>
   </div>
 </template>
 
 <script>
 import OsmSidebar from './sidebar';
-import about from '../pages/about';
+import reuses from '../pages/reuses';
 
 export default {
   components: { OsmSidebar },
@@ -55,7 +55,7 @@ export default {
     return {
       sidebar: false,
       isMobile: false,
-      about
+      reuses
     };
   },
 
