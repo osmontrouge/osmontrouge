@@ -27,15 +27,16 @@
           <v-list-item-title class="body-1">{{ $t('about') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-divider></v-divider>
       <v-list-item
-        :href="`https://twitter.com/${social.twitter}`"
-        target="_blank">
-        <v-list-item-icon class="mr-0">
-          <v-icon small>osm-twitter</v-icon>
+        v-for="link in links"
+        :href="link.url">
+        <v-list-item-icon
+          v-if="link.icon"
+          class="mr-0">
+          <v-icon small>{{ link.icon }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="ml-2">
-          <v-list-item-title class="body-1">Twitter</v-list-item-title>
+          <v-list-item-title class="body-1">{{ link.name }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -43,12 +44,12 @@
 </template>
 
 <script>
-import { mapName, imageSidebar, social }  from '../config';
+import { mapName, imageSidebar, links }  from '../config';
 
 export default {
   data () {
     return {
-      mapName, imageSidebar, social
+      mapName, imageSidebar, links
     };
   }
 }

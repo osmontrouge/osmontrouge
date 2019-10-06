@@ -1,8 +1,12 @@
 config:
   name: OSMontrouge
 
-  social:
-    twitter: osmontrouge
+  links:
+    - name: Portail OpenData
+      url: https://data.osmontrouge.fr/
+    - name: Twitter
+      icon: osm-twitter
+      url: https://twitter.com/osmontrouge
 
   map:
     zoom: 15
