@@ -21,7 +21,7 @@
         />
         <foreignObject x="9" y="3" width="30" height="30">
           <div class="marker-icon">
-            <v-icon :color="category.color">{{ category.icon }}</v-icon>
+            <v-icon :color="category.color" size="20">{{ category.icon }}</v-icon>
           </div>
         </foreignObject>
       </svg>
@@ -90,7 +90,6 @@ export default {
   height: 30px;
   width: 30px;
   padding: 5px;
-  font-size: 20px;
 }
 .tooltip {
   font-weight: bold;
