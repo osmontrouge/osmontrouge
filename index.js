@@ -39,6 +39,7 @@ import App from './js/app.vue';
 import OsmMap from './js/map.vue';
 
 import messages from './locales.json';
+import pages from './pages/*.md';
 
 Vue.use(Vuetify, {
   components: {
@@ -94,12 +95,17 @@ const i18n = new VueI18n({
   messages,
 });
 
+const staticPages = Object.keys(pages).map((page) => {
+  return {
+    name: page,
+    path: `/${page}`,
+    component: () => import('./js/page'),
+    props: { page: pages[page] }
+  };
+});
+
 const routes = [
-   {
-    name: 'about',
-    path: '/about',
-    component: () => import('./js/about'),
-   },
+  ...staticPages,
   {
     name: 'index',
     path: '/:featuresAndLocation?',

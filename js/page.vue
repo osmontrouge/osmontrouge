@@ -36,23 +36,28 @@
       >
         <v-icon>osm-filter_list</v-icon>
       </v-btn>
-      <div class="ma-3 page" v-html="about">
+      <div class="ma-3 page" v-html="page">
     </v-content>
   </div>
 </template>
 
 <script>
 import OsmSidebar from './sidebar';
-import about from '../pages/about';
 
 export default {
   components: { OsmSidebar },
 
+  props: {
+    page: {
+      type: String,
+      required: true
+    }
+  },
+
   data() {
     return {
       sidebar: false,
-      isMobile: false,
-      about
+      isMobile: false
     };
   },
 
