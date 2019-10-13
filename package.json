@@ -26,7 +26,8 @@
   "prerender": {
     "routes": [
       "/",
-      "/about"
+      "/about",
+      "premiere-plateforme-opendata-citoyenne"
     ]
   },
   "devDependencies": {
