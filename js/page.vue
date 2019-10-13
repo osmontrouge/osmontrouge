@@ -7,9 +7,8 @@
       :temporary="isMobile"
       :stateless="!isMobile"
       :hide-overlay="!isMobile || !sidebar"
-      :absolute="!isMobile"
-      :fixed="isMobile"
       width="300"
+      fixed
     >
       <osm-sidebar>
         <template v-slot:list-top>
