@@ -35,6 +35,7 @@ import { Resize } from 'vuetify/lib/directives'
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
 
+import { mapName } from './config';
 import App from './js/app.vue';
 import OsmMap from './js/map.vue';
 
@@ -148,6 +149,16 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes
+});
+
+router.afterEach((route) => {
+  if (route.name === 'index') {
+    document.title = mapName;
+  } else {
+    const doc2 = new DOMParser().parseFromString(pages[route.name], 'text/html');
+    const title = doc2.querySelector('h1').textContent;
+    document.title = `${title} - ${mapName}`;
+  }
 });
 
 new Vue({
