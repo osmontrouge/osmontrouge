@@ -27,7 +27,7 @@
     "routes": [
       "/",
       "/about",
-      "premiere-plateforme-opendata-citoyenne"
+      "/premiere-plateforme-opendata-citoyenne"
     ]
   },
   "devDependencies": {
