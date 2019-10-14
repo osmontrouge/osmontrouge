@@ -134,7 +134,7 @@ taxonomy:
         color: '#f2bb14'
         query: >-
           (
-            nwr["operator"="Autocité"](area.searchArea);
+            nwr["operator"="Indigo"]["parking"="underground"](area.searchArea);
           );
           out center;
 
