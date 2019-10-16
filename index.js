@@ -152,12 +152,13 @@ const router = new VueRouter({
 });
 
 router.afterEach((route) => {
-  if (route.name === 'index') {
-    document.title = mapName;
-  } else {
+  const page = pages[route.name];
+  if (page) {
     const doc2 = new DOMParser().parseFromString(pages[route.name], 'text/html');
     const title = doc2.querySelector('h1').textContent;
     document.title = `${title} - ${mapName}`;
+  } else {
+    document.title = mapName;
   }
 });
 
