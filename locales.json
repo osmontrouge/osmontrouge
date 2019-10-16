@@ -5,7 +5,20 @@
       "control": "Voir les photos à 360°"
     },
     "details": {
-      "dog_no": "Interdit aux chiens"
+      "dog_no": "Interdit aux chiens",
+      "opening_hours": {
+        "days": {
+          "monday": "Lundi",
+          "tuesday": "Mardi",
+          "wednesday": "Mercredi",
+          "thursday": "Jeudi",
+          "friday": "Vendredi",
+          "saturday": "Samedi",
+          "sunday": "Dimanche"
+        },
+        "true": "ouvert",
+        "false": "fermé"
+      }
     },
     "about": "A propos",
     "map": "Carte"

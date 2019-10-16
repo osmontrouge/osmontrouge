@@ -58,10 +58,12 @@
             :value="point.properties['school:FR']"
             name="Type de l'école :"
           />
-          <detail-tag
+
+          <detail-opening-hours
+            v-if="point.properties.opening_hours"
             :value="point.properties.opening_hours"
-            name="Horaires d'ouverture"
           />
+
           <detail-tag
             :value="point.properties.collection_times"
             name="Horaires de levée"
@@ -102,11 +104,13 @@ import * as config from '../config';
 import geojsondata from '../data/*.geojson';
 import DetailTag from './detail_tag';
 import DetailEntry from './detail_entry';
+import DetailOpeningHours from './detail_opening_hours';
 
 export default {
   components: {
     DetailEntry,
     DetailTag,
+    DetailOpeningHours,
     MapillaryViewer: () => import('./mapillary/mapillary_viewer')
   },
 
