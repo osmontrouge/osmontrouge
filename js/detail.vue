@@ -64,10 +64,13 @@
             :value="point.properties.opening_hours"
           />
 
-          <detail-tag
+          <detail-opening-hours
+            v-if="point.properties.collection_times"
+            :mode="1"
             :value="point.properties.collection_times"
-            name="Horaires de levée"
+            namespace="details.collection_times"
           />
+
           <detail-tag
             :value="point.properties.capacity"
             name="Nombre de places :"

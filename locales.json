@@ -1,24 +1,32 @@
 {
   "fr": {
+    "days": {
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche"
+    },
     "mapillary": {
       "info": "Cliquez sur les lignes vertes pour voir les photos à 360°.",
       "control": "Voir les photos à 360°"
     },
     "details": {
       "dog_no": "Interdit aux chiens",
+      "collection_times": {
+        "state_until_date": "prochaine levée à {date}",
+        "state": {
+          "closed": "aucune levée"
+        }
+      },
       "opening_hours": {
-        "until_date": "jusqu'à {date}",
-        "days": {
-          "monday": "Lundi",
-          "tuesday": "Mardi",
-          "wednesday": "Mercredi",
-          "thursday": "Jeudi",
-          "friday": "Vendredi",
-          "saturday": "Samedi",
-          "sunday": "Dimanche"
-        },
-        "true": "ouvert",
-        "false": "fermé"
+        "state_until_date": "{state} jusqu'à {date}",
+        "state": {
+          "open": "ouvert",
+          "closed": "fermé"
+        }
       }
     },
     "about": "A propos",

@@ -13,8 +13,7 @@
     <template v-slot:activator>
       <v-list-item-content>
         <v-list-item-title>
-          {{ $t(`details.opening_hours.${state}`) }}
-          {{ $t('details.opening_hours.until_date', { date: formatNextDate}) }}
+          {{ $t(`${namespace}.state_until_date`, { state: $t(`details.opening_hours.state.${state}`), date: formatNextDate}) }}
         </v-list-item-title>
       </v-list-item-content>
     </template>
@@ -23,7 +22,7 @@
       v-for="(interval, day) in weekDays">
       <v-list-item-content>
         <v-list-item-title>
-          {{ $t(`details.opening_hours.days.${day}`) }}:
+          {{ $t(`days.${day}`) }}:
           {{ interval }}
         </v-list-item-title>
       </v-list-item-content>
@@ -39,15 +38,25 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    namespace: {
+      type: String,
+      required: false,
+      default: 'details.opening_hours'
+    },
+    mode: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
 
   computed: {
     openingHours() {
-      return new OpeningHours(this.value);
+      return new OpeningHours(this.value, null, { mode: this.mode });
     },
     state() {
-      return this.openingHours.getState();
+      return this.openingHours.getState() ? 'open' : 'closed';
     },
     weekDays() {
       return ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].reduce((memo, day, index) => {
@@ -82,7 +91,7 @@ export default {
 
     formatIntervals(intervals) {
       if (intervals.length === 0) {
-        return this.$t(`details.opening_hours.false`);
+        return this.$t(`${this.namespace}.state.closed`);
       }
       return intervals.map((interval) => {
         return interval.slice(0, 2).map(this.formatDate).join('-');
