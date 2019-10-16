@@ -7,6 +7,7 @@
     "details": {
       "dog_no": "Interdit aux chiens",
       "opening_hours": {
+        "until_date": "jusqu'à {date}",
         "days": {
           "monday": "Lundi",
           "tuesday": "Mardi",
