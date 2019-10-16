@@ -34,10 +34,18 @@
         />
 
         <v-list>
-          <detail-tag
-            :value="point.properties.phone"
-            name="Téléphone :"
-          />
+          <v-list-item
+            v-if="point.properties.phone"
+            :href="`tel:${point.properties.phone}`"
+          >
+            <v-list-item-icon><v-icon>osm-phone</v-icon></v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ point.properties.phone }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <detail-tag
             :value="point.properties['operator:type']"
             name="Type de l'opérateur :"
@@ -71,14 +79,17 @@
             {{ $t('details.dog_no') }}
           </detail-entry>
 
-          <detail-entry v-if="point.properties.website">
-            <a
-              :href="point.properties.website"
-            >
-              {{ point.properties.website }}
-            </a>
-          </detail-entry>
-
+          <v-list-item
+            v-if="point.properties.website"
+            :href="point.properties.website"
+          >
+            <v-list-item-icon><v-icon>osm-link</v-icon></v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ point.properties.website }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-slide-x-reverse-transition>
