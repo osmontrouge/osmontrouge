@@ -13,6 +13,10 @@
       "info": "Cliquez sur les lignes vertes pour voir les photos à 360°.",
       "control": "Voir les photos à 360°"
     },
+    "3d": {
+      "tooltip": "Voir les batiments en 3D",
+      "button": "3D"
+    },
     "details": {
       "dog_no": "Interdit aux chiens",
       "collection_times": {

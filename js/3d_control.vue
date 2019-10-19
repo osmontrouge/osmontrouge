@@ -1,12 +1,20 @@
 <template>
-  <div class="mapboxgl-ctrl mapboxgl-ctrl-group">
-    <button
-      :class="{ 'mapboxgl-ctrl-active': value }"
-      @click="onClick"
-    >
-      <strong>3D</strong>
-    </button>
-  </div>
+  <v-tooltip left>
+    <template v-slot:activator="{ on }">
+      <div
+        v-on="on"
+        class="mapboxgl-ctrl mapboxgl-ctrl-group"
+      >
+        <button
+          :class="{ 'mapboxgl-ctrl-active': value }"
+          @click="onClick"
+        >
+          <strong>{{ $t('3d.button') }}</strong>
+        </button>
+      </div>
+    </template>
+    <span>{{ $t('3d.tooltip') }}</span>
+  </v-tooltip>
 </template>
 
 <script>
