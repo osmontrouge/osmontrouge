@@ -27,6 +27,18 @@
           "open": "ouvert",
           "closed": "fermé"
         }
+      },
+      "operator": "Géré par {name}",
+      "operator_with_type": "Géré par {name} ({type})",
+      "operator_type": {
+        "community": "communauté",
+        "consortium": "consortium",
+        "cooperative": "coopérative",
+        "government": "administration",
+        "ngo": "organisation non gouvernementale",
+        "private": "privé",
+        "public": "public",
+        "religious": "religieux"
       }
     },
     "about": "A propos",

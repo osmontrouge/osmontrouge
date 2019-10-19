@@ -47,10 +47,6 @@
           </v-list-item>
 
           <detail-tag
-            :value="point.properties['operator:type']"
-            name="Type de l'opérateur :"
-          />
-          <detail-tag
             :value="point.properties['kindergarten:FR']"
             name="Type de crèche :"
           />
@@ -75,10 +71,6 @@
             :value="point.properties.capacity"
             name="Nombre de places :"
           />
-          <detail-tag
-            :value="point.properties.operator"
-            name="Opéré par"
-          />
 
           <detail-entry v-if="point.properties.dog === 'no'">
             {{ $t('details.dog_no') }}
@@ -95,6 +87,28 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <detail-entry
+            v-if="point.properties.operator"
+            icon="osm-info"
+          >
+            <template v-if="point.properties['operator:type']">
+              {{ $t('details.operator_with_type', {
+                name: point.properties.operator,
+                type: $t(`details.operator_type.${point.properties['operator:type']}`)
+              }) }}
+            </template>
+            <template v-else>
+              {{ $t('details.operator', { name: point.properties.operator }) }}
+            </template>
+          </detail-entry>
+          <detail-tag
+            v-else-if="point.properties['operator:type']"
+            :value="$t(`details.operator_type.${point.properties['operator:type']}`)"
+            icon="osm-info"
+            name="Type de l'opérateur :"
+          />
+
         </v-list>
       </v-card>
     </v-slide-x-reverse-transition>

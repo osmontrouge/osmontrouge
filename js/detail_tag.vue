@@ -2,6 +2,7 @@
   <detail-entry
     v-if="value"
     :name="name"
+    :icon="icon"
   >
     {{ value }}
   </detail-entry>
@@ -16,7 +17,11 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      default: undefined
+    },
+    icon: {
+      type: String,
+      default: undefined
     },
     value: {
       type: String,
