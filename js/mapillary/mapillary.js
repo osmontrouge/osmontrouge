@@ -17,6 +17,15 @@ export function findImage({ lng, lat }, pano, users, clientId) {
     });
 }
 
+export function getImage(key, clientId) {
+  const url = new URL(`https://a.mapillary.com/v3/images/${key}`);
+  const params = {
+    client_id: clientId
+  };
+  url.search = new URLSearchParams(params);
+  return fetch(url).then(e => e.json());
+}
+
 export function mapillaryViewerFilter(users, pano) {
   return [
     'all',
