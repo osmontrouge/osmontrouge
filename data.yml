@@ -23,6 +23,9 @@ config:
       - XtzGKZX2_VIJRoiJ8IWRNQ # overflorian
     clientId: ZV9aQkU2bUZkN0NZTmpSU3BMbC1MZzowMzY1ODgyOWM4NDVmMzQ0
 
+  addok:
+    url: https://addok.osmontrouge.fr
+
   query_search: >-
     [out:json][timeout:25];
     area(3600037026)->.searchArea;

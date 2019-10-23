@@ -34,6 +34,9 @@
         />
 
         <v-list>
+          <detail-entry icon="osm-mail">
+            {{ address }}
+          </detail-entry>
           <v-list-item
             v-if="point.properties.phone"
             :href="`tel:${point.properties.phone}`"
@@ -122,6 +125,7 @@ import geojsondata from '../data/*.geojson';
 import DetailTag from './detail_tag';
 import DetailEntry from './detail_entry';
 import DetailOpeningHours from './detail_opening_hours';
+import { reverse } from './addok';
 
 export default {
   components: {
@@ -163,7 +167,8 @@ export default {
       icon: null,
       feature: null,
       point: null,
-      mapillaryImage: null
+      mapillaryImage: null,
+      address: null
     };
   },
 
@@ -201,6 +206,7 @@ export default {
           if (!this.mapillaryImage) {
             this.fetchMapillaryImage();
           }
+          this.fetchAddress();
         });
     },
 
@@ -213,6 +219,15 @@ export default {
         .then((mKey) => {
           this.mapillaryImage = mKey;
         });
+    },
+
+    fetchAddress() {
+      const [lon, lat] = this.point.geometry.coordinates;
+      reverse(config.addok.url, { lat, lon }).then((data) => {
+        if (data.features.length > 0) {
+          this.address = data.features[0].properties.label;
+        }
+      });
     },
 
     close() {
