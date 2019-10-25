@@ -245,6 +245,7 @@ export default {
   top: 0;
   right: 0;
   z-index: 10;
+  overflow-y: auto;
 }
 
 .bottom-dialog {
