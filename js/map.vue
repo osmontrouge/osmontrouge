@@ -51,6 +51,9 @@
           :center.sync="mapCenter"
           :zoom.sync="mapZoom"
           :map-style="mapStyle"
+          @mouseenter-poi-special="mouseenter"
+          @click-poi-special="click"
+          @mouseleave-poi-special="mouseleave"
         >
           <template
             v-for="category in markers"
@@ -251,6 +254,18 @@ export default {
           featuresAndLocation: this.featuresAndLocation
         }
       });
+    },
+
+    mouseenter(e) {
+      e.map.getCanvas().style.cursor = 'pointer';
+    },
+
+    click(e) {
+      console.log(e.mapboxEvent.features);
+    },
+
+    mouseleave(e) {
+      e.map.getCanvas().style.cursor = '';
     }
   }
 }
