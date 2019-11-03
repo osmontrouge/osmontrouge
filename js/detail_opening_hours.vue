@@ -84,7 +84,7 @@ export default {
       start.setDate(start.getDate() + (day + 7 - start.getDay()) % 7);
       start.setHours(0, 0, 0, 0);
       const end = new Date();
-      end.setDate(start.getDate() + (day + 7 - start.getDay()) % 7);
+      end.setDate(end.getDate() + (day + 7 - end.getDay()) % 7);
       end.setHours(24, 0, 0, 0);
       return [start, end];
     },
