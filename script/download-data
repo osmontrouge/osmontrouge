@@ -20,9 +20,7 @@ Object.keys(taxonomy).forEach((idCat) => {
     };
     rate = rate
       .then(() => rp('https://overpass.osmontrouge.fr/api/interpreter', options))
-      .then((data) => {
-        return osmtogeojson(data);
-      })
+      .then(data => osmtogeojson(data))
       .then((geojson) => {
         fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
         console.log(`${id} updated`);
