@@ -245,9 +245,7 @@ export default {
       this.$router.push({
         name: 'place',
         params: {
-          idCategory: category.category,
-          idFeature: category.feature,
-          id: id,
+          id: `osm:${id.replace('/', ':')}`,
           featuresAndLocation: this.featuresAndLocation
         }
       });

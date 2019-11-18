@@ -5,3 +5,8 @@ export function reverse(baseUrl, { lat, lon, type = 'housenumber' }) {
   url.searchParams.append('lon', lon);
   return fetch(url).then(data => data.json());
 }
+
+export function getById(baseUrl, { id }) {
+  const url = new URL(`${baseUrl}/id/${id}`);
+  return fetch(url).then(data => data.json());
+}

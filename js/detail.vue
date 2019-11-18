@@ -8,11 +8,7 @@
         v-if="point"
         height="100%"
       >
-        <v-toolbar
-          :color="color"
-          dark
-        >
-          <v-icon>{{ icon }}</v-icon>
+        <v-toolbar dark>
           <v-toolbar-title
             :title="title"
             class="ml-3"
@@ -38,76 +34,76 @@
             {{ address }}
           </detail-entry>
           <v-list-item
-            v-if="point.properties.phone"
-            :href="`tel:${point.properties.phone}`"
+            v-if="point.properties.tags.phone"
+            :href="`tel:${point.properties.tags.phone}`"
           >
             <v-list-item-icon><v-icon>osm-phone</v-icon></v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                {{ point.properties.phone }}
+                {{ point.properties.tags.phone }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <detail-tag
-            :value="point.properties['kindergarten:FR']"
+            :value="point.properties.tags['kindergarten:FR']"
             name="Type de crèche :"
           />
           <detail-tag
-            :value="point.properties['school:FR']"
+            :value="point.properties.tags['school:FR']"
             name="Type de l'école :"
           />
 
           <detail-opening-hours
-            v-if="point.properties.opening_hours"
-            :value="point.properties.opening_hours"
+            v-if="point.properties.tags.opening_hours"
+            :value="point.properties.tags.opening_hours"
           />
 
           <detail-opening-hours
-            v-if="point.properties.collection_times"
+            v-if="point.properties.tags.collection_times"
             :mode="1"
-            :value="point.properties.collection_times"
+            :value="point.properties.tags.collection_times"
             namespace="details.collection_times"
           />
 
           <detail-tag
-            :value="point.properties.capacity"
+            :value="point.properties.tags.capacity"
             name="Nombre de places :"
           />
 
-          <detail-entry v-if="point.properties.dog === 'no'">
+          <detail-entry v-if="point.properties.tags.dog === 'no'">
             {{ $t('details.dog_no') }}
           </detail-entry>
 
           <v-list-item
-            v-if="point.properties.website"
-            :href="point.properties.website"
+            v-if="point.properties.tags.website"
+            :href="point.properties.tags.website"
           >
             <v-list-item-icon><v-icon>osm-link</v-icon></v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                {{ point.properties.website }}
+                {{ point.properties.tags.website }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <detail-entry
-            v-if="point.properties.operator"
+            v-if="point.properties.tags.operator"
             icon="osm-info"
           >
-            <template v-if="point.properties['operator:type']">
+            <template v-if="point.properties.tags['operator:type']">
               {{ $t('details.operator_with_type', {
-                name: point.properties.operator,
-                type: $t(`details.operator_type.${point.properties['operator:type']}`)
+                name: point.properties.tags.operator,
+                type: $t(`details.operator_type.${point.properties.tags['operator:type']}`)
               }) }}
             </template>
             <template v-else>
-              {{ $t('details.operator', { name: point.properties.operator }) }}
+              {{ $t('details.operator', { name: point.properties.tags.operator }) }}
             </template>
           </detail-entry>
           <detail-tag
-            v-else-if="point.properties['operator:type']"
-            :value="$t(`details.operator_type.${point.properties['operator:type']}`)"
+            v-else-if="point.properties.tags['operator:type']"
+            :value="$t(`details.operator_type.${point.properties.tags['operator:type']}`)"
             icon="osm-info"
             name="Type de l'opérateur :"
           />
@@ -121,11 +117,11 @@
 <script>
 import { findImage } from './mapillary/mapillary';
 import * as config from '../config';
-import geojsondata from '../data/*.geojson';
 import DetailTag from './detail_tag';
 import DetailEntry from './detail_entry';
 import DetailOpeningHours from './detail_opening_hours';
 import { reverse } from './addok';
+import { getById } from './addok';
 
 export default {
   components: {
@@ -136,14 +132,6 @@ export default {
   },
 
   props: {
-    idCategory: {
-      type: String,
-      required: true
-    },
-    idFeature: {
-      type: String,
-      required: true
-    },
     id: {
       type: String,
       required: true
@@ -163,9 +151,6 @@ export default {
   data() {
     return {
       isMobile: true,
-      color: null,
-      icon: null,
-      feature: null,
       point: null,
       mapillaryImage: null,
       address: null
@@ -174,7 +159,7 @@ export default {
 
   computed: {
     title() {
-      return this.point.properties.name || this.feature.name;
+      return this.point.properties.name;
     }
   },
 
@@ -191,18 +176,10 @@ export default {
     },
 
     updatePoint() {
-      const category = config.taxonomy[this.idCategory];
-      const feature = category.features[this.idFeature];
-
-      this.color = feature.color || category.color;
-      this.icon = feature.icon || category.icon;
-      this.feature = feature;
-
-      fetch(geojsondata[this.idFeature])
-        .then(data => data.json())
-        .then(({ features }) => {
-          this.point = features.find(f => f.id === this.id);
-          this.mapillaryImage = this.point.properties.mapillary;
+      getById(config.addok.url, { id: this.id })
+        .then((feature) => {
+          this.point = feature;
+          this.mapillaryImage = this.point.properties.tags.mapillary;
           if (!this.mapillaryImage) {
             this.fetchMapillaryImage();
           }
