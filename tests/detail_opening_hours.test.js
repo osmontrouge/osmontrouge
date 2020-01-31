@@ -63,12 +63,12 @@ describe('OpeningHours', () => {
         value: 'Mo-Sa 09:00-18:00'
       }
     });
-    expect(detail.vm.weekDays).toEqual({"monday": "9:00 AM-6:00 PM",
-                                        "tuesday": "9:00 AM-6:00 PM",
-                                        "wednesday": "9:00 AM-6:00 PM",
-                                        "thursday": "9:00 AM-6:00 PM",
-                                        "friday": "9:00 AM-6:00 PM",
-                                        "saturday": "9:00 AM-6:00 PM",
+    expect(detail.vm.weekDays).toEqual({"monday": "09:00 AM-06:00 PM",
+                                        "tuesday": "09:00 AM-06:00 PM",
+                                        "wednesday": "09:00 AM-06:00 PM",
+                                        "thursday": "09:00 AM-06:00 PM",
+                                        "friday": "09:00 AM-06:00 PM",
+                                        "saturday": "09:00 AM-06:00 PM",
                                         "sunday": undefined});
   });
 
@@ -80,12 +80,12 @@ describe('OpeningHours', () => {
         value: 'Mo-Sa 09:00-18:00'
       }
     });
-    expect(detail.vm.weekDays).toEqual({"monday": "9:00 AM-6:00 PM",
-                                        "tuesday": "9:00 AM-6:00 PM",
-                                        "wednesday": "9:00 AM-6:00 PM",
-                                        "thursday": "9:00 AM-6:00 PM",
-                                        "friday": "9:00 AM-6:00 PM",
-                                        "saturday": "9:00 AM-6:00 PM",
+    expect(detail.vm.weekDays).toEqual({"monday": "09:00 AM-06:00 PM",
+                                        "tuesday": "09:00 AM-06:00 PM",
+                                        "wednesday": "09:00 AM-06:00 PM",
+                                        "thursday": "09:00 AM-06:00 PM",
+                                        "friday": "09:00 AM-06:00 PM",
+                                        "saturday": "09:00 AM-06:00 PM",
                                         "sunday": undefined});
   });
 });
