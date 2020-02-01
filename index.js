@@ -134,12 +134,13 @@ const routes = [
       },
       {
         name: '360',
-        path: '360/:mKey',
+        path: '360/:mKey/:bearing?',
         component: () => import('./js/mapillary/mapillary_view'),
         props: (route) => {
           return {
             featuresAndLocation: route.params.featuresAndLocation,
             mKey: route.params.mKey,
+            bearing: route.params.bearing,
             class: 'fullscreen'
           };
         }

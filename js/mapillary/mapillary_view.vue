@@ -5,7 +5,9 @@
   >
     <mapillary-viewer
       :m-key="mKey"
+      :bearing="bearing"
       @keychange="updateRoute"
+      @updateBearing="updateBearing"
     />
     <v-card
       :loading="loading"
@@ -43,6 +45,11 @@ export default {
       type: String,
       required: true
     },
+    bearing: {
+      type: String,
+      required: false,
+      default: null
+    },
     featuresAndLocation: {
       type: String,
       required: false,
@@ -70,7 +77,25 @@ export default {
 
   methods: {
     updateRoute(key) {
-      this.$router.replace({ name: '360', params: { mKey: key, featuresAndLocation: this.featuresAndLocation } });
+      this.$router.replace({
+        name: '360',
+        params: {
+          mKey: key,
+          bearing: this.bearing,
+          featuresAndLocation: this.featuresAndLocation
+        }
+      });
+    },
+
+    updateBearing(bearing) {
+      this.$router.replace({
+        name: '360',
+        params: {
+          mKey: this.mKey,
+          bearing,
+          featuresAndLocation: this.featuresAndLocation
+        }
+      });
     },
 
     fetchAddress() {
