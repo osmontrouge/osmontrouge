@@ -1,7 +1,7 @@
 <template>
   <MglMarker
     ref="marker"
-    :coordinates="feature.geometry.coordinates"
+    :coordinates="coordinates"
     anchor="bottom"
   >
     <div slot="marker">
@@ -13,15 +13,18 @@
         class="marker-inside"
         @mouseover="togglePopup"
         @mouseout="togglePopup"
-        @click.stop="$emit('open', feature.id)"
+        @click.stop="$emit('open')"
       >
         <path
-          :fill="category.color"
+          :fill="color"
           d="M24 0c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z"
         />
         <foreignObject x="9" y="3" width="30" height="30">
           <div class="marker-icon">
-            <v-icon :color="category.color" size="20">{{ category.icon }}</v-icon>
+            <v-icon
+              :color="color"
+              size="20"
+            >{{ icon }}</v-icon>
           </div>
         </foreignObject>
       </svg>
@@ -32,9 +35,9 @@
       @added="(e) => e.popup.remove()"
     >
       <div
-        :style="{ 'background-color': category.color }"
+        :style="{ 'background-color': color }"
         class="tooltip"
-      >{{ feature.properties.name || category.name }}</div>
+      >{{ name }}</div>
     </MglPopup>
   </MglMarker>
 </template>
@@ -46,13 +49,23 @@ export default {
   components: { MglMarker, MglPopup },
 
   props: {
-    feature: {
-      type: Object,
+    coordinates: {
+      type: Array,
       required: true
     },
 
-    category: {
-      type: Object,
+    color: {
+      type: String,
+      required: true
+    },
+
+    name: {
+      type: String,
+      required: true
+    },
+
+    icon: {
+      type: String,
       required: true
     }
   },

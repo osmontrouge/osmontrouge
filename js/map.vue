@@ -58,9 +58,11 @@
             <osm-marker
               v-for="marker in category.markers"
               :key="marker.id"
-              :feature="marker"
-              :category="category"
-              @open="openDetail(category, $event)"
+              :color="category.color"
+              :coordinates="marker.geometry.coordinates"
+              :name="marker.properties.name || category.name"
+              :icon="category.icon"
+              @open="openDetail(category, marker.id)"
             />
           </template>
           <mapillary-layer
