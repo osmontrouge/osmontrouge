@@ -28,6 +28,7 @@
     "routes": [
       "/",
       "/about",
+      "/reuses",
       "/premiere-plateforme-opendata-citoyenne"
     ]
   },

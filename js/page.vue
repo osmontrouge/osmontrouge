@@ -35,7 +35,16 @@
       >
         <v-icon>osm-filter_list</v-icon>
       </v-btn>
-      <div class="ma-3 page" v-html="page">
+      <div
+        v-if="html"
+        v-html="html"
+        class="ma-3 page"
+      />
+      <component
+        v-else
+        :is="component"
+        class="ma-3 page"
+      />
     </v-content>
   </div>
 </template>
@@ -47,9 +56,13 @@ export default {
   components: { OsmSidebar },
 
   props: {
-    page: {
+    html: {
       type: String,
-      required: true
+      required: false
+    },
+    component: {
+      type: Function,
+      required: false
     }
   },
 

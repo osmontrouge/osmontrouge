@@ -3,11 +3,14 @@ import './font/osm.css';
 
 import Vue from 'vue';
 import Vuetify, {
+  VApp,
   VBtn,
   VCard,
+  VCardSubtitle,
   VCardText,
   VCardTitle,
   VCheckbox,
+  VCol,
   VContainer,
   VContent,
   VDivider,
@@ -24,13 +27,13 @@ import Vuetify, {
   VListItemIcon,
   VListItemTitle,
   VNavigationDrawer,
+  VRow,
   VSlideXReverseTransition,
   VSpacer,
   VSubheader,
   VToolbar,
   VToolbarTitle,
   VTooltip,
-  VApp,
 } from 'vuetify/lib';
 import { Resize } from 'vuetify/lib/directives'
 import VueRouter from 'vue-router';
@@ -41,16 +44,18 @@ import App from './js/app.vue';
 import OsmMap from './js/map.vue';
 
 import messages from './locales.json';
-import pages from './pages/*.md';
+import markdownPages from './pages/*.md';
 
 Vue.use(Vuetify, {
   components: {
     VApp,
     VBtn,
     VCard,
+    VCardSubtitle,
     VCardText,
     VCardTitle,
     VCheckbox,
+    VCol,
     VContainer,
     VContent,
     VDivider,
@@ -67,6 +72,7 @@ Vue.use(Vuetify, {
     VListItemIcon,
     VListItemTitle,
     VNavigationDrawer,
+    VRow,
     VSlideXReverseTransition,
     VSpacer,
     VSubheader,
@@ -98,17 +104,28 @@ const i18n = new VueI18n({
   messages,
 });
 
-const staticPages = Object.keys(pages).map((page) => {
+const staticPagesMarkdown = Object.keys(markdownPages).map((page) => {
   return {
     name: page,
     path: `/${page}`,
     component: () => import('./js/page'),
-    props: { page: pages[page] }
+    props: { html: markdownPages[page] }
   };
 });
 
+const Reuses = () => import('./pages/reuses');
+const staticPagesVue = [
+  {
+    name: 'reuses',
+    path: `/reuses`,
+    component: () => import('./js/page'),
+    props: { component: Reuses }
+  }
+];
+
 const routes = [
-  ...staticPages,
+  ...staticPagesMarkdown,
+  ...staticPagesVue,
   {
     name: 'index',
     path: '/:featuresAndLocation?',
@@ -155,9 +172,9 @@ const router = new VueRouter({
 });
 
 router.afterEach((route) => {
-  const page = pages[route.name];
+  const page = markdownPages[route.name];
   if (page) {
-    const doc2 = new DOMParser().parseFromString(pages[route.name], 'text/html');
+    const doc2 = new DOMParser().parseFromString(markdownPages[route.name], 'text/html');
     const title = doc2.querySelector('h1').textContent;
     document.title = `${title} - ${mapName}`;
   } else {
