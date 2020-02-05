@@ -11,7 +11,7 @@
             height="200px"
           />
           <v-card-title>Vélib'</v-card-title>
-          <v-card-subtitle>Les bornes de Vélib' affichent un plan de quartier utilisant les donnés d'OpenStreetMap</v-card-subtitle>
+          <v-card-subtitle>Les bornes de Vélib' affichent un plan de quartier utilisant les données d'OpenStreetMap</v-card-subtitle>
         </v-card>
       </v-col>
       <v-col cols="12" md="6" lg="4" xs="1">
@@ -51,7 +51,7 @@
             height="200px"
           />
           <v-card-title>RATP</v-card-title>
-          <v-card-subtitle>Les bornes interactives dans le métro affichent un plan d’Île-de-France grâce aux données OpenStreetMap.</v-card-subtitle>
+          <v-card-subtitle>Les bornes interactives dans le métro affichent un plan d’Île-de-France grâce aux données OpenStreetMap</v-card-subtitle>
         </v-card>
       </v-col>
       <v-col cols="12" md="6" lg="4" xs="1">
