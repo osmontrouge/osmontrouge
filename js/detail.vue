@@ -49,10 +49,12 @@
             </v-list-item-content>
           </v-list-item>
 
-          <detail-tag
-            :value="point.properties['kindergarten:FR']"
-            name="Type de crèche :"
-          />
+          <detail-entry
+            v-if="point.properties['kindergarten:FR']"
+            icon="osm-info"
+          >
+            {{ $t(`details.kindergarten_fr.${point.properties['kindergarten:FR']}`) }}
+          </detail-entry>
           <detail-tag
             :value="point.properties['school:FR']"
             name="Type de l'école :"

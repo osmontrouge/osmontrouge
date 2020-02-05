@@ -18,12 +18,21 @@
       "button": "3D"
     },
     "details": {
-      "dog_no": "Interdit aux chiens",
       "collection_times": {
         "state_until_date": "prochaine levée à {date}",
         "state": {
           "closed": "aucune levée"
         }
+      },
+      "dog_no": "Interdit aux chiens",
+      "kindergarten_fr": {
+        "crèche_collective": "Crèche collective",
+        "multiaccueil": "Multiaccueil",
+        "crèche_parentale": "Crèche parentale",
+        "crèche_familiale": "Crèche familiale",
+        "microcrèche":	"Microcrèche",
+        "halte_garderie": "Halte-garderie",
+        "jardin_enfants": "Jardin d'enfants"
       },
       "opening_hours": {
         "state_until_date": "{state} jusqu'à {date}",
