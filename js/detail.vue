@@ -55,10 +55,6 @@
           >
             {{ $t(`details.kindergarten_fr.${point.properties['kindergarten:FR']}`) }}
           </detail-entry>
-          <detail-tag
-            :value="point.properties['school:FR']"
-            name="Type de l'école :"
-          />
 
           <detail-opening-hours
             v-if="point.properties.opening_hours"
@@ -74,6 +70,7 @@
 
           <detail-tag
             :value="point.properties.capacity"
+            icon="osm-info"
             name="Nombre de places :"
           />
 
