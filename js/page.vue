@@ -1,7 +1,7 @@
 <template>
   <div
     v-resize="computeIsMobile"
-   :class="{ withSidebar: sidebar && !isMobile }">
+   :class="{ withSidebar: sidebar && !isMobile, isMobile: isMobile }">
     <v-navigation-drawer
       v-model="sidebar"
       :temporary="isMobile"
@@ -89,6 +89,9 @@ export default {
 <style>
 .withSidebar .page {
   margin-left: 320px !important;
+}
+.isMobile .page h1 {
+  padding-left: 80px;
 }
 .page h1, .page h2, .page h3, .page ul {
   margin-bottom: 10px;
