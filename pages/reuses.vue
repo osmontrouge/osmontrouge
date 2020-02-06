@@ -61,7 +61,7 @@
             height="200px"
           />
           <v-card-title>Géovélo</v-card-title>
-          <v-card-subtitle>L'appli Géovélo utilisent les données cyclable d'OpenStreetMap pour faire des calculs d'itinéraire adaptés aux vélos</v-card-subtitle>
+          <v-card-subtitle>L'appli Géovélo utilise les données cyclable d'OpenStreetMap pour faire des calculs d'itinéraire adaptés aux vélos</v-card-subtitle>
         </v-card>
       </v-col>
     </v-row>
