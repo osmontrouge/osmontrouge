@@ -178,7 +178,7 @@ router.afterEach((route) => {
     const doc2 = new DOMParser().parseFromString(markdownPages[route.name], 'text/html');
     const title = doc2.querySelector('h1').textContent;
     document.title = `${title} - ${mapName}`;
-  } else if (route.meta) {
+  } else if (route.meta.title) {
     document.title = `${route.meta.title} - ${mapName}`;
   } else {
     document.title = mapName;
