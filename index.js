@@ -119,7 +119,8 @@ const staticPagesVue = [
     name: 'reuses',
     path: `/reuses`,
     component: () => import('./js/page'),
-    props: { component: Reuses }
+    props: { component: Reuses },
+    meta: { title: i18n.t('reuses')  }
   }
 ];
 
@@ -172,11 +173,13 @@ const router = new VueRouter({
 });
 
 router.afterEach((route) => {
-  const page = markdownPages[route.name];
-  if (page) {
+  const markdownPage = markdownPages[route.name];
+  if (markdownPage) {
     const doc2 = new DOMParser().parseFromString(markdownPages[route.name], 'text/html');
     const title = doc2.querySelector('h1').textContent;
     document.title = `${title} - ${mapName}`;
+  } else if (route.meta) {
+    document.title = `${route.meta.title} - ${mapName}`;
   } else {
     document.title = mapName;
   }

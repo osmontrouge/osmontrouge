@@ -24,7 +24,7 @@
       <v-divider></v-divider>
       <v-list-item :to="{ name: 'reuses' }">
         <v-list-item-content class="ml-2">
-          <v-list-item-title class="body-1">{{ $t('reuse') }}</v-list-item-title>
+          <v-list-item-title class="body-1">{{ $t('reuses') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-item :to="{ name: 'about' }">
