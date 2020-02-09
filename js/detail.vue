@@ -74,7 +74,10 @@
             name="Nombre de places :"
           />
 
-          <detail-entry v-if="point.properties.dog === 'no'">
+          <detail-entry
+            v-if="point.properties.dog === 'no'"
+            icon="osm-no_dogs"
+          >
             {{ $t('details.dog_no') }}
           </detail-entry>
 
