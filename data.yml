@@ -31,6 +31,20 @@ config:
     area(3600037026)->.searchArea;
 
 taxonomy:
+  election:
+    name: Élections Municipales 2020
+    features:
+
+      polling_station:
+        name: Bureaux de votes
+        icon: osm-polling_station
+        color: '#107afb'
+        query: >-
+            (
+              nwr["amenity"="polling_station"](area.searchArea);
+            );
+            out center;
+
   schools:
     name: Écoles
     icon: osm-school
