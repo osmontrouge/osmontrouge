@@ -70,7 +70,7 @@ taxonomy:
           out center;
 
   public_services:
-    name: Services publiques
+    name: Services publics
     color: '#48719D'
 
     features:
