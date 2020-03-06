@@ -45,6 +45,16 @@ taxonomy:
             );
             out center;
 
+      political_board:
+        name: Panneaux électoraux
+        icon: osm-political_board
+        color: '#107afb'
+        query: >-
+            (
+              nwr["message"="political"](area.searchArea);
+            );
+            out center;
+
   schools:
     name: Écoles
     icon: osm-school
