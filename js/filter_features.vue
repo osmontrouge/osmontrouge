@@ -6,11 +6,7 @@
       class="pt-1"
       subheader
     >
-      <v-subheader
-        class="small-subheader-height"
-      >
-        {{ category.name }}
-      </v-subheader>
+      <v-subheader class="subtitle-1">{{ category.name }}</v-subheader>
       <v-list-item
         v-for="(feature, idFeature) in category.features"
         :key="idFeature"
@@ -51,9 +47,6 @@ export default {
 </script>
 
 <style scoped>
-  .small-subheader-height {
-    height: 35px;
-  }
   .small-item-height {
     height: 40px;
     min-height: 35px;
