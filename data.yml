@@ -32,9 +32,29 @@ config:
 
 taxonomy:
   covid19:
-    name: Ou aller pendant le confinement ?
+    name: Ouvert durant le confinement
 
     features:
+      townhall:
+        name: Mairie
+        color: '#48719D'
+        icon: osm-town_hall
+        query: >-
+          (
+            nwr["amenity"="townhall"](area.searchArea);
+          );
+          out center;
+
+      police:
+        name: Police
+        color: '#224a91'
+        icon: osm-police
+        query: >-
+          (
+            nwr["amenity"="police"](area.searchArea);
+          );
+          out center;
+
       pharmacy:
         name: Pharmacies
         color: '#009400'
@@ -45,28 +65,59 @@ taxonomy:
           );
           out center;
 
+      centre_sante:
+        name: Centre de santé
+        color: '#bf0000'
+        icon: osm-pharmacy
+        query: >-
+          (
+            nwr["amenity"="doctors"]["operator:type"="public"](area.searchArea);
+          );
+          out center;
+
       food:
         name: "Magasins d'alimentation"
         icon: osm-food
-        color: '#454337'
+        color: 'rgb(162, 129, 67)'
         query: >-
           (
             nwr["amenity"="marketplace"](area.searchArea);
             nwr["shop"="supermarket"](area.searchArea);
-            nwr["shop"="greengrocer"](area.searchArea);
-            nwr["shop"="butcher"](area.searchArea);
-            nwr["shop"="seafood"](area.searchArea);
-            nwr["shop"="cheese"](area.searchArea);
+            nwr["shop"="greengrocer"][!"indoor"](area.searchArea);
+            nwr["shop"="butcher"][!"indoor"](area.searchArea);
+            nwr["shop"="seafood"][!"indoor"](area.searchArea);
+            nwr["shop"="cheese"][!"indoor"](area.searchArea);
+            nwr["shop"="convenience"](area.searchArea);
           );
           out center;
 
       bakery:
         name: Boulangerie
         icon: osm-bakery
-        color: 'rgb(162, 129, 67)'
+        color: '#dd9201'
         query: >-
           (
-            nwr["shop"="bakery"](area.searchArea);
+            nwr["shop"="bakery"][!"indoor"](area.searchArea);
+          );
+          out center;
+
+      fuels_station:
+        name: Station essences
+        icon: osm-fuel
+        color: 'rgb(145, 141, 141)'
+        query: >-
+          (
+            nwr["amenity"="fuel"](area.searchArea);
+          );
+          out center;
+
+      funerals:
+        name: Services funéraires
+        icon: osm-funeral_directors
+        color: black
+        query: >-
+          (
+            nwr["shop"="funeral_directors"](area.searchArea);
           );
           out center;
 
@@ -137,24 +188,6 @@ taxonomy:
     color: '#48719D'
 
     features:
-      townhall:
-        name: Mairie
-        icon: osm-town_hall
-        query: >-
-          (
-            nwr["amenity"="townhall"](area.searchArea);
-          );
-          out center;
-
-      police:
-        name: Police
-        icon: osm-police
-        query: >-
-          (
-            nwr["amenity"="police"](area.searchArea);
-          );
-          out center;
-
       post_office:
         name: Bureaux de postes
         icon: osm-post_office
