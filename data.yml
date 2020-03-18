@@ -53,6 +53,10 @@ taxonomy:
           (
             nwr["amenity"="marketplace"](area.searchArea);
             nwr["shop"="supermarket"](area.searchArea);
+            nwr["shop"="greengrocer"](area.searchArea);
+            nwr["shop"="butcher"](area.searchArea);
+            nwr["shop"="seafood"](area.searchArea);
+            nwr["shop"="cheese"](area.searchArea);
           );
           out center;
 
