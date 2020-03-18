@@ -88,6 +88,8 @@ taxonomy:
             nwr["shop"="seafood"][!"indoor"](area.searchArea);
             nwr["shop"="cheese"][!"indoor"](area.searchArea);
             nwr["shop"="convenience"](area.searchArea);
+            nwr["shop"="frozen_food"](area.searchArea);
+            nwr["shop"="alcohol"](area.searchArea);
           );
           out center;
 
@@ -98,6 +100,23 @@ taxonomy:
         query: >-
           (
             nwr["shop"="bakery"][!"indoor"](area.searchArea);
+          );
+          out center;
+
+      boutique:
+        name: Boutiques
+        icon: osm-shop
+        color: '#c827eb'
+        query: >-
+          (
+            nwr["shop"="bicycle"](area.searchArea);
+            nwr["shop"="mobile_phone"](area.searchArea);
+            nwr["shop"="doityourself"](area.searchArea);
+            nwr["shop"="stationery"](area.searchArea);
+            nwr["shop"="optician"](area.searchArea);
+            nwr["amenity"="car_rental"](area.searchArea);
+            nwr["amenity"="bank"](area.searchArea);
+            nwr["office"="employment_agency"](area.searchArea);
           );
           out center;
 
