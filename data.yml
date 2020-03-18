@@ -92,7 +92,7 @@ taxonomy:
           out center;
 
       bakery:
-        name: Boulangerie
+        name: Boulangeries
         icon: osm-bakery
         color: '#dd9201'
         query: >-
@@ -102,7 +102,7 @@ taxonomy:
           out center;
 
       fuels_station:
-        name: Station essences
+        name: Stations essence
         icon: osm-fuel
         color: 'rgb(145, 141, 141)'
         query: >-
@@ -112,7 +112,7 @@ taxonomy:
           out center;
 
       funerals:
-        name: Services funéraires
+        name: Services funéraire
         icon: osm-funeral_directors
         color: black
         query: >-
