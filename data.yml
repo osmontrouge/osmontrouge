@@ -31,6 +31,31 @@ config:
     area(3600037026)->.searchArea;
 
 taxonomy:
+  covid19:
+    name: Ou aller pendant le confinement ?
+
+    features:
+      pharmacy:
+        name: Pharmacies
+        color: '#009400'
+        icon: osm-pharmacy
+        query: >-
+          (
+            nwr["amenity"="pharmacy"](area.searchArea);
+          );
+          out center;
+
+      food:
+        name: "Magasins d'alimentation"
+        icon: osm-food
+        color: '#454337'
+        query: >-
+          (
+            nwr["amenity"="marketplace"](area.searchArea);
+            nwr["shop"="supermarket"](area.searchArea);
+          );
+          out center;
+
   election:
     name: Élections Municipales 2020
     features:
