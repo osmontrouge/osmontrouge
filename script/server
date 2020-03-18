@@ -1,8 +1,8 @@
 #!/bin/sh
 
-NODE_VERSION=12
+DOCKER_RUN="docker run --rm --tty --interactive --volume $(pwd):/code --workdir /code --publish 1234:1234 --publish 1235:1235 node:12"
 
-docker run --rm --tty --interactive --volume $(pwd):/code --workdir /code node:$NODE_VERSION yarn install
-docker run --rm --tty --interactive --volume $(pwd):/code --workdir /code node:$NODE_VERSION yarn icons
-docker run --rm --tty --interactive --volume $(pwd):/code --workdir /code node:$NODE_VERSION yarn run download-data
-docker run --rm --tty --interactive --volume $(pwd):/code --workdir /code --publish 1234:1234 --publish 1235:1235 node:$NODE_VERSION yarn run dev
+$DOCKER_RUN yarn install
+$DOCKER_RUN yarn icons
+$DOCKER_RUN yarn run download-data
+$DOCKER_RUN yarn run dev
