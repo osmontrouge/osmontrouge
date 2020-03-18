@@ -56,6 +56,16 @@ taxonomy:
           );
           out center;
 
+      bakery:
+        name: Boulangerie
+        icon: osm-bakery
+        color: 'rgb(162, 129, 67)'
+        query: >-
+          (
+            nwr["shop"="bakery"](area.searchArea);
+          );
+          out center;
+
   election:
     name: Élections Municipales 2020
     features:
