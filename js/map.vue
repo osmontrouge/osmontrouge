@@ -34,6 +34,14 @@
         ></v-icon>
       </v-container>
       <v-content>
+        <v-alert
+          :class="{ 'alert--marginleft': sidebar }"
+          dense
+          tile
+          type="warning"
+        >
+          Limitez vos déplacements au maximum. Plus d'informations sur le <a href="https://www.ville-montrouge.fr">site de la mairie de Montrouge</a>.
+        </v-alert>
         <v-btn
           v-show="isMobile"
           fixed
@@ -275,9 +283,16 @@ export default {
   transform: translateX(0);
 }
 
+.v-alert {
+  margin: 0;
+}
+.alert--marginleft {
+  transform: translateX(300px);
+}
+
 .mgl-map-wrapper {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 40px);
   position: relative;
 }
 

@@ -3,6 +3,7 @@ import './font/osm.css';
 
 import Vue from 'vue';
 import Vuetify, {
+  VAlert,
   VApp,
   VBtn,
   VCard,
@@ -48,6 +49,7 @@ import markdownPages from './pages/*.md';
 
 Vue.use(Vuetify, {
   components: {
+    VAlert,
     VApp,
     VBtn,
     VCard,
