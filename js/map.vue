@@ -39,9 +39,8 @@
           dense
           tile
           type="warning"
-        >
-          Limitez vos déplacements au maximum. Plus d'informations sur le <a href="https://www.ville-montrouge.fr">site de la mairie de Montrouge</a>.
-        </v-alert>
+          v-html="$t('covid19-alert')"
+        />
         <v-btn
           v-show="isMobile"
           fixed
