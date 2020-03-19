@@ -106,8 +106,17 @@ taxonomy:
             nwr["shop"="optician"](area.searchArea);
             nwr["shop"="laundry"](area.searchArea);
             nwr["amenity"="car_rental"](area.searchArea);
-            nwr["amenity"="bank"](area.searchArea);
             nwr["office"="employment_agency"](area.searchArea);
+          );
+          out center;
+
+      bank:
+        name: Banques & Assurances
+        icon: osm-bank
+        color: '#725a50'
+        query: >-
+          (
+            nwr["amenity"="bank"](area.searchArea);
             nwr["office"="insurance"](area.searchArea);
           );
           out center;
