@@ -106,7 +106,7 @@ taxonomy:
       boutique:
         name: Boutiques
         icon: osm-shop
-        color: '#c827eb'
+        color: '#725a50'
         query: >-
           (
             nwr["shop"="bicycle"](area.searchArea);
