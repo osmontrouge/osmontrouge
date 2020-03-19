@@ -35,16 +35,6 @@ taxonomy:
     name: Ouvert durant le confinement
 
     features:
-      townhall:
-        name: Mairie
-        color: '#48719D'
-        icon: osm-town_hall
-        query: >-
-          (
-            nwr["amenity"="townhall"](area.searchArea);
-          );
-          out center;
-
       police:
         name: Police
         color: '#224a91'
