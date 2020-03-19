@@ -132,7 +132,7 @@ taxonomy:
           out center;
 
       funerals:
-        name: Services funéraire
+        name: Services funéraires
         icon: osm-funeral_directors
         color: black
         query: >-
