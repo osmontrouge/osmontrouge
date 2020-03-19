@@ -18,7 +18,16 @@
       </v-img>
     </v-card>
 
+    <v-alert
+      v-html="$t('covid19-alert')"
+      dense
+      tile
+      type="warning"
+      class="mb-0"
+    />
+
     <slot />
+
     <v-list>
       <slot name="list-top"></slot>
       <v-divider></v-divider>

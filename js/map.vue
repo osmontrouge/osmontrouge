@@ -34,13 +34,6 @@
         ></v-icon>
       </v-container>
       <v-content>
-        <v-alert
-          :class="{ 'alert--marginleft': sidebar }"
-          dense
-          tile
-          type="warning"
-          v-html="$t('covid19-alert')"
-        />
         <v-btn
           v-show="isMobile"
           fixed
@@ -282,16 +275,9 @@ export default {
   transform: translateX(0);
 }
 
-.v-alert {
-  margin: 0;
-}
-.alert--marginleft {
-  transform: translateX(300px);
-}
-
 .mgl-map-wrapper {
   width: 100vw;
-  height: calc(100vh - 40px);
+  height: 100vh;
   position: relative;
 }
 
