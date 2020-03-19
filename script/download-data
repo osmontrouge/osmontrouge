@@ -4,26 +4,56 @@ const yaml         = require('js-yaml');
 const fs           = require('fs');
 const rp           = require('request-promise');
 const osmtogeojson = require('osmtogeojson');
+const jsdom        = require('jsdom');
 
-const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
+async function fetchBlaclistedIds() {
+  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=2&format=json&origin=*', { json: true })
+    .then((data) => {
+      const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
+      return Array.from(doc.querySelectorAll('table tr')).map((row, index) => {
+        if (index === 0) return;
 
-let rate = Promise.resolve();
+        const link = row.querySelector('td:nth-child(5) a');
+        if (!link) return;
 
-const taxonomy = data.taxonomy;
-Object.keys(taxonomy).forEach((idCat) => {
-  Object.keys(taxonomy[idCat].features).forEach((id) => {
-    const { query } = taxonomy[idCat].features[id];
-    const options = {
-      method: 'POST',
-      form: { data: `${data.config.query_search}${query}` },
-      json: true,
-    };
-    rate = rate
-      .then(() => rp('https://overpass.osmontrouge.fr/api/interpreter', options))
-      .then(data => osmtogeojson(data))
-      .then((geojson) => {
-        fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
-        console.log(`${id} updated`);
-      });
+        return link.getAttribute('href').replace('https://www.openstreetmap.org/', '');
+      }).filter(n => !!n);
+    });
+};
+
+async function fetchDataFromOverpass() {
+  const blacklistedIds = await fetchBlaclistedIds();
+  console.log(blacklistedIds);
+
+  const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
+
+  let rate = Promise.resolve();
+
+  const taxonomy = data.taxonomy;
+  Object.keys(taxonomy).forEach((idCat) => {
+    Object.keys(taxonomy[idCat].features).forEach((id) => {
+      const { query } = taxonomy[idCat].features[id];
+      const options = {
+        method: 'POST',
+        form: { data: `${data.config.query_search}${query}` },
+        json: true,
+      };
+      rate = rate
+        .then(() => rp('https://overpass.osmontrouge.fr/api/interpreter', options))
+        .then(data => osmtogeojson(data))
+        .then((geojson) => {
+          return {
+            ...geojson,
+            features: geojson.features.filter((feature) => {
+              return !blacklistedIds.includes(feature.id);
+            })
+          };
+        })
+        .then((geojson) => {
+          fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
+          console.log(`${id} updated`);
+        });
+    });
   });
-});
+}
+fetchDataFromOverpass();
