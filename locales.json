@@ -19,7 +19,7 @@
       "button": "3D"
     },
     "details": {
-      "containment_closed": "Ce lieu est fermé ? Signalez le nous.",
+      "containment_closed": "Ce lieu est fermé ? Signalez le",
       "containment_closed_subject": "Le lieu {name} est fermé",
       "containment_closed_message":"Bonjour OSMontrouge,%0D%0A%0D%0ALe lieu {name} est fermé pendant le confinement.%0D%0A%0D%0AInformation technique pour OSMontrouge, ne pas supprimer: {id}%0D%0A%0D%0AMerci",
       "collection_times": {
