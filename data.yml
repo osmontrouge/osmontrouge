@@ -1,5 +1,6 @@
 config:
   name: OSMontrouge
+  baseUrl: https://osmontrouge.fr
 
   links:
     - name: Portail open data

@@ -5,6 +5,7 @@ export const mapMaxBounds = config.map.maxBounds;
 export const mapCenter = config.map.center;
 export const mapZoom = config.map.zoom;
 export const mapName = config.name;
+export const baseUrl = config.baseUrl;
 export const mapStyles = config.map.styles;
 export const links = config.links;
 
