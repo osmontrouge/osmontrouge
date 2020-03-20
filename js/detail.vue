@@ -263,10 +263,12 @@ export default {
 
 .bottom-dialog {
   width: 100vw;
+  height: 100vh;
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 10;
+  overflow-y: auto;
 }
 .card-mapillary {
   height: 400px;
