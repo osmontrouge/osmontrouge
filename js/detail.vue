@@ -6,10 +6,12 @@
     <v-slide-x-reverse-transition>
       <v-card
         v-if="point"
+        tile
         min-height="100%"
       >
         <v-toolbar
           :color="color"
+          tile
           dark
         >
           <v-icon>{{ icon }}</v-icon>
