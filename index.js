@@ -40,7 +40,7 @@ import { Resize } from 'vuetify/lib/directives'
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
 
-import { mapName, baseUrl, imageSidebar } from './config';
+import { mapName, mapDescription, baseUrl, imageSidebar } from './config';
 import App from './js/app.vue';
 import OsmMap from './js/map.vue';
 
@@ -197,6 +197,7 @@ router.afterEach((route) => {
     document.head.append(meta);
   }
   metaFactory('og:title', document.title);
+  metaFactory('og:description', mapDescription);
   metaFactory('og:url', document.URL);
   metaFactory('og:image', `${baseUrl}${imageSidebar}`);
 });

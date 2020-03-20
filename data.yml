@@ -1,5 +1,6 @@
 config:
   name: OSMontrouge
+  description: Lieux ouverts à Montrouge durant le confinement
   baseUrl: https://osmontrouge.fr
 
   links:
