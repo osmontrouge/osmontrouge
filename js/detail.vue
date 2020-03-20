@@ -6,7 +6,7 @@
     <v-slide-x-reverse-transition>
       <v-card
         v-if="point"
-        height="100%"
+        min-height="100%"
       >
         <v-toolbar
           :color="color"
