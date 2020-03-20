@@ -7,7 +7,7 @@ const osmtogeojson = require('osmtogeojson');
 const jsdom        = require('jsdom');
 
 async function fetchBlaclistedIds() {
-  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=2&format=json&origin=*', { json: true })
+  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=3&format=json&origin=*', { json: true })
     .then((data) => {
       const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
       return Array.from(doc.querySelectorAll('table tr')).map((row, index) => {
@@ -21,9 +21,25 @@ async function fetchBlaclistedIds() {
     });
 };
 
+async function fetchOpeningHoursOverride() {
+  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=2&format=json&origin=*', { json: true })
+    .then((data) => {
+      const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
+      return Array.from(doc.querySelectorAll('table tr')).reduce((memo, row, index) => {
+        if (index === 0) return memo;
+
+        const link = row.querySelector('td:nth-child(4) a');
+        if (!link) return memo;
+
+        memo[link.getAttribute('href').replace('https://www.openstreetmap.org/', '')] = row.querySelector('td:nth-child(3)').textContent.trim();;
+        return memo;
+      });
+    }, {});
+};
+
 async function fetchDataFromOverpass() {
   const blacklistedIds = await fetchBlaclistedIds();
-  console.log(blacklistedIds);
+  const openingHoursOverride = await fetchOpeningHoursOverride();
 
   const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
 
@@ -46,6 +62,11 @@ async function fetchDataFromOverpass() {
             ...geojson,
             features: geojson.features.filter((feature) => {
               return !blacklistedIds.includes(feature.id);
+            }).map((feature) => {
+              if (openingHoursOverride[feature.id]) {
+                feature.properties.opening_hours = openingHoursOverride[feature.id];
+              }
+              return feature;
             })
           };
         })
