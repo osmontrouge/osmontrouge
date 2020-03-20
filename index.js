@@ -40,7 +40,7 @@ import { Resize } from 'vuetify/lib/directives'
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
 
-import { mapName } from './config';
+import { mapName, imageSidebar } from './config';
 import App from './js/app.vue';
 import OsmMap from './js/map.vue';
 
@@ -175,16 +175,30 @@ const router = new VueRouter({
 });
 
 router.afterEach((route) => {
-  const markdownPage = markdownPages[route.name];
-  if (markdownPage) {
-    const doc2 = new DOMParser().parseFromString(markdownPages[route.name], 'text/html');
-    const title = doc2.querySelector('h1').textContent;
-    document.title = `${title} - ${mapName}`;
-  } else if (route.meta.title) {
-    document.title = `${route.meta.title} - ${mapName}`;
-  } else {
-    document.title = mapName;
+  const title = () => {
+    const markdownPage = markdownPages[route.name];
+    if (markdownPage) {
+      const doc2 = new DOMParser().parseFromString(markdownPages[route.name], 'text/html');
+      const title = doc2.querySelector('h1').textContent;
+      return `${title} - ${mapName}`;
+    } else if (route.meta.title) {
+      return `${route.meta.title} - ${mapName}`;
+    } else {
+      return mapName;
+    }
+  };
+  document.title = title();
+  const metaFactory = (property, content) => {
+    const meta = document.createElement('meta');
+    meta.setAttribute('property', property);
+    meta.setAttribute('content', content);
+    const existingMeta = document.head.querySelector(`meta[property="${property}"]`);
+    if (existingMeta) existingMeta.remove();
+    document.head.append(meta);
   }
+  metaFactory('og:title', document.title);
+  metaFactory('og:url', document.URL);
+  metaFactory('og:image', imageSidebar);
 });
 
 new Vue({
