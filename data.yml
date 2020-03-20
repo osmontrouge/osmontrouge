@@ -118,6 +118,7 @@ taxonomy:
             nwr["shop"="stationery"](area.searchArea);
             nwr["shop"="optician"](area.searchArea);
             nwr["shop"="laundry"](area.searchArea);
+            nwr["shop"="e-cigarette"](area.searchArea);
             nwr["amenity"="car_rental"](area.searchArea);
             nwr["office"="employment_agency"](area.searchArea);
           );
