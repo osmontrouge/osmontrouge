@@ -65,6 +65,17 @@ taxonomy:
           );
           out center;
 
+      post_office:
+        name: Bureaux de postes
+        icon: osm-post_office
+        color: '#ffcc2e'
+        query: >-
+          (
+            nwr["amenity"="post_office"](area.searchArea);
+            nwr["post_office:type"="post_partner"](area.searchArea);
+          );
+          out center;
+
       food:
         name: "Magasins d'alimentation"
         icon: osm-food
