@@ -58,7 +58,7 @@
             {{ $t(`details.kindergarten_fr.${point.properties['kindergarten:FR']}`) }}
           </detail-entry>
 
-          <template v-if="!point.properties.opening_hours_covid_19">
+          <template v-if="!point.properties.opening_hours_covid_19 && point.properties.opening_hours">
             <v-alert
               dense
               tile
