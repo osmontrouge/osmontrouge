@@ -58,9 +58,26 @@
             {{ $t(`details.kindergarten_fr.${point.properties['kindergarten:FR']}`) }}
           </detail-entry>
 
+          <template v-if="!point.properties.opening_hours_covid_19">
+            <v-alert
+              dense
+              tile
+              :icon="false"
+              border="left"
+              colored-border
+              type="warning"
+              class="mb-0 pa-0"
+            >
+              <div class="ml-3">{{ $t('details.containment_opening_hours') }}</div>
+              <detail-opening-hours
+                v-if="point.properties.opening_hours"
+                :value="point.properties.opening_hours"
+              />
+            </v-alert>
+          </template>
           <detail-opening-hours
-            v-if="point.properties.opening_hours"
-            :value="point.properties.opening_hours"
+            v-else
+            :value="point.properties.opening_hours_covid_19"
           />
 
           <detail-opening-hours

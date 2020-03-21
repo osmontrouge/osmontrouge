@@ -64,7 +64,7 @@ async function fetchDataFromOverpass() {
               return !blacklistedIds.includes(feature.id);
             }).map((feature) => {
               if (openingHoursOverride[feature.id]) {
-                feature.properties.opening_hours = openingHoursOverride[feature.id];
+                feature.properties.opening_hours_covid_19 = openingHoursOverride[feature.id];
               }
               return feature;
             })
