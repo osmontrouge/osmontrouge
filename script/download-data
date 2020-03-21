@@ -7,7 +7,7 @@ const osmtogeojson = require('osmtogeojson');
 const jsdom        = require('jsdom');
 
 async function fetchBlaclistedIds() {
-  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=3&format=json&origin=*', { json: true })
+  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=4&format=json&origin=*', { json: true })
     .then((data) => {
       const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
       return Array.from(doc.querySelectorAll('table tr')).map((row, index) => {
@@ -22,7 +22,7 @@ async function fetchBlaclistedIds() {
 };
 
 async function fetchOpeningHoursOverride() {
-  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=2&format=json&origin=*', { json: true })
+  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=3&format=json&origin=*', { json: true })
     .then((data) => {
       const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
       return Array.from(doc.querySelectorAll('table tr')).reduce((memo, row, index) => {
