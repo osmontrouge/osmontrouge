@@ -33,7 +33,6 @@
           <v-checkbox v-model="feature.selected" dense></v-checkbox>
         </v-list-item-action>
       </v-list-item>
-      <p class="body-2 px-4 pt-3 mb-0">Les commerces alimentaires hors grandes surfaces sont fermés l’après-midi.</p>
     </v-list>
   </div>
 </template>
