@@ -93,6 +93,7 @@ taxonomy:
             nwr["shop"="convenience"](area.searchArea);
             nwr["shop"="frozen_food"](area.searchArea);
             nwr["shop"="alcohol"](area.searchArea);
+            nwr["shop"="deli"](area.searchArea);
           );
           out center;
 
