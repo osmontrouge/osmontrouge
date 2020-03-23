@@ -76,7 +76,7 @@
             </v-alert>
           </template>
           <detail-opening-hours
-            v-else
+            v-else-if="point.properties.opening_hours_covid_19"
             :value="point.properties.opening_hours_covid_19"
           />
 
