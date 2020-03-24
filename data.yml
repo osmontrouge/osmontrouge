@@ -84,7 +84,6 @@ taxonomy:
         color: 'rgb(162, 129, 67)'
         query: >-
           (
-            nwr["amenity"="marketplace"](area.searchArea);
             nwr["shop"="supermarket"](area.searchArea);
             nwr["shop"="greengrocer"][!"indoor"](area.searchArea);
             nwr["shop"="butcher"][!"indoor"](area.searchArea);
