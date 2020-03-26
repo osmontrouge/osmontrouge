@@ -21,11 +21,17 @@ async function fetchDataFromOverpass() {
         json: true,
       };
       rate = rate
-        .then(() => rp('https://overpass.osmontrouge.fr/api/interpreter', options))
+        .then(() => rp('https://overpass-api.de/api/interpreter', options))
         .then(data => osmtogeojson(data))
         .then((geojson) => {
           fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
           console.log(`${id} updated`);
+        }).then(() => {
+          return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+              resolve();
+            }, 5000);
+          });
         });
     });
   });
