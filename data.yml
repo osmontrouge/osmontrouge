@@ -43,7 +43,7 @@ taxonomy:
         icon: osm-police
         query: >-
           (
-            nwr["amenity"="police"](area.searchArea);
+            nwr["amenity"="police"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -73,8 +73,8 @@ taxonomy:
         color: '#ffcc2e'
         query: >-
           (
-            nwr["amenity"="post_office"](area.searchArea);
-            nwr["post_office:type"="post_partner"](area.searchArea);
+            nwr["amenity"="post_office"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["post_office:type"="post_partner"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -84,16 +84,16 @@ taxonomy:
         color: 'rgb(162, 129, 67)'
         query: >-
           (
-            nwr["shop"="supermarket"](area.searchArea);
-            nwr["shop"="greengrocer"][!"indoor"](area.searchArea);
-            nwr["shop"="butcher"][!"indoor"](area.searchArea);
-            nwr["shop"="seafood"][!"indoor"](area.searchArea);
-            nwr["shop"="cheese"][!"indoor"](area.searchArea);
-            nwr["shop"="convenience"](area.searchArea);
-            nwr["shop"="frozen_food"](area.searchArea);
-            nwr["shop"="alcohol"](area.searchArea);
-            nwr["shop"="deli"][!"indoor"](area.searchArea);
-            nwr["shop"="chocolate"](area.searchArea);
+            nwr["shop"="supermarket"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="greengrocer"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="butcher"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="seafood"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="cheese"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="convenience"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="frozen_food"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="alcohol"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="deli"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="chocolate"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -103,7 +103,7 @@ taxonomy:
         color: '#dd9201'
         query: >-
           (
-            nwr["shop"="bakery"][!"indoor"](area.searchArea);
+            nwr["shop"="bakery"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -113,15 +113,15 @@ taxonomy:
         color: '#9d4f1c'
         query: >-
           (
-            nwr["shop"="bicycle"](area.searchArea);
-            nwr["shop"="mobile_phone"](area.searchArea);
-            nwr["shop"="doityourself"](area.searchArea);
-            nwr["shop"="stationery"](area.searchArea);
-            nwr["shop"="optician"](area.searchArea);
-            nwr["shop"="laundry"](area.searchArea);
-            nwr["shop"="e-cigarette"](area.searchArea);
-            nwr["amenity"="car_rental"](area.searchArea);
-            nwr["office"="employment_agency"](area.searchArea);
+            nwr["shop"="bicycle"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="mobile_phone"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="doityourself"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="stationery"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="optician"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="laundry"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["shop"="e-cigarette"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["amenity"="car_rental"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["office"="employment_agency"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -131,8 +131,8 @@ taxonomy:
         color: '#725a50'
         query: >-
           (
-            nwr["amenity"="bank"](area.searchArea);
-            nwr["office"="insurance"](area.searchArea);
+            nwr["amenity"="bank"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["office"="insurance"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -142,7 +142,7 @@ taxonomy:
         color: 'rgb(145, 141, 141)'
         query: >-
           (
-            nwr["amenity"="fuel"](area.searchArea);
+            nwr["amenity"="fuel"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;
 
@@ -152,6 +152,6 @@ taxonomy:
         color: black
         query: >-
           (
-            nwr["shop"="funeral_directors"](area.searchArea);
+            nwr["shop"="funeral_directors"]["opening_hours:covid19"!="off"](area.searchArea);
           );
           out center;

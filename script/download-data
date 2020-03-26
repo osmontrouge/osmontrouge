@@ -6,41 +6,7 @@ const rp           = require('request-promise');
 const osmtogeojson = require('osmtogeojson');
 const jsdom        = require('jsdom');
 
-async function fetchBlaclistedIds() {
-  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=4&format=json&origin=*', { json: true })
-    .then((data) => {
-      const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
-      return Array.from(doc.querySelectorAll('table tr')).map((row, index) => {
-        if (index === 0) return;
-
-        const link = row.querySelector('td:nth-child(5) a');
-        if (!link) return;
-
-        return link.getAttribute('href').replace('https://www.openstreetmap.org/', '');
-      }).filter(n => !!n);
-    });
-};
-
-async function fetchOpeningHoursOverride() {
-  return rp('https://wiki.openstreetmap.org/w/api.php?action=parse&page=Montrouge_confinement&prop=text&section=3&format=json&origin=*', { json: true })
-    .then((data) => {
-      const doc = jsdom.JSDOM.fragment(data.parse.text['*']);
-      return Array.from(doc.querySelectorAll('table tr')).reduce((memo, row, index) => {
-        if (index === 0) return memo;
-
-        const link = row.querySelector('td:nth-child(4) a');
-        if (!link) return memo;
-
-        memo[link.getAttribute('href').replace('https://www.openstreetmap.org/', '')] = row.querySelector('td:nth-child(3)').textContent.trim();;
-        return memo;
-      });
-    }, {});
-};
-
 async function fetchDataFromOverpass() {
-  const blacklistedIds = await fetchBlaclistedIds();
-  const openingHoursOverride = await fetchOpeningHoursOverride();
-
   const data = yaml.safeLoad(fs.readFileSync('data.yml', 'utf8'));
 
   let rate = Promise.resolve();
@@ -57,19 +23,6 @@ async function fetchDataFromOverpass() {
       rate = rate
         .then(() => rp('https://overpass.osmontrouge.fr/api/interpreter', options))
         .then(data => osmtogeojson(data))
-        .then((geojson) => {
-          return {
-            ...geojson,
-            features: geojson.features.filter((feature) => {
-              return !blacklistedIds.includes(feature.id);
-            }).map((feature) => {
-              if (openingHoursOverride[feature.id]) {
-                feature.properties.opening_hours_covid_19 = openingHoursOverride[feature.id];
-              }
-              return feature;
-            })
-          };
-        })
         .then((geojson) => {
           fs.writeFileSync(`data/${id}.geojson`, JSON.stringify(geojson), 'utf-8');
           console.log(`${id} updated`);
