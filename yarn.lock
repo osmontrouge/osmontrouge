@@ -2777,6 +2777,11 @@ deasync@^0.1.14:
     bindings "~1.2.1"
     node-addon-api "^1.6.0"
 
+debounce@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
+
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -5243,6 +5248,14 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+mapbox-gl-indoorequal@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/mapbox-gl-indoorequal/-/mapbox-gl-indoorequal-0.0.4.tgz#1d715965639bfc81458f6bdb37ec5fac807e159d"
+  integrity sha512-5E7rknWaJ2c9p+0zDzW/2K5emmr+bJ16WyHUHdbRDIdTDO/q9n8yoYmTzhn6Mb51k8iJh6xEe+stY0wcrqXsLA==
+  dependencies:
+    array-equal "^1.0.0"
+    debounce "^1.2.0"
 
 mapbox-gl@^1.0.0:
   version "1.8.1"

@@ -55,6 +55,7 @@
   "dependencies": {
     "i18next-client": "^1.11.4",
     "mapbox-gl": "^1.0.0",
+    "mapbox-gl-indoorequal": "^0.0.4",
     "mapillary-js": "^2.17.0",
     "opening_hours": "^3.5.0",
     "vue": "^2.6.9",

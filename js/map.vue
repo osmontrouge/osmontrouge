@@ -74,6 +74,7 @@
           <MglNavigationControl :show-compass="false" />
           <view-control v-model="style3D" />
           <mapillary-control v-model="mapillaryLayer" />
+          <indoorequal-control />
         </MglMap>
         <v-card
           v-if="mapillaryLayer"
@@ -99,6 +100,7 @@ import OsmFilterFeatures from './filter_features';
 import OsmMarker from './marker';
 import MapillaryLayer from './mapillary/mapillary_layer';
 import MapillaryControl from './mapillary/mapillary_control';
+import IndoorequalControl from './indoorequal_control';
 import geojsondata from '../data/*.geojson';
 import * as config from '../config';
 import { findImage } from './mapillary/mapillary';
@@ -106,6 +108,7 @@ import { encode, decode, encodePosition, decodePosition, encodeFeatures, decodeF
 
 export default {
   components: {
+    IndoorequalControl,
     MapillaryControl,
     MapillaryLayer,
     MglMap,
