@@ -13,6 +13,7 @@ export const links = config.links;
 export const mapillaryUsers = config.mapillary.users;
 export const mapillaryClientId = config.mapillary.clientId;
 export const addok = config.addok;
+export const indoorequal = config.indoorequal;
 
 Object.keys(taxonomy).forEach((key) => {
   Object.keys(taxonomy[key].features).forEach((keyFeature) => {
