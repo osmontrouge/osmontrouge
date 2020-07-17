@@ -35,37 +35,88 @@ config:
     area(3600037026)->.searchArea;
 
 taxonomy:
-  covid19:
-    name: Lieux ouverts à Montrouge durant le confinement
+  election:
+    name: Élections Municipales 2020
+    features:
+
+      polling_station:
+        name: Bureaux de votes
+        icon: osm-polling_station
+        color: '#107afb'
+        query: >-
+            (
+              nwr["amenity"="polling_station"](area.searchArea);
+            );
+            out center;
+
+      political_board:
+        name: Panneaux électoraux
+        icon: osm-political_board
+        color: '#107afb'
+        query: >-
+            (
+              nwr["message"="political"](area.searchArea);
+            );
+            out center;
+
+  schools:
+    name: Écoles
+    icon: osm-school
+    color: '#725a50'
+    features:
+
+      school_creche:
+        name: Crèches
+        query: >-
+          (
+            nwr["amenity"="kindergarten"]["kindergarten:FR"](area.searchArea);
+          );
+          out center;
+
+      school_elementaire:
+        name: Écoles élémentaires
+        query: >-
+          (
+            nwr["amenity"~"school|kindergarten"]["school:FR"~"primaire|maternelle"](area.searchArea);
+          );
+          out center;
+
+      school_college:
+        name: Collèges
+        query: >-
+          (
+            nwr["amenity"="school"]["school:FR"="collège"](area.searchArea);
+          );
+          out center;
+
+      school_lycee:
+        name: Lycées
+        query: >-
+          (
+            nwr["amenity"="school"]["school:FR"="lycée"](area.searchArea);
+          );
+          out center;
+
+  public_services:
+    name: Services publics
+    color: '#48719D'
 
     features:
+      townhall:
+        name: Mairie
+        icon: osm-town_hall
+        query: >-
+          (
+            nwr["amenity"="townhall"](area.searchArea);
+          );
+          out center;
+
       police:
         name: Police
-        color: '#224a91'
         icon: osm-police
         query: >-
           (
-            nwr["amenity"="police"]["opening_hours:covid19"!="off"](area.searchArea);
-          );
-          out center;
-
-      pharmacy:
-        name: Pharmacies
-        color: '#009400'
-        icon: osm-pharmacy
-        query: >-
-          (
-            nwr["amenity"="pharmacy"](area.searchArea);
-          );
-          out center;
-
-      centre_sante:
-        name: Centre de santé
-        color: '#bf0000'
-        icon: osm-pharmacy
-        query: >-
-          (
-            nwr["amenity"="doctors"]["operator:type"="public"](area.searchArea);
+            nwr["amenity"="police"](area.searchArea);
           );
           out center;
 
@@ -75,85 +126,145 @@ taxonomy:
         color: '#ffcc2e'
         query: >-
           (
-            nwr["amenity"="post_office"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["post_office:type"="post_partner"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["amenity"="post_office"](area.searchArea);
+            nwr["post_office:type"="post_partner"](area.searchArea);
           );
           out center;
 
-      food:
-        name: "Magasins d'alimentation"
-        icon: osm-food
-        color: 'rgb(162, 129, 67)'
+      post_box:
+        name: Boites aux lettres
+        icon: osm-post_box
+        color: '#ffcc2e'
         query: >-
           (
-            nwr["shop"="supermarket"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="greengrocer"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="butcher"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="seafood"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="cheese"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="convenience"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="frozen_food"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="alcohol"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="deli"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="chocolate"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["amenity"="post_box"](area.searchArea);
           );
           out center;
 
-      bakery:
-        name: Boulangeries
-        icon: osm-bakery
-        color: '#dd9201'
+  nature:
+    name: Espaces verts
+    icon: osm-park
+    color: '#a2c36b'
+
+    features:
+      parks:
+        name: Parcs
         query: >-
           (
-            nwr["shop"="bakery"][!"indoor"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["leisure"="park"]["access"!="private"](area.searchArea);
           );
           out center;
 
-      boutique:
-        name: Boutiques
-        icon: osm-shop
-        color: '#9d4f1c'
+  stationnement:
+    name: Stationnement
+
+    features:
+      parkings:
+        name: Parkings souterrain
+        icon: osm-parking_entrance
+        color: '#f2bb14'
         query: >-
           (
-            nwr["shop"="bicycle"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="mobile_phone"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="doityourself"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="stationery"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="optician"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="laundry"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["shop"="e-cigarette"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["amenity"="car_rental"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["office"="employment_agency"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["operator"="Indigo"]["parking"="underground"](area.searchArea);
           );
           out center;
 
-      bank:
-        name: Banques & Assurances
-        icon: osm-bank
-        color: '#725a50'
+      twowheel_parking:
+        name: Stationnements 2 roues
+        icon: osm-motorcycle_parking
+        color: '#f2bb14'
         query: >-
           (
-            nwr["amenity"="bank"]["opening_hours:covid19"!="off"](area.searchArea);
-            nwr["office"="insurance"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr[amenity="motorcycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
+            nwr[amenity="bicycle_parking"][access!="no"][access!="private"][access!="customers"](area.searchArea);
           );
           out center;
 
-      fuels_station:
-        name: Stations essence
-        icon: osm-fuel
-        color: 'rgb(145, 141, 141)'
+  zero_waste:
+    name: Zéro déchets
+    icon: osm-recycling
+
+    features:
+
+      bulk_purchase:
+        name: Vente en vrac
+        color: '#00aa03'
+
         query: >-
           (
-            nwr["amenity"="fuel"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["bulk_purchase"](area.searchArea);
           );
           out center;
 
-      funerals:
-        name: Services funéraires
-        icon: osm-funeral_directors
-        color: black
+      reusable_packaging:
+        name: Accepte les contenants
+        color: '#366837'
+
         query: >-
           (
-            nwr["shop"="funeral_directors"]["opening_hours:covid19"!="off"](area.searchArea);
+            nwr["reusable_packaging:accept"]["reusable_packaging:accept"!="no"](area.searchArea);
+          );
+          out center;
+
+  others:
+    name: Divers
+    color: '#7e007e'
+
+    features:
+
+      marketplace:
+        name: Marchés
+        icon: osm-marketplace
+        color: '#5d60be'
+        query: >-
+          (
+            nwr["amenity"="marketplace"](area.searchArea);
+          );
+          out center;
+
+      public_bookcase:
+        name: Boîtes à livres
+        icon: osm-public_bookcase
+        query: >-
+          (
+            nwr["amenity"="public_bookcase"](area.searchArea);
+          );
+          out center;
+
+      charging_station:
+        name: Recharge de véhicule électrique
+        icon: osm-charging_station
+        color: '#0071bc'
+        query: >-
+          (
+            nwr["amenity"="charging_station"](area.searchArea);
+          );
+          out center;
+
+      recycling_clothes:
+        name: Recyclage de vêtements
+        icon: osm-recycling
+        query: >-
+          (
+            nwr["amenity"="recycling"]["recycling:clothes"="yes"](area.searchArea);
+          );
+          out center;
+
+      excrement_bags:
+        name: Sacs à déjections canine
+        icon: osm-excrement_bags
+        query: >-
+          (
+            nwr["vending"="excrement_bags"](area.searchArea);
+          );
+          out center;
+
+      velib:
+        name: Stations Vélib
+        icon: osm-velib
+        color: '#733e7fff'
+        query: >-
+          (
+            nwr["amenity"="bicycle_rental"]["operator"="Smovengo"](area.searchArea);
           );
           out center;

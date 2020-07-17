@@ -58,26 +58,9 @@
             {{ $t(`details.kindergarten_fr.${point.properties['kindergarten:FR']}`) }}
           </detail-entry>
 
-          <template v-if="!point.properties['opening_hours:covid19'] && point.properties.opening_hours">
-            <v-alert
-              dense
-              tile
-              :icon="false"
-              border="left"
-              colored-border
-              type="warning"
-              class="mb-0 pa-0"
-            >
-              <div class="ml-3">{{ $t('details.containment_opening_hours') }}</div>
-              <detail-opening-hours
-                v-if="point.properties.opening_hours"
-                :value="point.properties.opening_hours"
-              />
-            </v-alert>
-          </template>
           <detail-opening-hours
-            v-else-if="point.properties['opening_hours:covid19']"
-            :value="point.properties['opening_hours:covid19']"
+            v-if="point.properties['opening_hours']"
+            :value="point.properties['opening_hours']"
           />
 
           <detail-opening-hours
@@ -133,11 +116,6 @@
             name="Type de l'opérateur :"
           />
         </v-list>
-        <v-btn
-          :href="mailto"
-          class="mx-3"
-          >{{ $t('details.containment_closed') }}
-        </v-btn>
       </v-card>
     </v-slide-x-reverse-transition>
   </div>
@@ -200,13 +178,6 @@ export default {
   computed: {
     title() {
       return this.point.properties.name || this.feature.name;
-    },
-
-    mailto() {
-      const name = this.point.properties.name;
-      const subject = this.$t('details.containment_closed_subject', { name });
-      const body = this.$t('details.containment_closed_message', { name, id: this.id });
-      return `mailto:contact@osmontrouge.fr?subject=${subject}&body=${body}`;
     }
   },
 

@@ -6,9 +6,7 @@
       class="pt-1"
       subheader
     >
-      <v-subheader class="subtitle-1 pt-2">{{ category.name }}</v-subheader>
-      <p class="body-2 px-4 pt-3 mb-0">Dernière mise à jour le 3 mai 2020.<br>
-       Les informations de cette carte évoluent rapidement et seront actualisées en collaboration avec la mairie.</p>
+      <v-subheader class="subtitle-1 pt-0">{{ category.name }}</v-subheader>
       <v-list-item
         v-for="(feature, idFeature) in category.features"
         :key="idFeature"
