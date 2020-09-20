@@ -10,6 +10,7 @@ export default {
   mounted() {
     this.control = new IndoorEqual(this.map, { apiKey: indoorequal });
     this.$_addControl();
+    this.control.loadSprite('/indoorequal');
   }
 };
 </script>
