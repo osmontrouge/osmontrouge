@@ -8,7 +8,7 @@ export default {
   mixins: [$helpers.asControl],
 
   mounted() {
-    this.control = new IndoorEqual(this.map, { apiKey: indoorequal });
+    this.control = new IndoorEqual(this.map, { apiKey: indoorequal, heatmap: false });
     this.$_addControl();
     this.control.loadSprite('/indoorequal');
   }
