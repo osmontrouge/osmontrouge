@@ -28,7 +28,7 @@ config:
   addok:
     url: https://addok.osmontrouge.fr
 
-  indoorequal: nd8bRbEv4z5q1pwfCvdNig
+  indoorequal: iek_sjbQcWN0LeIMPaqtFUlgQh33AxGg
 
   query_search: >-
     [out:json][timeout:25];
