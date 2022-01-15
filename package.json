@@ -50,7 +50,7 @@
     "jest-cli": "^25.1.0",
     "js-yaml": "^3.12.2",
     "jsdom": "^16.2.1",
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "osmtogeojson": "^3.0.0-beta.3",
     "parcel": "^1.11.0",
     "parcel-plugin-prerender": "^1.4.1",
